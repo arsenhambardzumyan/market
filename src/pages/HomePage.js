@@ -50,14 +50,17 @@ const HomePage = ({ addProductToCart, products }) => {
 
     React.useEffect(() => {
         let localList;
-        localList = JSON.parse(localStorage.getItem("shopping-cart")).map(product => product.id);
-        for (let i = 0; i < productListEl.current.childElementCount; i++) {
-            if (localList.includes(+productListEl.current.children[i].id)) {
-                if (!productListEl.current.children[i].classList.contains('product-added')) {
-                    productListEl.current.children[i].classList.add('product-added')
+        if(localStorage.getItem("shopping-cart")!=null || localStorage.getItem("shopping-cart")!=undefined) {
+            localList = JSON.parse(localStorage.getItem("shopping-cart")).map(product => product.id);
+            for (let i = 0; i < productListEl.current.childElementCount; i++) {
+                if (localList.includes(+productListEl.current.children[i].id)) {
+                    if (!productListEl.current.children[i].classList.contains('product-added')) {
+                        productListEl.current.children[i].classList.add('product-added')
+                    }
                 }
             }
         }
+        
     }, []);
 
     const addProduct = (e, product) => {

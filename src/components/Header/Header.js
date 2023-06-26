@@ -80,7 +80,7 @@ const Header = ({ products }) => {
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="page-contacts.html">Contact</a></li>
+                            <li><a href="Contacts">Contact</a></li>
                         </ul>
                     </nav>
                 </div>

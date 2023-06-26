@@ -14,12 +14,6 @@ import brand3 from '../assets/img/brand-3.png';
 import brand4 from '../assets/img/brand-4.png';
 import brand5 from '../assets/img/brand-5.png';
 import araratprod1 from '../assets/img/araratprod1.jpg';
-
-// import iconplay from '../assets/img/iconplay.png';
-// import "uikit/dist/css/uikit.min.css";
-// import "uikit/dist/css/uikit-core.min.css";
-// import "uikit/dist/js/uikit.js";
-
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import MainSlider from '../components/MainSlider/MainSlider';
@@ -29,12 +23,12 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import { AiOutlinePauseCircle } from "react-icons/ai";
 import video from '../assets/video/energy_video.mp4';
 
+
 const HomePage = ({ addProductToCart, products }) => {
 
     let productListEl = useRef(null);
     const videoRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(true);
-
 
     const handlePlayPause = () => {
         const video = videoRef.current;
@@ -47,10 +41,9 @@ const HomePage = ({ addProductToCart, products }) => {
         }
     };
 
-
     React.useEffect(() => {
         let localList;
-        if(localStorage.getItem("shopping-cart")!=null || localStorage.getItem("shopping-cart")!=undefined) {
+        if(localStorage.getItem("shopping-cart")!= null){
             localList = JSON.parse(localStorage.getItem("shopping-cart")).map(product => product.id);
             for (let i = 0; i < productListEl.current.childElementCount; i++) {
                 if (localList.includes(+productListEl.current.children[i].id)) {
@@ -691,7 +684,8 @@ const HomePage = ({ addProductToCart, products }) => {
                                                             <p>Magna aliqua quis nostrud exercitation ullamco laboris nisut aliqua yxa consequat duis
                                                                 aute irure dolor iny reprehenderit voluptate velit esse cilum dols sed ipsum nulla
                                                                 pariatur nostrul doney quis nostrud saercitation ullamco laboris nisi ut aliquip
-                                                                reprehenderit.</p>
+                                                                reprehenderit.
+                                                            </p>
                                                         </div>
                                                         <div className="review-item__user">
                                                             <div>
@@ -710,7 +704,8 @@ const HomePage = ({ addProductToCart, products }) => {
                                                             <p>Magna aliqua quis nostrud exercitation ullamco laboris nisut aliqua yxa consequat duis
                                                                 aute irure dolor iny reprehenderit voluptate velit esse cilum dols sed ipsum nulla
                                                                 pariatur nostrul doney quis nostrud saercitation ullamco laboris nisi ut aliquip
-                                                                reprehenderit.</p>
+                                                                reprehenderit.
+                                                            </p>
                                                         </div>
                                                         <div className="review-item__user">
                                                             <div>
@@ -729,7 +724,8 @@ const HomePage = ({ addProductToCart, products }) => {
                                                             <p>Magna aliqua quis nostrud exercitation ullamco laboris nisut aliqua yxa consequat duis
                                                                 aute irure dolor iny reprehenderit voluptate velit esse cilum dols sed ipsum nulla
                                                                 pariatur nostrul doney quis nostrud saercitation ullamco laboris nisi ut aliquip
-                                                                reprehenderit.</p>
+                                                                reprehenderit.
+                                                            </p>
                                                         </div>
                                                         <div className="review-item__user">
                                                             <div>

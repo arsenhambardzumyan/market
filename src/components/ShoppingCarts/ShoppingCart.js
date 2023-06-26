@@ -1,7 +1,26 @@
-import React from "react";
+import React from 'react';
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
+
 
 function ShoppingCart({ products, CartTotalPrice, onProductRemove, offConvasCartHide, onQuantityChange, }) {
+
+	const incrementCount = (productId) => {
+		let prodInput = document.getElementById(productId + "cartInput").value;
+		prodInput++;
+		onQuantityChange(productId, prodInput);
+	};
+
+	const decrementCount = (productId) => {
+		let prodInput = document.getElementById(productId + "cartInput").value;
+		if (prodInput > 1) {
+			prodInput--;
+			onQuantityChange(productId, prodInput);
+		}
+	};
+
+	const maxSize = 10;
 
 	return (
 		<div className="offcanvass offConvassCart" id="offcanvas" data-uk-offcanvas="flip: true; overlay: true">
@@ -19,13 +38,17 @@ function ShoppingCart({ products, CartTotalPrice, onProductRemove, offConvasCart
 										<div className="cart_product_name">{product.name}</div>
 										<span className="product-price">{product.price * product.count}$</span>
 									</div>
-									<select className="count" value={product.count}
-											onChange={(event) => { onQuantityChange(product.id, event.target.value); }}>
-											{[...Array(10).keys(),].map((number) => {
-												const num = number + 1;
-												return (<option value={num} key={num}>{num}</option>);
-											})}
-										</select>
+									<div className="count_block">
+										<button className="minusCount_btn" onClick={() => decrementCount(product.id)}><AiOutlineMinus size={15} /></button>
+										<input type="number"
+											id={product.id + "cartInput"}
+											value={product.count}
+											onChange={(event) => { onQuantityChange(product.id, event.target.value); }}
+											min="0" max={maxSize}
+											className="count_input"
+										/>
+										<button className="plusCount_btn" onClick={() => incrementCount(product.id)}><AiOutlinePlus size={15} /></button>
+									</div>
 									<button className="btn remove-btn" onClick={() => onProductRemove(product)}>
 										<RiDeleteBin6Line size={20} />
 									</button>

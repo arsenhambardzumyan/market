@@ -10,8 +10,12 @@
   background-image: url("./assets/img/bg/subscribe.jpg");
 }
 
-.contacts_container .section-hero__bg {
+.section-hero__bg {
   background-image: url("./assets/img/bg/subscribe.jpg");
+}
+
+.textarea_inner{
+  width: 100%;
 }
 
 .product-added .uk-transition-fade {
@@ -22,6 +26,11 @@
 
 .product-added .icon-cross {
   display: none;
+}
+
+.uk-offcanvas-close:first-child+* {
+  margin-top: 0;
+  position: relative;
 }
 
 .checked-product .icon-cross {
@@ -90,6 +99,9 @@
 
 .cart_product_list .cart-product img {
   max-width: 120px;
+  height: 70px;
+  object-fit: contain;
+  width: 100%;
 }
 
 @font-face {
@@ -268,6 +280,7 @@ body {
   content: "";
   transition: background-color 0.1s ease-in-out;
 }
+
 
 .uk-link-toggle:focus .uk-link,
 .uk-link-toggle:hover .uk-link,
@@ -2643,13 +2656,6 @@ body.page-home .section-hero__content {
   height: 100%;
 }
 
-.product-item.product-item--list .product-item__media .uk-overlay-cover,
-.product-item.product-item--list .product-item__media .uk-position-center,
-.product-item.product-item--list .product-item__media img .uk-overlay-cover,
-.product-item.product-item--list .product-item__media img .uk-position-center {
-  display: none;
-}
-
 .product-item.product-item--list .product-item__label {
   display: inline-block;
 }
@@ -2920,7 +2926,7 @@ body.page-home .section-hero__content {
   text-align: center;
 }
 
-.count_block button{
+.count_block button {
   outline: none;
   background: white;
   font-size: 18px;
@@ -2930,7 +2936,7 @@ body.page-home .section-hero__content {
   width: 25px;
   box-shadow: none;
   height: 100%;
-  border: 1px solid rgba(0, 0 , 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .count_block input::-webkit-outer-spin-button,
@@ -2939,6 +2945,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
   display: none;
 }
+
 .video-info {
   background: #ffffff;
   -webkit-transform: translateY(-50%);
@@ -4573,12 +4580,44 @@ input::-webkit-inner-spin-button {
   color: #ffffff;
 }
 
+.page-product__gallery .uk-slider-items {
+  margin-top: 25px;
+  height: 80px;
+}
+
+.uk-section-small{
+  max-width: 600px;
+  margin-bottom: 70px;
+}
+
+.page-product__gallery .uk-slider-items a {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.section-about-first {
+  padding-bottom: 7px;
+}
+
+.section-about__img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  background: url('../src/assets/img/kateni01.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .page-product__gallery .uk-slider-items img {
   -o-object-fit: cover;
   -o-object-position: center;
   width: 100%;
   max-height: 80px;
   object-fit: cover;
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
   object-position: center;
 }
 
@@ -5020,10 +5059,12 @@ input::-webkit-inner-spin-button {
   /* content: "KeyMoto"; */
   opacity: 0.5;
 }
+
 .contacts_container .section-title img {
   margin-bottom: 0;
   max-width: 250px;
 }
+
 .contact-form>* {
   z-index: 2;
   position: relative;

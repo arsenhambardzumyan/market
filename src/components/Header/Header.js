@@ -1,10 +1,11 @@
 import imglogo from '../../assets/img/logo.png';
 import navLogo from '../../assets/img/icons/menu.svg';
-import "uikit/dist/css/uikit.min.css";
-import "uikit/dist/css/uikit-core.min.css";
+// import "uikit/dist/css/uikit.min.css";
+// import "uikit/dist/css/uikit-core.min.css";
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
-import "uikit/dist/js/uikit.js";
+import { Link } from "react-router-dom";
+// import "uikit/dist/js/uikit.js";
 
 const Header = ({ products }) => {
 
@@ -44,43 +45,41 @@ const Header = ({ products }) => {
             <div className="page-header__inner">
                 <div className="page-header__left">
                     <div className="logo">
-                        <a className="logo__link" href="/">
+                        <Link className="logo__link" to="/">
                             <div className="logo__icon"><img src={imglogo} alt="logo" /></div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="page-header__center">
                     <nav className="page-nav" data-uk-navbar>
                         <ul className="uk-navbar-nav">
-                            <li><a href="/#">Home</a>
+                            <li>
+                                <Link to="/">Home</Link>
                                 <div className="uk-navbar-dropdown">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="index.html">Home 1</a></li>
-                                        <li><a href="page-home-2.html">Home 2</a></li>
+                                        <li><Link to="/">Home 1</Link></li>
+                                        <li><Link to="/">Home 2</Link></li>
                                     </ul>
                                 </div>
                             </li>
                             <li><a href="typography.html">About Us</a></li>
-                            <li><a href="/#">Moto Pages</a>
+                            <li><a href="/#">Product Page</a>
                                 <div className="uk-navbar-dropdown">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="product-listing">Page  grid</a></li>
-                                        <li><a href="page-shop-list.html">Page  list</a></li>
-                                        <li><a href="page-shop-product-1.html">Page Single 1</a></li>
-                                        <li><a href="page-shop-product-2.html">Page Single 2</a></li>
+                                        <li><Link to="product-listing">Product Listing</Link></li>
+                                        <li><Link to="product-inner">Product Inner</Link></li>
                                     </ul>
                                 </div>
                             </li>
                             <li><a href="/#">Our News</a>
                                 <div className="uk-navbar-dropdown">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="page-blog-grid.html">Page Blog grid</a></li>
-                                        <li><a href="page-blog-list.html">Page Blog list</a></li>
-                                        <li><a href="page-blog-article.html">Page Blog article</a></li>
+                                        <li><Link to="login">Login</Link></li>
+                                        <li><Link to="registration">Registration</Link></li>
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="Contacts">Contact</a></li>
+                            <li><Link to="Contacts">Contact</Link></li>
                         </ul>
                     </nav>
                 </div>
@@ -130,7 +129,7 @@ const Header = ({ products }) => {
                                     <li><a href="page-shop-product-2.html">Page Singless 2</a></li>
                                 </ul>
                             </li>
-                            <li><a href="page-contacts.html">Contact</a></li>
+                            <li><Link to="Contacts">Contact</Link></li>
                         </ul>
                     </div>
                     <div className="uk-margin-auto-top">

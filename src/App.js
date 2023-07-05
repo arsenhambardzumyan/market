@@ -4,6 +4,9 @@ import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage';
 import ProductListing from './pages/ProductListing';
 import Contacts from './pages/Contacts';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
+import ProductInner from './pages/ProductInner';
 import ShoppingCart from "./components/ShoppingCarts/ShoppingCart";
 import UIkit from 'uikit';
 import { Route, Routes } from 'react-router-dom';
@@ -65,6 +68,30 @@ const productListing = [
     }
 ];
 
+
+const productInner = [
+    {
+        id: 5,
+        name: "product 5",
+        description: "Vivamus v555555itae neque accumsan, ultrices nisl nec maximus sem.",
+        price: 320,
+        image: require("./assets/img/milkprod1.jpg"),
+    },
+    {
+        id: 6,
+        name: "product 6",
+        description: "Vivamus vita6666666666e neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
+        price: 500,
+        image: require("./assets/img/product03.jpg"),
+    },
+    {
+        id: 7,
+        name: "product 7",
+        description: "Vivamus v77777erra magna. Fusce nec maximus sem.",
+        price: 500,
+        image: require("./assets/img/milkprod5.jpg"),
+    }
+];
 
 function App() {
 
@@ -130,6 +157,9 @@ function App() {
                 <Route path="/" element={<HomePage     products={productHome}   addProductToCart={addProductToCart} />}  />
                 <Route path="product-listing" element={<ProductListing   products={productListing}   addProductToCart={addProductToCart} />}  />
                 <Route path="Contacts" element={<Contacts />}  />
+                <Route path="login" element={<Login />}  />
+                <Route path="registration" element={<Registration />}  />
+                <Route path="product-inner" element={<ProductInner  products={productInner}   addProductToCart={addProductToCart} />}  />
             </Routes>
             <Footer />
         </div>

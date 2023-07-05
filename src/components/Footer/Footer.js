@@ -1,9 +1,15 @@
 import imglogo from '../../assets/img/logo.png';
 import "uikit/dist/css/uikit.min.css";
 import "uikit/dist/css/uikit-core.min.css";
-import "uikit/dist/js/uikit.min.js";
+import product03 from '../../assets/img/product03.jpg';
+import product02 from '../../assets/img/product02.jpg';
+import product04 from '../../assets/img/product04.jpg';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
 
 const Footer = () => {
+    UIkit.use(Icons);
+
     return (
         <footer className="page-footer">
             <div className="page-footer__top">
@@ -59,7 +65,7 @@ const Footer = () => {
                                 <ul className="latest-news-list">
                                     <li>
                                         <div className="latest-news-item">
-                                            <div className="latest-news-item__thumb"><img src="assets/img/news-thumb-1.jpg" alt="news-thumb" /></div>
+                                            <div className="latest-news-item__thumb"><img src={product02} alt="news-thumb" /></div>
                                             <div className="latest-news-item__info"><a className="latest-news-item__title" href="page-blog-article.html">We Allow Each Rider To Customize Their Rides.</a>
                                                 <div className="latest-news-item__date">August 25, 2021</div>
                                             </div>
@@ -67,7 +73,7 @@ const Footer = () => {
                                     </li>
                                     <li>
                                         <div className="latest-news-item">
-                                            <div className="latest-news-item__thumb"><img src="assets/img/news-thumb-2.jpg" alt="news-thumb" /></div>
+                                            <div className="latest-news-item__thumb"><img src={product03} alt="news-thumb" /></div>
                                             <div className="latest-news-item__info"><a className="latest-news-item__title" href="page-blog-article.html">Motorcycles Which Feels Just Right Like Ease.</a>
                                                 <div className="latest-news-item__date">August 25, 2021</div>
                                             </div>
@@ -75,7 +81,7 @@ const Footer = () => {
                                     </li>
                                     <li>
                                         <div className="latest-news-item">
-                                            <div className="latest-news-item__thumb"><img src="assets/img/news-thumb-3.jpg" alt="news-thumb" /></div>
+                                            <div className="latest-news-item__thumb"><img src={product04} alt="news-thumb" /></div>
                                             <div className="latest-news-item__info"><a className="latest-news-item__title" href="page-blog-article.html">Gaze Upon Unbelievably Exciting To Futuristic.</a>
                                                 <div className="latest-news-item__date">August 25, 2021</div>
                                             </div>
@@ -114,7 +120,7 @@ const Footer = () => {
             </div>
             <div className="page-footer__bottom">
                 <div className="uk-container">
-                    <div className="uk-text-center">(c) 2022 KEYMOTO - Motorcycles Dealer Template. All rights reserved.</div>
+                    <div className="uk-text-center">(c) 2023 Black Market -  All rights reserved.</div>
                 </div>
             </div>
             <div className="uk-modal-full uk-modal" id="modal-search" data-uk-modal>

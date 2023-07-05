@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import slider1 from '../assets/img/img-home-slideshow.jpg';
+// import kateni01 from '../assets/img/kateni01.jpg';
 import product04 from '../assets/img/product04.jpg';
 import product02 from '../assets/img/product02.jpg';
 import product03 from '../assets/img/product03.jpg';
@@ -72,7 +72,7 @@ const HomePage = ({ addProductToCart, products }) => {
             <div className="section-about" id="section-about">
                 <div className="uk-section-large uk-container">
                     <div className="uk-grid uk-grid-collapse" data-uk-grid>
-                        <div className="uk-width-1-3@m"><img className="section-about__img" src={product02} alt="img-about" /> </div>
+                        <div className="uk-width-1-3@m section-about-first"><div className="section-about__img"></div></div>
                         <div className="uk-width-2-3@m">
                             <div className="section-about__content">
                                 <div className="section-title"> <span>Taking rides to a newer level</span>
@@ -88,7 +88,7 @@ const HomePage = ({ addProductToCart, products }) => {
                                         <div className="uk-grid uk-child-width-1-2@s" data-uk-grid>
                                             <div>
                                                 <div className="block-icon">
-                                                    <div className="block-icon__icon"><img className="block-icon__img" src={slider1} alt="icon-about" /></div>
+                                                    <div className="block-icon__icon"><img className="block-icon__img" src={brand1} alt="icon-about" /></div>
                                                     <div className="block-icon__desc">
                                                         <div className="block-icon__title">Cutting Edge Tech</div>
                                                         <div className="block-icon__text">Exercitation ullamco laboris nis exa duis aute irure dolor.</div>
@@ -97,7 +97,7 @@ const HomePage = ({ addProductToCart, products }) => {
                                             </div>
                                             <div>
                                                 <div className="block-icon">
-                                                    <div className="block-icon__icon"><img className="block-icon__img" src={slider1} alt="icon-about" /></div>
+                                                    <div className="block-icon__icon"><img className="block-icon__img" src={brand2} alt="icon-about" /></div>
                                                     <div className="block-icon__desc">
                                                         <div className="block-icon__title">Perfect Styling</div>
                                                         <div className="block-icon__text">Exercitation ullamco laboris nis exa duis aute irure dolor.</div>
@@ -106,7 +106,7 @@ const HomePage = ({ addProductToCart, products }) => {
                                             </div>
                                             <div>
                                                 <div className="block-icon">
-                                                    <div className="block-icon__icon"><img className="block-icon__img" src={slider1} alt="icon-about" /></div>
+                                                    <div className="block-icon__icon"><img className="block-icon__img" src={brand3} alt="icon-about" /></div>
                                                     <div className="block-icon__desc">
                                                         <div className="block-icon__title">Distinctive Beauty</div>
                                                         <div className="block-icon__text">Exercitation ullamco laboris nis exa duis aute irure dolor.</div>
@@ -115,7 +115,7 @@ const HomePage = ({ addProductToCart, products }) => {
                                             </div>
                                             <div>
                                                 <div className="block-icon">
-                                                    <div className="block-icon__icon"><img className="block-icon__img" src={slider1} alt="icon-about" /></div>
+                                                    <div className="block-icon__icon"><img className="block-icon__img" src={brand4} alt="icon-about" /></div>
                                                     <div className="block-icon__desc">
                                                         <div className="block-icon__title">Radiance Polishing </div>
                                                         <div className="block-icon__text">Exercitation ullamco laboris nis exa duis aute irure dolor.</div>

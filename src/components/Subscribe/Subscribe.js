@@ -2,9 +2,9 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const SubScribe = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
-    console.log(errors);
+    // console.log(errors);
 
     return (
         <div className="section-subscribe">

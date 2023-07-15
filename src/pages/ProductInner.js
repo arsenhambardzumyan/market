@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react';
-
 import brand2 from '../assets/img/brand-2.png';
 import Subscribe from '../components/Subscribe/Subscribe';
-// import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { FiCheck } from "react-icons/fi";
 import product04 from '../assets/img/product04.jpg';
@@ -12,31 +10,40 @@ import milkprod1 from '../assets/img/milkprod1.jpg';
 import milkprod2 from '../assets/img/milkprod2.jpg';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
-// import milkprod3 from '../assets/img/milkprod3.jpg';
-// import milkprod4 from '../assets/img/milkprod4.jpg';
-// import milkprod5 from '../assets/img/milkprod5.jpg';
 import { AiOutlineHeart } from "react-icons/ai";
-// import { FiGrid } from "react-icons/fi";
-// import { TfiViewList } from "react-icons/tfi";
 
-
-
-const ProductInner = ({ addProductToCart, products }) => {
-
+const ProductInner = ({ addProductToCart,  products }) => {
+    
     let productListEl = useRef(null);
+    let productInnerListEl = useRef(null);
+    let producNameRef = useRef(null);
 
     const [isToggled] = useState(false);
-
 
     const addProduct = (e, product) => {
         e.preventDefault();
         addProductToCart(product);
+        console.log(e.target.className.includes(product.id));
         if (!e.currentTarget.parentElement.parentElement.parentElement.classList.contains('product-added')) {
             e.currentTarget.parentElement.parentElement.parentElement.classList.add('product-added');
         }
     }
+    
+    const ProductInnerProto = {
+        id: 777,
+        name : 'Exampe Name',
+        description : 'Example Description',
+        price: 6200,
+        image : product02,
+    }
+
+    const innerElid=ProductInnerProto.id;
 
     React.useEffect(() => {
+        const element = document.getElementById('product_inner');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
         let localList;
         if (localStorage.getItem("shopping-cart") != null) {
             localList = JSON.parse(localStorage.getItem("shopping-cart")).map(product => product.id);
@@ -45,12 +52,23 @@ const ProductInner = ({ addProductToCart, products }) => {
                     if (!productListEl.current.children[i].classList.contains('product-added')) {
                         productListEl.current.children[i].classList.add('product-added')
                     }
+                }else if(localList.includes(+innerElid)){
+                    if (!productInnerListEl.current.classList.contains('product-added')) {
+                        productInnerListEl.current.classList.add('product-added')
+                    }
                 }
             }
         }
     }, []);
 
+
+
     UIkit.use(Icons);
+
+    const innerProductAdd = (e) => {
+        addProduct(e, ProductInnerProto)
+    }
+
     return (
         <>
             <main className="page-main">
@@ -72,29 +90,42 @@ const ProductInner = ({ addProductToCart, products }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="page-content">
+                    <div className="page-content"  id="product_inner">
                         <div className="uk-section-large uk-container">
-                            <div className="page-product">
+                            <div className="page-product" >
                                 <div className="uk-grid uk-flex-middle" data-uk-grid>
                                     <div className="uk-width-2-3@m">
                                         <div className="page-product__title">
-                                            <div className="uk-h1">Product Name</div><span>Product description!</span>
+                                            <div className="uk-h1 productInnerName" ref={producNameRef} >{ProductInnerProto.name}</div>
+                                            <span className="productInnerDesc">{ProductInnerProto.description}</span>
                                         </div>
                                     </div>
                                     <div className="uk-width-1-3@m">
                                         <div className="page-product__price">
-                                            <div><span className="current">$6,200</span><span className="old">MSRP: $7,800</span></div>
+                                            <div><span className="current">${ProductInnerProto.price} </span><span className="old productInnerPrice">MSRP: $7,800</span></div>
                                             <div className="uk-margin-small-top"><span>Included Taxes & Checkup*</span></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="uk-grid" data-uk-grid>
-                                    <div className="uk-width-2-3@m">
-                                        <div className="page-product__btns"><button className="danger" type="button"><i className="fas fa-star"></i><span>Save to fav</span></button><button className="secondary" type="button"><i className="fas fa-columns"></i><span>Add to compare</span></button><button type="button"><i className="fas fa-motorcycle"></i><span>schedule test drive</span></button><button type="button"><i className="fas fa-envelope"></i><span>email friend</span></button><button type="button"><i className="fas fa-share-alt"></i></button></div>
+                                    <div className="uk-width-2-3@m" ref={productInnerListEl} id={ProductInnerProto.id}>
+                                        <div className="page-product__btns">
+                                            <button className="danger" type="button">
+                                                <i className="fas fa-star"></i>
+                                                <span>Save to fav</span>
+                                            </button>
+                                            <button className="secondary" type="button">
+                                                <i className="fas fa-columns"></i>
+                                                <a href='/#'  className="productInnerAddBtn" onClick={(e)=>innerProductAdd(e)} >
+                                                    <FiCheck className="btn-checked" size={30} />
+                                                    Add to Cart
+                                                </a>
+                                            </button>
+                                        </div>
                                         <div className="page-product__gallery">
                                             <div data-uk-slideshow="min-height: 300; max-height: 430">
                                                 <ul className="uk-slideshow-items uk-child-width-1-1">
-                                                    <li><img className="uk-width-1-1" src={product02} alt="img-gallery" data-uk-cover title="product" /></li>
+                                                    <li><img className="uk-width-1-1 productInnerImage" src={ProductInnerProto.image} alt="img-gallery" data-uk-cover title="product" /></li>
                                                     <li><img className="uk-width-1-1" src={product03} alt="img-gallery" data-uk-cover title="product" /></li>
                                                     <li><img className="uk-width-1-1" src={product04} alt="img-gallery" data-uk-cover title="product" /></li>
                                                     <li><img className="uk-width-1-1" src={milkprod1} alt="img-gallery" data-uk-cover title="product" /></li>
@@ -289,22 +320,6 @@ const ProductInner = ({ addProductToCart, products }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <aside className="sidebar">
-                                            <div className="widjet widjet--form">
-                                                <div className="widjet__title">
-                                                    <div className="uk-h4">Send a message</div><span>get in touch via message</span>
-                                                </div>
-                                                <div className="widjet__content">
-                                                    <form action="#!">
-                                                        <div className="uk-margin-small"><input className="uk-input uk-form-large" type="text" placeholder="Your Name" /></div>
-                                                        <div className="uk-margin-small"><input className="uk-input uk-form-large" type="text" placeholder="Email" /></div>
-                                                        <div className="uk-margin-small"><input className="uk-input uk-form-large" type="text" placeholder="Phone (Optional)" /></div>
-                                                        <div className="uk-margin-small"><textarea className="uk-textarea uk-form-large" placeholder="Message"></textarea></div>
-                                                        <div className="uk-margin-small uk-text-center"><button className="uk-button uk-button-danger uk-button-large" type="submit">Send message</button></div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </aside>
                                     </div>
                                 </div>
                             </div>

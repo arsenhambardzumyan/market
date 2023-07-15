@@ -1,11 +1,8 @@
 import imglogo from '../../assets/img/logo.png';
 import navLogo from '../../assets/img/icons/menu.svg';
-// import "uikit/dist/css/uikit.min.css";
-// import "uikit/dist/css/uikit-core.min.css";
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import { Link } from "react-router-dom";
-// import "uikit/dist/js/uikit.js";
 
 const Header = ({ products }) => {
 

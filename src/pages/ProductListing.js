@@ -10,7 +10,7 @@ import product03 from '../assets/img/product03.jpg';
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
-
+import { Link } from "react-router-dom";
 
 
 const ProductListing = ({ addProductToCart, products }) => {
@@ -223,7 +223,7 @@ const ProductListing = ({ addProductToCart, products }) => {
                                             data-uk-grid ref={productListEl}>
                                             {products.map((product) => (
                                                 <div key={product.id} id={product.id} className="product-container" >
-                                                    <div className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
+                                                    <Link to="/product-inner" className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
                                                         <div className="product-item__head">
                                                             <div>
                                                                 <div className="product-item__name"><a href="page-shop-product-1.html">{product.name}</a></div>
@@ -296,7 +296,7 @@ const ProductListing = ({ addProductToCart, products }) => {
                                                                 </li>
                                                             </ul>
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </div>))}
                                         </div>
                                     </div>

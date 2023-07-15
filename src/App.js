@@ -6,6 +6,8 @@ import ProductListing from './pages/ProductListing';
 import Contacts from './pages/Contacts';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
+import ShoppingCartPage from './pages/ShoppingCartPage';
+import Checkout from './pages/Checkout';
 import ProductInner from './pages/ProductInner';
 import ShoppingCart from "./components/ShoppingCarts/ShoppingCart";
 import UIkit from 'uikit';
@@ -21,6 +23,7 @@ const productHome = [
         price: 199,
         image: require("./assets/img/product01.png"),
     },
+
     {
         id: 2,
         name: "product 2",
@@ -28,6 +31,7 @@ const productHome = [
         price: 320,
         image: require("./assets/img/product02.jpg"),
     },
+    
     {
         id: 3,
         name: "product 3",
@@ -97,8 +101,8 @@ function App() {
 
     let shoppingCart = document.getElementsByClassName('offConvassCart');
     const [productsInCart, setProducts] = useState(JSON.parse(localStorage.getItem("shopping-cart")) || []);
-    const getTotalPrice = (items) => items.map((item) => item.price*item.count).reduce((acc, value) => acc + value, 0);
-	const CartTotalPrice = getTotalPrice(productsInCart);
+    const getTotalPrice = (items) => items.map((item) => item.price * item.count).reduce((acc, value) => acc + value, 0);
+    const CartTotalPrice = getTotalPrice(productsInCart);
 
     useEffect(() => {
         localStorage.setItem(
@@ -133,6 +137,7 @@ function App() {
             }
             return [...oldState];
         });
+        console.log(product.id);
         if (document.getElementById(product.id)) {
             document.getElementById(product.id).classList.remove('product-added')
         }
@@ -154,12 +159,28 @@ function App() {
                 CartTotalPrice={CartTotalPrice}
             />
             <Routes>
-                <Route path="/" element={<HomePage     products={productHome}   addProductToCart={addProductToCart} />}  />
-                <Route path="product-listing" element={<ProductListing   products={productListing}   addProductToCart={addProductToCart} />}  />
-                <Route path="Contacts" element={<Contacts />}  />
-                <Route path="login" element={<Login />}  />
-                <Route path="registration" element={<Registration />}  />
-                <Route path="product-inner" element={<ProductInner  products={productInner}   addProductToCart={addProductToCart} />}  />
+                <Route path="/" element={<HomePage
+                    products={productHome}
+                    addProductToCart={addProductToCart}
+                />} />
+                <Route path="product-listing" element={<ProductListing
+                    products={productListing}
+                    addProductToCart={addProductToCart}
+                />} />
+                <Route path="Contacts" element={<Contacts />} />
+                <Route path="login" element={<Login />} />
+                <Route path="registration" element={<Registration />} />
+                <Route path="shopping-cart" element={<ShoppingCartPage
+                    products={productsInCart}
+                    onQuantityChange={onQuantityChange}
+                    onProductRemove={onProductRemove}
+                    CartTotalPrice={CartTotalPrice}
+                />} />
+                <Route path="checkout" element={<Checkout
+                    products={productsInCart}
+                    CartTotalPrice={CartTotalPrice}
+                />} />
+                <Route path="product-inner" element={<ProductInner  products={productInner}      onQuantityChange={onQuantityChange} addProductToCart={addProductToCart} />} />
             </Routes>
             <Footer />
         </div>

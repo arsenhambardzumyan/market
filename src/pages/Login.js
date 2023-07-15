@@ -3,6 +3,8 @@ import blacklogo from '../assets/img/logo-black.png';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
+
 
 const Login = () => {
     const [validated, setValidated] = useState(false);
@@ -63,8 +65,20 @@ const Login = () => {
                                                     className="uk-input uk-form-large"
                                                 />
                                             </Form.Group>
-                                            <div className="uk-margin-medium-top uk-width-1-1 uk-text-center">
+                                            <div className="login-bottom uk-width-1-1">
+                                                <div className="checkbox-content">
+                                                    <label className="checkbox_field">
+                                                        <input name="rememberme" className="uk-checkbox" type="checkbox" value="forever" />
+                                                        <span>Remember Me</span>
+                                                    </label>
+                                                </div>
+                                                <a className="lost-pass" href="#/"> Lost password?</a>
+                                            </div>
+                                            <div className="uk-margin-medium-top uk-width-1-1 uk-text-center  login-btn-login">
                                                 <Button className="uk-button uk-button-danger uk-button-large" type="submit">Login </Button>
+                                            </div>
+                                            <div className="uk-margin-medium-top uk-width-1-1 uk-text-center login-btn-registrtation">
+                                                <Link to="/registration" className="uk-button uk-button-danger uk-button-large">Create New Account </Link>
                                             </div>
                                         </div>
                                     </Form>

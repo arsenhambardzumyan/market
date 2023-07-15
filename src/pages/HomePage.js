@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-// import kateni01 from '../assets/img/kateni01.jpg';
 import product04 from '../assets/img/product04.jpg';
 import product02 from '../assets/img/product02.jpg';
 import product03 from '../assets/img/product03.jpg';
@@ -14,15 +13,13 @@ import brand3 from '../assets/img/brand-3.png';
 import brand4 from '../assets/img/brand-4.png';
 import brand5 from '../assets/img/brand-5.png';
 import araratprod1 from '../assets/img/araratprod1.jpg';
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
 import MainSlider from '../components/MainSlider/MainSlider';
 import Subscribe from '../components/Subscribe/Subscribe';
 import { FiCheck } from "react-icons/fi";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { AiOutlinePauseCircle } from "react-icons/ai";
 import video from '../assets/video/energy_video.mp4';
-
+import { Link } from "react-router-dom";
 
 const HomePage = ({ addProductToCart, products }) => {
 
@@ -64,7 +61,7 @@ const HomePage = ({ addProductToCart, products }) => {
         }
     }
 
-    UIkit.use(Icons);
+    // UIkit.use(Icons);
 
     return (
         <>
@@ -199,7 +196,7 @@ const HomePage = ({ addProductToCart, products }) => {
                         <div className="uk-grid uk-grid-medium uk-child-width-1-3@l uk-child-width-1-2@s product_listing" data-uk-grid ref={productListEl}>
                             {products.map((product) => (
                                 <div key={product.id} id={product.id} >
-                                    <div className="product-item uk-transition-toggle">
+                                    <Link to="/product-inner" className="product-item uk-transition-toggle" >
                                         <div className="product-item__head">
                                             <div>
                                                 <div className="product-item__name"><a href="page-shop-product-1.html">{product.name}</a></div>
@@ -272,7 +269,7 @@ const HomePage = ({ addProductToCart, products }) => {
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </div>))}
                         </div>
                         <div className="uk-text-center uk-margin-medium-top">

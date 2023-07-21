@@ -52,7 +52,7 @@ const ShoppingCartPage = ({ products, CartTotalPrice, onProductRemove, onQuantit
                                     </div>
                                     <div className="section-hero__breadcrumb">
                                         <ul className="uk-breadcrumb">
-                                            <li><Link to="/" href="/">Home</Link></li>
+                                            <li><Link to="/">Home</Link></li>
                                             <li><span>Shopping Cart</span></li>
                                         </ul>
                                     </div>

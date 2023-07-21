@@ -18,6 +18,8 @@ import Subscribe from '../components/Subscribe/Subscribe';
 import { FiCheck } from "react-icons/fi";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { AiOutlinePauseCircle } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import video from '../assets/video/energy_video.mp4';
 import { Link } from "react-router-dom";
 
@@ -61,7 +63,10 @@ const HomePage = ({ addProductToCart, products }) => {
         }
     }
 
-    // UIkit.use(Icons);
+    const favoritemode =(e)=> {
+        e.preventDefault();
+        e.currentTarget.classList.add('favorite-mode-on');
+    }
 
     return (
         <>
@@ -139,7 +144,7 @@ const HomePage = ({ addProductToCart, products }) => {
                         <ul className="uk-slider-items uk-grid uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl">
                             <li>
                                 <div className="category-item">
-                                    <a className="category-item__link" href="page-shop-grid.html">
+                                    <a className="category-item__link" href="/#">
                                         <div className="category-item__title"> <strong>Roadster</strong><span>Explore type</span></div>
                                         <div className="category-item__icon"> <img src={milkprod1} data-uk-svg alt="product" title="" /> </div>
                                     </a>
@@ -147,7 +152,7 @@ const HomePage = ({ addProductToCart, products }) => {
                             </li>
                             <li>
                                 <div className="category-item">
-                                    <a className="category-item__link" href="page-shop-grid.html">
+                                    <a className="category-item__link" href="/#">
                                         <div className="category-item__title"> <strong>Sportbike</strong><span>Explore type</span></div>
                                         <div className="category-item__icon"> <img src={milkprod2} data-uk-svg alt="product" title="" /></div>
                                     </a>
@@ -155,7 +160,7 @@ const HomePage = ({ addProductToCart, products }) => {
                             </li>
                             <li>
                                 <div className="category-item">
-                                    <a className="category-item__link" href="page-shop-grid.html">
+                                    <a className="category-item__link" href="/#">
                                         <div className="category-item__title"> <strong>Chopper</strong><span>Explore type</span></div>
                                         <div className="category-item__icon"><img src={milkprod3} data-uk-svg alt="product" title="" /></div>
                                     </a>
@@ -163,7 +168,7 @@ const HomePage = ({ addProductToCart, products }) => {
                             </li>
                             <li>
                                 <div className="category-item">
-                                    <a className="category-item__link" href="page-shop-grid.html">
+                                    <a className="category-item__link" href="/#">
                                         <div className="category-item__title"> <strong>Cruiser</strong><span>Explore type</span></div>
                                         <div className="category-item__icon"><img src={milkprod4} data-uk-svg alt="product" title="" /></div>
                                     </a>
@@ -171,7 +176,7 @@ const HomePage = ({ addProductToCart, products }) => {
                             </li>
                             <li>
                                 <div className="category-item">
-                                    <a className="category-item__link" href="page-shop-grid.html">
+                                    <a className="category-item__link" href="/#">
                                         <div className="category-item__title"> <strong>Touring bike</strong><span>Explore type</span></div>
                                         <div className="category-item__icon"><img src={milkprod5} data-uk-svg alt="product" title="" /></div>
                                     </a>
@@ -199,7 +204,7 @@ const HomePage = ({ addProductToCart, products }) => {
                                     <Link to="/product-inner" className="product-item uk-transition-toggle" >
                                         <div className="product-item__head">
                                             <div>
-                                                <div className="product-item__name"><a href="page-shop-product-1.html">{product.name}</a></div>
+                                                <div className="product-item__name"><span >{product.name}</span></div>
                                                 <div className="product-item__manufacturer">{product.description}</div>
                                             </div>
                                             <div>
@@ -208,11 +213,11 @@ const HomePage = ({ addProductToCart, products }) => {
                                         </div>
                                         <div className="product-item__media uk-inline-clip uk-inline">
                                             <img src={product.image} alt={product.image} title="product" />
-                                            <a className="uk-transition-fade" href="/#" onClick={(e) => addProduct(e, product)}>
+                                            <div className="uk-transition-fade"  onClick={(e) => addProduct(e, product)}>
                                                 <div className="uk-overlay-cover uk-overlay-primary"></div>
                                                 <FiCheck className="checked_icon uk-position-center " size={60} />
                                                 <div className="uk-position-center"><span className="icon-cross"></span></div>
-                                            </a>
+                                            </div>
                                             <button className="product-item__whish btn-whish"><i className="far fa-heart"></i></button></div>
                                         <div className="product-item__info">
                                             <ul className="list-info">
@@ -269,11 +274,16 @@ const HomePage = ({ addProductToCart, products }) => {
                                                 </li>
                                             </ul>
                                         </div>
+                                        <div className="add-favorite-block">
+                                            <div onClick={(e)=> favoritemode(e)}>
+                                                Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on"/>
+                                            </div>
+                                        </div>
                                     </Link>
                                 </div>))}
                         </div>
                         <div className="uk-text-center uk-margin-medium-top">
-                            <a className="uk-button uk-button-danger" href="page-shop-grid.html">View all models</a>
+                            <a className="uk-button uk-button-danger mg-center" href="/#">View all models</a>
                         </div>
                     </div>
                 </div>
@@ -605,56 +615,56 @@ const HomePage = ({ addProductToCart, products }) => {
                     <div className="uk-grid uk-child-width-1-4@m uk-child-width-1-3@s" data-uk-grid data-uk-lightbox>
                         <div>
                             <div>
-                                <a href={product04}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product04} alt="img-gallery" />
                                 </a>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <a href={product02}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product02} alt="img-gallery" />
                                 </a>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <a href={product03}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product03} alt="img-gallery" />
                                 </a>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <a href={product04}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product04} alt="img-gallery" />
                                 </a>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <a href={product02}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product02} alt="img-gallery" />
                                 </a>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <a href={product03}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product03} alt="img-gallery" />
                                 </a>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <a href={product04}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product04} alt="img-gallery" />
                                 </a>
                             </div>
                         </div>
                         <div>
                             <div>
-                                <a href={product02}>
+                                <a href="/#">
                                     <img className="uk-width-1-1" src={product02} alt="img-gallery" />
                                 </a>
                             </div>

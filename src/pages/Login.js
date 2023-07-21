@@ -72,13 +72,13 @@ const Login = () => {
                                                         <span>Remember Me</span>
                                                     </label>
                                                 </div>
-                                                <a className="lost-pass" href="#/"> Lost password?</a>
+                                                <Link className="lost-pass" to='/ResetPassword'> Lost password?</Link>
                                             </div>
                                             <div className="uk-margin-medium-top uk-width-1-1 uk-text-center  login-btn-login">
                                                 <Button className="uk-button uk-button-danger uk-button-large" type="submit">Login </Button>
                                             </div>
                                             <div className="uk-margin-medium-top uk-width-1-1 uk-text-center login-btn-registrtation">
-                                                <Link to="/registration" className="uk-button uk-button-danger uk-button-large">Create New Account </Link>
+                                                <Link to="/registration" className=" mg-center  uk-button uk-button-danger uk-button-large">Create New Account </Link>
                                             </div>
                                         </div>
                                     </Form>

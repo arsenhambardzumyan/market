@@ -10,7 +10,10 @@ import milkprod1 from '../assets/img/milkprod1.jpg';
 import milkprod2 from '../assets/img/milkprod2.jpg';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
+import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
+
 
 const ProductInner = ({ addProductToCart,  products }) => {
     
@@ -23,13 +26,18 @@ const ProductInner = ({ addProductToCart,  products }) => {
     const addProduct = (e, product) => {
         e.preventDefault();
         addProductToCart(product);
-        console.log(e.target.className.includes(product.id));
         if (!e.currentTarget.parentElement.parentElement.parentElement.classList.contains('product-added')) {
             e.currentTarget.parentElement.parentElement.parentElement.classList.add('product-added');
         }
     }
     
+    const favoritemode =(e)=> {
+        e.preventDefault();
+        e.currentTarget.classList.add('favorite-mode-on');
+    }
+
     const ProductInnerProto = {
+        
         id: 777,
         name : 'Exampe Name',
         description : 'Example Description',
@@ -37,10 +45,10 @@ const ProductInner = ({ addProductToCart,  products }) => {
         image : product02,
     }
 
-    const innerElid=ProductInnerProto.id;
-
     React.useEffect(() => {
+        const innerElid=ProductInnerProto.id;
         const element = document.getElementById('product_inner');
+
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
@@ -59,8 +67,7 @@ const ProductInner = ({ addProductToCart,  products }) => {
                 }
             }
         }
-    }, []);
-
+    }, [ProductInnerProto.id]);
 
 
     UIkit.use(Icons);
@@ -82,7 +89,7 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                     </div>
                                     <div className="section-hero__breadcrumb">
                                         <ul className="uk-breadcrumb">
-                                            <li><a href="/">Home</a></li>
+                                            <li><a href="/#">Home</a></li>
                                             <li><span>Product</span></li>
                                         </ul>
                                     </div>
@@ -133,11 +140,11 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                                 </ul>
                                                 <div className="uk-margin-top" >
                                                     <ul className="uk-thumbnav uk-slider-items uk-grid uk-grid-small uk-child-width-1-3 uk-child-width-1-4@m uk-child-width-1-5@l">
-                                                        <li data-uk-slideshow-item="0"><a href="#/"><img className="uk-width-1-1" src={product02} alt="img-gallery" data-uk-cover title="product" /></a></li>
-                                                        <li data-uk-slideshow-item="1"><a href="#/"><img className="uk-width-1-1" src={product03} alt="img-gallery" data-uk-cover title="product" /></a></li>
-                                                        <li data-uk-slideshow-item="2"><a href="#/"><img className="uk-width-1-1" src={product04} alt="img-gallery" data-uk-cover title="product" /></a></li>
-                                                        <li data-uk-slideshow-item="3"><a href="#/"><img className="uk-width-1-1" src={milkprod1} alt="img-gallery" data-uk-cover title="product" /></a></li>
-                                                        <li data-uk-slideshow-item="4"><a href="#/"><img className="uk-width-1-1" src={milkprod2} alt="img-gallery" data-uk-cover title="product" /></a></li>
+                                                        <li data-uk-slideshow-item="0"><a href="/#"><img className="uk-width-1-1" src={product02} alt="img-gallery" data-uk-cover title="product" /></a></li>
+                                                        <li data-uk-slideshow-item="1"><a href="/#"><img className="uk-width-1-1" src={product03} alt="img-gallery" data-uk-cover title="product" /></a></li>
+                                                        <li data-uk-slideshow-item="2"><a href="/#"><img className="uk-width-1-1" src={product04} alt="img-gallery" data-uk-cover title="product" /></a></li>
+                                                        <li data-uk-slideshow-item="3"><a href="/#"><img className="uk-width-1-1" src={milkprod1} alt="img-gallery" data-uk-cover title="product" /></a></li>
+                                                        <li data-uk-slideshow-item="4"><a href="/#"><img className="uk-width-1-1" src={milkprod2} alt="img-gallery" data-uk-cover title="product" /></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -297,10 +304,10 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                                     <div className="user__date">Member Since April 2013</div>
                                                     <div className="user__social">
                                                         <ul className="social-list">
-                                                            <li className="social-list__item"><a className="social-list__link" href="#!"><i className="fab fa-twitter"></i></a></li>
-                                                            <li className="social-list__item"><a className="social-list__link" href="#!"><i className="fab fa-facebook-f"></i></a></li>
-                                                            <li className="social-list__item"><a className="social-list__link" href="#!"><i className="fab fa-google-plus-g"></i></a></li>
-                                                            <li className="social-list__item"><a className="social-list__link" href="#!"><i className="fab fa-linkedin-in"></i></a></li>
+                                                            <li className="social-list__item"><a className="social-list__link" href="/#"><i className="fab fa-twitter"></i></a></li>
+                                                            <li className="social-list__item"><a className="social-list__link" href="/#"><i className="fab fa-facebook-f"></i></a></li>
+                                                            <li className="social-list__item"><a className="social-list__link" href="/#"><i className="fab fa-google-plus-g"></i></a></li>
+                                                            <li className="social-list__item"><a className="social-list__link" href="/#"><i className="fab fa-linkedin-in"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -332,10 +339,10 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                         data-uk-grid ref={productListEl}>
                                         {products.map((product) => (
                                             <div key={product.id} id={product.id} className="product-container" >
-                                                <div className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
+                                               <Link to="/product-inner" className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
                                                     <div className="product-item__head">
                                                         <div>
-                                                            <div className="product-item__name"><a href="page-shop-product-1.html">{product.name}</a></div>
+                                                            <div className="product-item__name"><span>{product.name}</span></div>
                                                             <div className="product-item__manufacturer">{product.description}</div>
                                                         </div>
                                                         <div>
@@ -344,11 +351,11 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                                     </div>
                                                     <div className="product-item__media uk-inline-clip uk-inline">
                                                         <img src={product.image} alt={product.image} title="product" />
-                                                        <a className="uk-transition-fade" href="/#" onClick={(e) => addProduct(e, product)}>
+                                                        <div className="uk-transition-fade" onClick={(e) => addProduct(e, product)}>
                                                             <div className="uk-overlay-cover uk-overlay-primary"></div>
                                                             <FiCheck className="checked_icon uk-position-center " size={60} />
                                                             <div className="uk-position-center"><span className="icon-cross"></span></div>
-                                                        </a>
+                                                        </div>
                                                         <button className="product-item__whish btn-whish"><i className="far fa-heart"><AiOutlineHeart /></i></button></div>
                                                     <div className="product-item__info">
                                                         <ul className="list-info">
@@ -405,10 +412,14 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                    <div className="add-favorite-block">
+                                                        <div onClick={(e)=> favoritemode(e)}>
+                                                            Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on"/>
+                                                        </div>
+                                                    </div>
+                                                </Link>
                                             </div>
-                                        )
-                                        )}
+                                        ))}
                                     </div>
                                 </div>
                             </div>

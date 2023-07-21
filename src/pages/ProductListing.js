@@ -7,10 +7,12 @@ import { FiCheck } from "react-icons/fi";
 import product04 from '../assets/img/product04.jpg';
 import product02 from '../assets/img/product02.jpg';
 import product03 from '../assets/img/product03.jpg';
-import { AiOutlineHeart } from "react-icons/ai";
 import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
 import { Link } from "react-router-dom";
+import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
+
 
 
 const ProductListing = ({ addProductToCart, products }) => {
@@ -49,6 +51,11 @@ const ProductListing = ({ addProductToCart, products }) => {
         }
     }
 
+    const favoritemode =(e)=> {
+        e.preventDefault();
+        e.currentTarget.classList.add('favorite-mode-on');
+    }
+
     React.useEffect(() => {
         let localList;
         if (localStorage.getItem("shopping-cart") != null) {
@@ -76,7 +83,7 @@ const ProductListing = ({ addProductToCart, products }) => {
                                     </div>
                                     <div className="section-hero__breadcrumb">
                                         <ul className="uk-breadcrumb">
-                                            <li><a href="/">Home</a></li>
+                                            <li><a href="/#">Home</a></li>
                                             <li><span>Inventory</span></li>
                                         </ul>
                                     </div>
@@ -187,9 +194,9 @@ const ProductListing = ({ addProductToCart, products }) => {
                                         <div className="widjet">
                                             <div className="widjet__content">
                                                 <div className="uk-text-center">
-                                                    <button className="uk-button uk-button-danger" type="button">Apply filter</button>
+                                                    <button className="uk-button mg-centerAll uk-button-danger" type="button">Apply filter</button>
                                                     <br />
-                                                    <a className="uk-text-meta uk-margin-top" href="#!">Clear All Filters</a>
+                                                    <a className="uk-text-meta uk-margin-top" href="/#">Clear All Filters</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -226,7 +233,7 @@ const ProductListing = ({ addProductToCart, products }) => {
                                                     <Link to="/product-inner" className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
                                                         <div className="product-item__head">
                                                             <div>
-                                                                <div className="product-item__name"><a href="page-shop-product-1.html">{product.name}</a></div>
+                                                                <div className="product-item__name"><span>{product.name}</span></div>
                                                                 <div className="product-item__manufacturer">{product.description}</div>
                                                             </div>
                                                             <div>
@@ -235,11 +242,11 @@ const ProductListing = ({ addProductToCart, products }) => {
                                                         </div>
                                                         <div className="product-item__media uk-inline-clip uk-inline">
                                                             <img src={product.image} alt={product.image} title="product" />
-                                                            <a className="uk-transition-fade" href="/#" onClick={(e) => addProduct(e, product)}>
+                                                            <div className="uk-transition-fade" onClick={(e) => addProduct(e, product)}>
                                                                 <div className="uk-overlay-cover uk-overlay-primary"></div>
                                                                 <FiCheck className="checked_icon uk-position-center " size={60} />
                                                                 <div className="uk-position-center"><span className="icon-cross"></span></div>
-                                                            </a>
+                                                            </div>
                                                             <button className="product-item__whish btn-whish"><i className="far fa-heart"><AiOutlineHeart /></i></button></div>
                                                         <div className="product-item__info">
                                                             <ul className="list-info">
@@ -296,13 +303,18 @@ const ProductListing = ({ addProductToCart, products }) => {
                                                                 </li>
                                                             </ul>
                                                         </div>
+                                                        <div className="add-favorite-block">
+                                                            <div onClick={(e)=> favoritemode(e)}>
+                                                                Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on"/>
+                                                            </div>
+                                                        </div>
                                                     </Link>
                                                 </div>))}
                                         </div>
                                     </div>
                                     <div className="uk-margin-large-top uk-text-center">
                                         <ul className="uk-pagination uk-flex-center">
-                                            <li><a href="/"><span data-uk-pagination-previous></span></a></li>
+                                            <li><a href="/#"><span data-uk-pagination-previous></span></a></li>
                                             <li className="uk-active"><span>1</span></li>
                                             <li><a href="/#">2</a></li>
                                             <li><a href="/#">3</a></li>

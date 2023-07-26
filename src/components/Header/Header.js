@@ -94,7 +94,7 @@ const Header = ({ products }) => {
                     </a>
                 </div>
             </div>
-            <div className="offcanvass offConvassRight" id="offcanvas" data-uk-offcanvas="flip: true; overlay: true; mode: push">
+            <div className="offcanvass offConvassRight" id="offcanvas" data-uk-offcanvas="flip: true; overlay: true;">
                 <div className="uk-offcanvas-bar " >
                     <button className="uk-offcanvas-close" data-uk-close="" type="button" onClick={offConvasHide}></button>
                     <div className="uk-margin">

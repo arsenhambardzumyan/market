@@ -1979,6 +1979,7 @@ blockquote span::before {
 
 .uk-offcanvas-bar {
   background: #0f0f0f;
+  z-index: 999;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;

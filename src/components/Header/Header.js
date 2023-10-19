@@ -51,15 +51,8 @@ const Header = ({ products }) => {
                     <nav className="page-nav" data-uk-navbar>
                         <ul className="uk-navbar-nav">
                             <li>
-                                <Link to="/">Home</Link>
-                                <div className="uk-navbar-dropdown">
-                                    <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><Link to="/">Home 1</Link></li>
-                                        <li><Link to="/">Home 2</Link></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="/#">About Us</a></li>
+                                <Link to="/">Home</Link>                               
+                            </li>                            
                             <li><a href="/#">Product Page</a>
                                 <div className="uk-navbar-dropdown">
                                     <ul className="uk-nav uk-navbar-dropdown-nav">

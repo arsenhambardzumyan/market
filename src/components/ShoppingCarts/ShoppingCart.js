@@ -40,7 +40,7 @@ function ShoppingCart({ products, CartTotalPrice, onProductRemove, offConvasCart
 							</div>)}
 							{products.map((product) => (
 								<div className="cart-product" key={product.id}>
-									<img src={product.image} alt={product.name} />
+									<img src={product.thumb_image} alt={product.name} />
 									<div className="product-info">
 										<div className="cart_product_name">{product.name}</div>
 										<span className="product-price">{product.price * product.count}$</span>

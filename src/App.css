@@ -32,6 +32,18 @@ a {
   text-decoration: none;
 }
 
+.product_description{
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  font: normal 400 18px/1.75 Oxygen !important;
+  color: #777777;
+  line-height: 1.69;
+}
+
 .uk-offcanvas-close:first-child+* {
   margin-top: 0;
   position: relative;

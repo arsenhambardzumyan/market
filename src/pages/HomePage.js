@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import product04 from '../assets/img/product04.jpg';
 import product02 from '../assets/img/product02.jpg';
 import product03 from '../assets/img/product03.jpg';
-import milkprod1 from '../assets/img/milkprod1.jpg';
-import milkprod2 from '../assets/img/milkprod2.jpg';
+// import milkprod1 from '../assets/img/milkprod1.jpg';
+// import milkprod2 from '../assets/img/milkprod2.jpg';
 import milkprod3 from '../assets/img/milkprod3.jpg';
-import milkprod4 from '../assets/img/milkprod4.jpg';
-import milkprod5 from '../assets/img/milkprod5.jpg';
+// import milkprod4 from '../assets/img/milkprod4.jpg';
+// import milkprod5 from '../assets/img/milkprod5.jpg';
 import brand1 from '../assets/img/brand-1.png';
 import brand2 from '../assets/img/brand-2.png';
 import brand3 from '../assets/img/brand-3.png';
@@ -23,7 +23,7 @@ import { AiFillHeart } from "react-icons/ai";
 import video from '../assets/video/energy_video.mp4';
 import { Link } from "react-router-dom";
 
-const HomePage = ({ addProductToCart, products }) => {
+const HomePage = ({ addProductToCart, products , categoryList}) => {
 
     let productListEl = useRef(null);
     const videoRef = useRef(null);
@@ -142,46 +142,16 @@ const HomePage = ({ addProductToCart, products }) => {
                 <div className="uk-container uk-container-large">
                     <div className="uk-position-relative" tabIndex="-1" data-uk-slider>
                         <ul className="uk-slider-items uk-grid uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl">
-                            <li>
-                                <div className="category-item">
-                                    <a className="category-item__link" href="/#">
-                                        <div className="category-item__title"> <strong>Roadster</strong><span>Explore type</span></div>
-                                        <div className="category-item__icon"> <img src={milkprod1} data-uk-svg alt="product" title="" /> </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="category-item">
-                                    <a className="category-item__link" href="/#">
-                                        <div className="category-item__title"> <strong>Sportbike</strong><span>Explore type</span></div>
-                                        <div className="category-item__icon"> <img src={milkprod2} data-uk-svg alt="product" title="" /></div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="category-item">
-                                    <a className="category-item__link" href="/#">
-                                        <div className="category-item__title"> <strong>Chopper</strong><span>Explore type</span></div>
-                                        <div className="category-item__icon"><img src={milkprod3} data-uk-svg alt="product" title="" /></div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="category-item">
-                                    <a className="category-item__link" href="/#">
-                                        <div className="category-item__title"> <strong>Cruiser</strong><span>Explore type</span></div>
-                                        <div className="category-item__icon"><img src={milkprod4} data-uk-svg alt="product" title="" /></div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div className="category-item">
-                                    <a className="category-item__link" href="/#">
-                                        <div className="category-item__title"> <strong>Touring bike</strong><span>Explore type</span></div>
-                                        <div className="category-item__icon"><img src={milkprod5} data-uk-svg alt="product" title="" /></div>
-                                    </a>
-                                </div>
-                            </li>
+                            {categoryList.map((category) => (
+                                <li key={category.id}>
+                                    <div className="category-item">
+                                        <a className="category-item__link" href="/#">
+                                            <div className="category-item__title">{category.name}</div>
+                                            <div className="category-item__icon">  <img src={category.image} data-uk-svg alt="product" title="" /></div>
+                                        </a>
+                                    </div>
+                                </li>
+                            ))}
                         </ul>
                         <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin-top"></ul>
                     </div>
@@ -212,7 +182,7 @@ const HomePage = ({ addProductToCart, products }) => {
                                             </div>
                                         </div>
                                         <div className="product-item__media uk-inline-clip uk-inline">
-                                            <img src={product.image} alt={product.image} title="product" />
+                                            <img src={product.thumb_image} alt={product.thumb_image} title="product" />
                                             <div className="uk-transition-fade"  onClick={(e) => addProduct(e, product)}>
                                                 <div className="uk-overlay-cover uk-overlay-primary"></div>
                                                 <FiCheck className="checked_icon uk-position-center " size={60} />
@@ -220,59 +190,9 @@ const HomePage = ({ addProductToCart, products }) => {
                                             </div>
                                             <button className="product-item__whish btn-whish"><i className="far fa-heart"></i></button></div>
                                         <div className="product-item__info">
-                                            <ul className="list-info">
-                                                <li className="list-info-item">
-                                                    <div className="list-info-item__title">Year</div>
-                                                    <div className="list-info-item__value">2021</div>
-                                                </li>
-                                                <li className="list-info-item">
-                                                    <div className="list-info-item__title">Type</div>
-                                                    <div className="list-info-item__value">Sports</div>
-                                                </li>
-                                                <li className="list-info-item">
-                                                    <div className="list-info-item__title">Make</div>
-                                                    <div className="list-info-item__value">BMW</div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div className="product-item__specifications">
-                                            <ul className="specifications-list">
-                                                <li className="specifications-list-item">
-                                                    <div className="specifications-list-item__icon">
-                                                        <img src={product04} alt="Engine type" title="product" />
-                                                    </div>
-                                                    <div className="specifications-list-item__desc">
-                                                        <div className="specifications-list-item__title">Engine type</div>
-                                                        <div className="specifications-list-item__value">4-Stroke Cylinder</div>
-                                                    </div>
-                                                </li>
-                                                <li className="specifications-list-item">
-                                                    <div className="specifications-list-item__icon">
-                                                        <img src={product03} alt="Engine Power" />
-                                                    </div>
-                                                    <div className="specifications-list-item__desc">
-                                                        <div className="specifications-list-item__title">Engine Power</div>
-                                                        <div className="specifications-list-item__value">205hp (151 kW)</div>
-                                                    </div>
-                                                </li>
-                                                <li className="specifications-list-item">
-                                                    <div className="specifications-list-item__icon">
-                                                        <img src={product02} alt="Displacement" /></div>
-                                                    <div className="specifications-list-item__desc">
-                                                        <div className="specifications-list-item__title">Displacement</div>
-                                                        <div className="specifications-list-item__value">999 cc</div>
-                                                    </div>
-                                                </li>
-                                                <li className="specifications-list-item">
-                                                    <div className="specifications-list-item__icon">
-                                                        <img src={product04} alt="Bore/Stroke" />
-                                                    </div>
-                                                    <div className="specifications-list-item__desc">
-                                                        <div className="specifications-list-item__title">Bore/Stroke</div>
-                                                        <div className="specifications-list-item__value">80mm / 49.7mm</div>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                            <p className="product_description">
+                                                {product.long_description}
+                                            </p>
                                         </div>
                                         <div className="add-favorite-block">
                                             <div onClick={(e)=> favoritemode(e)}>

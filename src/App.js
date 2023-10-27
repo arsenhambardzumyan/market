@@ -15,34 +15,37 @@ import ProductInner from './pages/ProductInner';
 import ShoppingCart from "./components/ShoppingCarts/ShoppingCart";
 import UIkit from 'uikit';
 import { Route, Routes } from 'react-router-dom';
+import request from "./components/helpers/request";
+import defaultImg from '../src/assets/img/defaultImg.jpg';
 
 import './App.css';
 
-const productHome = [
-    {
-        id: 1,
-        name: "Product 1",
-        description: "Vivamus vitae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-        price: 199,
-        image: require("./assets/img/product01.png"),
-    },
+// const productHome = [
+//     {
+//         id: 1,
+//         name: "Product 1",
+//         description: "Vivamus vitae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
+//         price: 199,
+//         image: require("./assets/img/product01.png"),
+//         slug: ''
+//     },
 
-    {
-        id: 2,
-        name: "product 2",
-        description: "Vivamus vitae neque accumsan, ultrices nisl nec maximus sem.",
-        price: 320,
-        image: require("./assets/img/product02.jpg"),
-    },
+//     {
+//         id: 2,
+//         name: "product 2",
+//         description: "Vivamus vitae neque accumsan, ultrices nisl nec maximus sem.",
+//         price: 320,
+//         image: require("./assets/img/product02.jpg"),
+//     },
 
-    {
-        id: 3,
-        name: "product 3",
-        description: "Vivamus vitae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-        price: 500,
-        image: require("./assets/img/product03.jpg"),
-    }
-];
+//     {
+//         id: 3,
+//         name: "product 3",
+//         description: "Vivamus vitae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
+//         price: 500,
+//         image: require("./assets/img/product03.jpg"),
+//     }
+// ];
 
 const productListing = [
     {
@@ -156,16 +159,38 @@ const productInner = [
 
 function App() {
 
-    let shoppingCart = document.getElementsByClassName('offConvassCart');
-    const [productsInCart, setProducts] = useState(JSON.parse(localStorage.getItem("shopping-cart")) || []);
+    let shoppingCart = document.getElementsByClassName('offConvassCart');    
     const getTotalPrice = (items) => items.map((item) => item.price * item.count).reduce((acc, value) => acc + value, 0);
+    const [productsInCart, setProducts] = useState(JSON.parse(localStorage.getItem("shopping-cart")) || []);
     const CartTotalPrice = getTotalPrice(productsInCart);
+
+    const [productHome, setproductHome] = useState([]);
+    const [categoryList, setcategoryList] = useState([]);
 
     useEffect(() => {
         localStorage.setItem(
             "shopping-cart",
             JSON.stringify(productsInCart),
         );
+        request('https://api.dev.itfabers.com/api/website-setup')
+            .then((homeData) => {
+                homeData.products.forEach((product , i )=>{
+                    if(product.thumb_image===null){
+                        product.thumb_image = defaultImg;
+                    }
+                })
+                homeData.productCategories.forEach((category , i )=>{
+                    if(category.image===null){
+                        category.image = defaultImg;
+                    }
+                })
+                setproductHome(homeData.products);
+                setcategoryList(homeData.productCategories)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
     }, [productsInCart]);
 
     const addProductToCart = (product) => {
@@ -216,10 +241,10 @@ function App() {
                 CartTotalPrice={CartTotalPrice}
             />
             <Routes>
-                
                 <Route path="/" element={<HomePage
                     products={productHome}
                     addProductToCart={addProductToCart}
+                    categoryList={categoryList}
                 />} />
 
                 <Route path="product-listing" element={<ProductListing

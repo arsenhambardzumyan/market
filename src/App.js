@@ -270,11 +270,14 @@ function App() {
                     products={productsInCart}
                     CartTotalPrice={CartTotalPrice}
                 />} />
-                <Route path="product-inner" element={<ProductInner
-                    products={productInner}
-                    onQuantityChange={onQuantityChange}
-                    addProductToCart={addProductToCart}
-                />} />
+                <Route path="product-inner/:id" 
+                    element={
+                        <ProductInner
+                        products={productInner}
+                        onQuantityChange={onQuantityChange}
+                        addProductToCart={addProductToCart}
+                    />} 
+                />
             </Routes>
             <Footer />
         </div>

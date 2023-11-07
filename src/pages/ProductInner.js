@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import brand2 from '../assets/img/brand-2.png';
 import Subscribe from '../components/Subscribe/Subscribe';
 import 'rc-slider/assets/index.css';
@@ -13,15 +13,31 @@ import Icons from 'uikit/dist/js/uikit-icons';
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import request from "../components/helpers/request";
 
-
-const ProductInner = ({ addProductToCart,  products }) => {
-    
+const ProductInner = ({ addProductToCart, products }) => {
+    const [productSlug, setProductSlug] = useState(null);
+    const [Singleproduct, setSingleProduct] = useState(null);
     let productListEl = useRef(null);
     let productInnerListEl = useRef(null);
     let producNameRef = useRef(null);
-
     const [isToggled] = useState(false);
+
+    useEffect(() => {
+        const path = window.location.href;
+        const parts = path.split("/");
+        const desiredPart = parts.slice(parts.indexOf("product-inner") + 1).join("/");
+        setProductSlug(desiredPart)
+        request(`https://api.dev.itfabers.com/api/product/${desiredPart}`)
+            .then((product) => {
+                setSingleProduct(product)
+                console.log(Singleproduct);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }, [productSlug , Singleproduct])
 
     const addProduct = (e, product) => {
         e.preventDefault();
@@ -30,25 +46,25 @@ const ProductInner = ({ addProductToCart,  products }) => {
             e.currentTarget.parentElement.parentElement.parentElement.classList.add('product-added');
         }
     }
-    
-    const favoritemode =(e)=> {
+
+    const favoritemode = (e) => {
         e.preventDefault();
         e.currentTarget.classList.add('favorite-mode-on');
     }
 
     const ProductInnerProto = {
-        
+
         id: 777,
-        name : 'Exampe Name',
-        description : 'Example Description',
+        name: 'Exampe Name',
+        description: 'Example Description',
         price: 6200,
-        image : product02,
+        image: product02,
     }
 
     React.useEffect(() => {
-        const innerElid=ProductInnerProto.id;
-        const element = document.getElementById('product_inner');
 
+        const innerElid = ProductInnerProto.id;
+        const element = document.getElementById('product_inner');
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
@@ -60,7 +76,7 @@ const ProductInner = ({ addProductToCart,  products }) => {
                     if (!productListEl.current.children[i].classList.contains('product-added')) {
                         productListEl.current.children[i].classList.add('product-added')
                     }
-                }else if(localList.includes(+innerElid)){
+                } else if (localList.includes(+innerElid)) {
                     if (!productInnerListEl.current.classList.contains('product-added')) {
                         productInnerListEl.current.classList.add('product-added')
                     }
@@ -97,7 +113,7 @@ const ProductInner = ({ addProductToCart,  products }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="page-content"  id="product_inner">
+                    <div className="page-content" id="product_inner">
                         <div className="uk-section-large uk-container">
                             <div className="page-product" >
                                 <div className="uk-grid uk-flex-middle" data-uk-grid>
@@ -123,7 +139,7 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                             </button>
                                             <button className="secondary" type="button">
                                                 <i className="fas fa-columns"></i>
-                                                <a href='/#'  className="productInnerAddBtn" onClick={(e)=>innerProductAdd(e)} >
+                                                <a href='/#' className="productInnerAddBtn" onClick={(e) => innerProductAdd(e)} >
                                                     <FiCheck className="btn-checked" size={30} />
                                                     Add to Cart
                                                 </a>
@@ -339,7 +355,7 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                         data-uk-grid ref={productListEl}>
                                         {products.map((product) => (
                                             <div key={product.id} id={product.id} className="product-container" >
-                                               <Link to="/product-inner" className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
+                                                <Link to="/product-inner" className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
                                                     <div className="product-item__head">
                                                         <div>
                                                             <div className="product-item__name"><span>{product.name}</span></div>
@@ -413,8 +429,8 @@ const ProductInner = ({ addProductToCart,  products }) => {
                                                         </ul>
                                                     </div>
                                                     <div className="add-favorite-block">
-                                                        <div onClick={(e)=> favoritemode(e)}>
-                                                            Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on"/>
+                                                        <div onClick={(e) => favoritemode(e)}>
+                                                            Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on" />
                                                         </div>
                                                     </div>
                                                 </Link>

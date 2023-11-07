@@ -1,8 +1,37 @@
+import React , {useEffect} from 'react';
 import product01 from '../../assets/img/product01.png';
 import product02 from '../../assets/img/product02.jpg';
 import product03 from '../../assets/img/product03.jpg';
+// import request from "../helpers/request";
+// import defaultImg from '../../assets/img/defaultImg.jpg';
+
 
 const MainSlider = () => {
+
+    // useEffect(() => {
+    //     request('https://api.dev.itfabers.com/api/product/{slug}')
+    //         .then((sliders) => {
+    //             // homeData.products.forEach((product , i )=>{
+    //             //     if(product.thumb_image===null){
+    //             //         product.thumb_image = defaultImg;
+    //             //     }
+    //             // })
+    //             // homeData.productCategories.forEach((category , i )=>{
+    //             //     if(category.image===null){
+    //             //         category.image = defaultImg;
+    //             //     }
+    //             // })
+    //             // setproductHome(homeData.products);
+    //             // setcategoryList(homeData.productCategories)
+    //             console.log(sliders);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+
+    // }, []);
+
+
     return (
         <div className="section-hero">
             <div data-uk-slideshow="autoplay: false; min-height: 560; max-height: 950; animation: fade">

@@ -23,7 +23,7 @@ import { AiFillHeart } from "react-icons/ai";
 import video from '../assets/video/energy_video.mp4';
 import { Link } from "react-router-dom";
 
-const HomePage = ({ addProductToCart, products , categoryList}) => {
+const HomePage = ({ addProductToCart, products, categoryList }) => {
 
     let productListEl = useRef(null);
     const videoRef = useRef(null);
@@ -42,7 +42,7 @@ const HomePage = ({ addProductToCart, products , categoryList}) => {
 
     React.useEffect(() => {
         let localList;
-        if(localStorage.getItem("shopping-cart")!= null){
+        if (localStorage.getItem("shopping-cart") != null) {
             localList = JSON.parse(localStorage.getItem("shopping-cart")).map(product => product.id);
             for (let i = 0; i < productListEl.current.childElementCount; i++) {
                 if (localList.includes(+productListEl.current.children[i].id)) {
@@ -52,7 +52,7 @@ const HomePage = ({ addProductToCart, products , categoryList}) => {
                 }
             }
         }
-        
+
     }, []);
 
     const addProduct = (e, product) => {
@@ -63,7 +63,7 @@ const HomePage = ({ addProductToCart, products , categoryList}) => {
         }
     }
 
-    const favoritemode =(e)=> {
+    const favoritemode = (e) => {
         e.preventDefault();
         e.currentTarget.classList.add('favorite-mode-on');
     }
@@ -171,7 +171,7 @@ const HomePage = ({ addProductToCart, products , categoryList}) => {
                         <div className="uk-grid uk-grid-medium uk-child-width-1-3@l uk-child-width-1-2@s product_listing" data-uk-grid ref={productListEl}>
                             {products.map((product) => (
                                 <div key={product.id} id={product.id} >
-                                    <Link to="/product-inner" className="product-item uk-transition-toggle" >
+                                    <Link to={`/product-inner/${product.slug}`} className="product-item uk-transition-toggle" >
                                         <div className="product-item__head">
                                             <div>
                                                 <div className="product-item__name"><span >{product.name}</span></div>
@@ -183,7 +183,7 @@ const HomePage = ({ addProductToCart, products , categoryList}) => {
                                         </div>
                                         <div className="product-item__media uk-inline-clip uk-inline">
                                             <img src={product.thumb_image} alt={product.thumb_image} title="product" />
-                                            <div className="uk-transition-fade"  onClick={(e) => addProduct(e, product)}>
+                                            <div className="uk-transition-fade" onClick={(e) => addProduct(e, product)}>
                                                 <div className="uk-overlay-cover uk-overlay-primary"></div>
                                                 <FiCheck className="checked_icon uk-position-center " size={60} />
                                                 <div className="uk-position-center"><span className="icon-cross"></span></div>
@@ -195,8 +195,8 @@ const HomePage = ({ addProductToCart, products , categoryList}) => {
                                             </p>
                                         </div>
                                         <div className="add-favorite-block">
-                                            <div onClick={(e)=> favoritemode(e)}>
-                                                Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on"/>
+                                            <div onClick={(e) => favoritemode(e)}>
+                                                Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on" />
                                             </div>
                                         </div>
                                     </Link>
@@ -268,14 +268,14 @@ const HomePage = ({ addProductToCart, products , categoryList}) => {
                                 <li><img src={product02} title="" alt="img-video-thumb" /></li>
                                 <li><img src={product03} title="" alt="img-video-thumb" /></li>
                             </ul>
-                        </div>  
+                        </div>
                     </div>
                     <div className="video-box" data-uk-lightbox="video-autoplay: true">
                         <video ref={videoRef} className="video_inner_container" width="100%" height="100%" loop muted uk-video="autoplay: true" poster="../assets/img/product04.jpg" >
                             <source src={video} type="video/MP4" />
                         </video>
                         <button className="btn-play-toggle" onClick={handlePlayPause}>
-                            {isPlaying ? <AiOutlinePauseCircle/>: <AiOutlinePlayCircle />}
+                            {isPlaying ? <AiOutlinePauseCircle /> : <AiOutlinePlayCircle />}
                         </button>
                     </div>
                 </div>

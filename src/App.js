@@ -157,6 +157,7 @@ const productInner = [
     }
 ];
 
+
 function App() {
 
     let shoppingCart = document.getElementsByClassName('offConvassCart');    

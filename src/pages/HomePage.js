@@ -2,16 +2,11 @@ import React, { useRef, useState } from "react";
 import product04 from '../assets/img/product04.jpg';
 import product02 from '../assets/img/product02.jpg';
 import product03 from '../assets/img/product03.jpg';
-// import milkprod1 from '../assets/img/milkprod1.jpg';
-// import milkprod2 from '../assets/img/milkprod2.jpg';
 import milkprod3 from '../assets/img/milkprod3.jpg';
-// import milkprod4 from '../assets/img/milkprod4.jpg';
-// import milkprod5 from '../assets/img/milkprod5.jpg';
 import brand1 from '../assets/img/brand-1.png';
 import brand2 from '../assets/img/brand-2.png';
 import brand3 from '../assets/img/brand-3.png';
 import brand4 from '../assets/img/brand-4.png';
-import brand5 from '../assets/img/brand-5.png';
 import araratprod1 from '../assets/img/araratprod1.jpg';
 import MainSlider from '../components/MainSlider/MainSlider';
 import Subscribe from '../components/Subscribe/Subscribe';
@@ -22,6 +17,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import video from '../assets/video/energy_video.mp4';
 import { Link } from "react-router-dom";
+import Partners from "../components/Partners/Partners";
 
 const HomePage = ({ addProductToCart, products, categoryList }) => {
 
@@ -675,7 +671,7 @@ const HomePage = ({ addProductToCart, products, categoryList }) => {
                     </div>
                 </div>
             </div>
-            <div className="section-brands">
+            {/* <div className="section-brands">
                 <div className="uk-section uk-container uk-container-large">
                     <div data-uk-slider="autoplay:true">
                         <div className="uk-position-relative" tabIndex="-1">
@@ -691,7 +687,8 @@ const HomePage = ({ addProductToCart, products, categoryList }) => {
                         <ul className="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <Partners />
             <Subscribe />
         </>
     )

@@ -35,6 +35,7 @@ const Login = ({SetSuccessMessage , SetErrorMessage}) => {
             event.preventDefault();
             request(`https://api.dev.itfabers.com/api/store-register/`, 'POST', formData)
                 .then(() => {
+                    SetErrorMessage(null);
                     SetSuccessMessage('success ✔');
                     navigate('/login');
                 })
@@ -43,7 +44,6 @@ const Login = ({SetSuccessMessage , SetErrorMessage}) => {
                     SetErrorMessage(err)
                 })
         }
-
         setValidated(true);
     };
 

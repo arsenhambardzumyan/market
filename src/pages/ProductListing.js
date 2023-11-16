@@ -1,6 +1,6 @@
+import React, { useRef, useState , useCallback } from 'react';
 import brand1 from '../assets/img/brand-1.png';
 import Subscribe from '../components/Subscribe/Subscribe';
-import React, { useRef, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { FiCheck } from "react-icons/fi";
@@ -12,15 +12,23 @@ import { TfiViewList } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
+import request from '../components/helpers/request';
 
 
-
-const ProductListing = ({ addProductToCart, products }) => {
+const ProductListing = ({ addProductToCart, products , SetProductsListing }) => {
 
     let productListEl = useRef(null);
-
     const [isToggled, setIsToggled] = useState(false);
     const [activeButton, setActiveButton] = useState('button2');
+
+    // const [PagesData, setPagesData] = useState({
+    //     firstPage : 1,
+    //     lastPage : 10,
+    //     nextPage : 2,
+    //     prevPage : 0,
+    // });
+
+    const [page, setPage] = useState(1);
 
     const toggleClass = () => {
         setIsToggled(!isToggled);
@@ -29,7 +37,6 @@ const ProductListing = ({ addProductToCart, products }) => {
     const handleButtonClick = (buttonId) => {
         setActiveButton(buttonId);
         toggleClass();
-
     };
 
     const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
@@ -51,10 +58,14 @@ const ProductListing = ({ addProductToCart, products }) => {
         }
     }
 
-    const favoritemode =(e)=> {
+    const favoritemode = (e) => {
         e.preventDefault();
         e.currentTarget.classList.add('favorite-mode-on');
     }
+
+    const SetCurrentProducts = useCallback((data) => {
+        SetProductsListing(data);
+    }, [SetProductsListing]);
 
     React.useEffect(() => {
         let localList;
@@ -68,7 +79,24 @@ const ProductListing = ({ addProductToCart, products }) => {
                 }
             }
         }
-    }, []);
+        request(`https://api.dev.itfabers.com/api/all-products?page=${page}`)
+        .then((response) => {
+           SetCurrentProducts(response.products.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, [page]);
+
+
+    const handlePageChange = (pageNumber) => {
+        if (
+            pageNumber > 0 &&
+            pageNumber <=  10 &&
+            pageNumber !== page
+        )
+        setPage(pageNumber);
+    };
 
     return (
         <>
@@ -234,14 +262,14 @@ const ProductListing = ({ addProductToCart, products }) => {
                                                         <div className="product-item__head">
                                                             <div>
                                                                 <div className="product-item__name"><span>{product.name}</span></div>
-                                                                <div className="product-item__manufacturer">{product.description}</div>
+                                                                <div className="product-item__manufacturer">{product.short_description}</div>
                                                             </div>
                                                             <div>
                                                                 <div className="product-item__price"> ${product.price}</div>
                                                             </div>
                                                         </div>
                                                         <div className="product-item__media uk-inline-clip uk-inline">
-                                                            <img src={product.image} alt={product.image} title="product" />
+                                                            <img src={`https://api.dev.itfabers.com/${product.thumb_image}`} alt={product.thumb_image} title="product" />
                                                             <div className="uk-transition-fade" onClick={(e) => addProduct(e, product)}>
                                                                 <div className="uk-overlay-cover uk-overlay-primary"></div>
                                                                 <FiCheck className="checked_icon uk-position-center " size={60} />
@@ -304,24 +332,55 @@ const ProductListing = ({ addProductToCart, products }) => {
                                                             </ul>
                                                         </div>
                                                         <div className="add-favorite-block">
-                                                            <div onClick={(e)=> favoritemode(e)}>
-                                                                Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on"/>
+                                                            <div onClick={(e) => favoritemode(e)}>
+                                                                Add to Favorite <AiOutlineHeart className="default-mode" /><AiFillHeart className="mode-on" />
                                                             </div>
                                                         </div>
                                                     </Link>
                                                 </div>))}
                                         </div>
                                     </div>
-                                    <div className="uk-margin-large-top uk-text-center">
-                                        <ul className="uk-pagination uk-flex-center">
-                                            <li><a href="/#"><span data-uk-pagination-previous></span></a></li>
-                                            <li className="uk-active"><span>1</span></li>
-                                            <li><a href="/#">2</a></li>
-                                            <li><a href="/#">3</a></li>
-                                            <li><a href="/#">4</a></li>
-                                            <li><a href="/#"><span data-uk-pagination-next></span></a></li>
-                                        </ul>
-                                    </div>
+                                    {products.length > 0 && (
+                                        <div className="uk-margin-large-top uk-text-center">
+                                            <ul className="uk-pagination uk-flex-center">
+                                                <li>
+                                                    <a href="/#"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            handlePageChange(page - 1)
+                                                        }}
+                                                        className={`arrow ${page === 1 ? "pagination__disabled" : ""}`}
+                                                    >
+                                                        <span data-uk-pagination-previous></span>
+                                                    </a>
+                                                </li>
+                                                
+                                                {[...Array(Math.floor(10))].map((_, i) => (
+                                                    <li className={`page__number ${page === i + 1 ? "uk-active" : ""}`}
+                                                        key={i + 1}
+                                                        onClick={() => handlePageChange(i + 1)}
+                                                    >
+                                                        <span>{i + 1}</span>
+                                                    </li>
+                                                ))}
+
+                                                <li>
+                                                    <a href="/#"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            handlePageChange(page + 1)
+                                                        }}
+                                                        className={`arrow ${page === Math.floor(10)
+                                                        ? "pagination__disabled"
+                                                        : ""
+                                                        }`}
+                                                    >
+                                                        <span data-uk-pagination-next></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

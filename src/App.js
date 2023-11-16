@@ -48,39 +48,72 @@ import './App.css';
 //     }
 // ];
 
-const productListing = [
-    {
-        id: 4,
-        name: "Product 4",
-        description: "Vivamus vi644444tae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-        price: 199,
-        image: require("./assets/img/milkprod2.jpg"),
-    },
+// const productListing = [
+//     {
+//         id: 4,
+//         name: "Product 4",
+//         description: "Vivamus vi644444tae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
+//         price: 199,
+//         image: require("./assets/img/milkprod2.jpg"),
+//     },
 
-    {
-        id: 5,
-        name: "product 5",
-        description: "Vivamus v555555itae neque accumsan, ultrices nisl nec maximus sem.",
-        price: 320,
-        image: require("./assets/img/milkprod4.jpg"),
-    },
+//     {
+//         id: 5,
+//         name: "product 5",
+//         description: "Vivamus v555555itae neque accumsan, ultrices nisl nec maximus sem.",
+//         price: 320,
+//         image: require("./assets/img/milkprod4.jpg"),
+//     },
 
-    {
-        id: 6,
-        name: "product 6",
-        description: "Vivamus vita6666666666e neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-        price: 500,
-        image: require("./assets/img/product03.jpg"),
-    },
+//     {
+//         id: 6,
+//         name: "product 6",
+//         description: "Vivamus vita6666666666e neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
+//         price: 500,
+//         image: require("./assets/img/product03.jpg"),
+//     },
 
-    {
-        id: 7,
-        name: "product 7",
-        description: "Vivamus v77777erra magna. Fusce nec maximus sem.",
-        price: 500,
-        image: require("./assets/img/milkprod5.jpg"),
-    }
-];
+//     {
+//         id: 7,
+//         name: "product 7",
+//         description: "Vivamus v77777erra magna. Fusce nec maximus sem.",
+//         price: 500,
+//         image: require("./assets/img/milkprod5.jpg"),
+//     },
+
+
+//     {
+//         id: 22,
+//         name: "Product 4",
+//         description: "Vivamus vi644444tae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
+//         price: 199,
+//         image: require("./assets/img/milkprod2.jpg"),
+//     },
+
+//     {
+//         id: 55,
+//         name: "product 5",
+//         description: "Vivamus v555555itae neque accumsan, ultrices nisl nec maximus sem.",
+//         price: 320,
+//         image: require("./assets/img/milkprod4.jpg"),
+//     },
+
+//     {
+//         id: 66,
+//         name: "product 6",
+//         description: "Vivamus vita6666666666e neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
+//         price: 500,
+//         image: require("./assets/img/product03.jpg"),
+//     },
+
+//     {
+//         id: 763,
+//         name: "product 7",
+//         description: "Vivamus v77777erra magna. Fusce nec maximus sem.",
+//         price: 500,
+//         image: require("./assets/img/milkprod5.jpg"),
+//     }
+// ];
 
 const favoriteProducts = [
     {
@@ -167,6 +200,7 @@ function App() {
     const CartTotalPrice = getTotalPrice(productsInCart);
 
     const [productHome, setproductHome] = useState([]);
+    const [productListing, setproductListing] = useState([]);
     const [categoryList, setcategoryList] = useState([]);
 
     const [successMessage, setSuccessMessage] = useState(null);
@@ -195,7 +229,6 @@ function App() {
             .catch(error => {
                 console.log(error);
             })
-
         if (errorMessage) {
             toast.error(errorMessage);
         }
@@ -204,6 +237,10 @@ function App() {
         }
 
     }, [productsInCart, errorMessage, successMessage]);
+
+    const SetProductsListing=(products)=>{
+        setproductListing(products)
+    }
 
     const SetSuccessMessage = (messageDone) => {
         setSuccessMessage(messageDone)
@@ -281,6 +318,7 @@ function App() {
                 />} />
                 <Route path="product-listing" element={<ProductListing
                     products={productListing}
+                    SetProductsListing ={SetProductsListing}
                     addProductToCart={addProductToCart}
                 />} />
                 <Route path="Contacts" element={<Contacts />} />

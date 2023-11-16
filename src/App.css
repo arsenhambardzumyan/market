@@ -1072,6 +1072,20 @@ a:hover {
   text-transform: uppercase;
 }
 
+.page__number{
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 1;
+}
+
+.page__number:hover{
+  opacity: 0.5;
+}
+
+.pagination__disabled{
+  pointer-events: none;
+  opacity: 0.5;
+}
 .uk-pagination>li:first-child a,
 .uk-pagination>li:last-child a {
   background: #222222;

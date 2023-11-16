@@ -3,19 +3,60 @@ import blacklogo from '../assets/img/logo-black.png';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import request from "../components/helpers/request";
 
 
-const Login = () => {
+const Login = ({ SetSuccessMessage, SetErrorMessage }) => {
+
+    const navigate = useNavigate();
     const [validated, setValidated] = useState(false);
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+
+    React.useEffect(() => {
+        const element = document.getElementById('form_container');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
+        } else {
+            event.preventDefault();
+            request(`https://api.dev.itfabers.com/api/store-login/`, 'POST', formData)
+                .then((response) => {
+                    if (response.notification) {
+                        SetErrorMessage(null)
+                        setTimeout(() => {
+                            SetErrorMessage(response.notification)
+                        });
+                    } else if (response.message) {
+                        SetErrorMessage(null);
+                        setTimeout(() => {
+                            SetErrorMessage(response.message);
+                        });
+                    } else {
+                        navigate('/account');
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    SetErrorMessage(err)
+                })
         }
-
         setValidated(true);
     };
 
@@ -41,40 +82,41 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="page-content">
-                        <div className="uk-section-small uk-container">
-                            <div className="contact-form">
+                        <div className="uk-section-small uk-container" id="form_container">
+                            <div className="contact-form" >
                                 <div className="section-title uk-text-center"><img src={blacklogo} title="icon" alt="" /><span>Taking rides to a newer level</span>
                                     <h3 className="uk-h2">Login in your acount</h3>
                                 </div>
-                                <div className="section-content">
+                                <div className="section-content"  >
                                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                         <div className="uk-grid uk-grid-small uk-child-width-1-3@s" data-uk-grid>
-                                            <Form.Group className="uk-width-1-1" controlId="validationCustom01">
+                                            <Form.Group className="uk-width-1-1 login-btn-registrtation" controlId="validationCustom01">
                                                 <Form.Control
                                                     required
                                                     type="text"
-                                                    placeholder="Your name"
+                                                    placeholder="Your email"
                                                     className="uk-input uk-form-large"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleChange}
                                                 />
                                             </Form.Group>
-                                            <Form.Group className="uk-width-1-1" controlId="validationCustom02">
+                                            <Form.Group className="uk-width-1-1 login-btn-registrtation " controlId="validationCustom02">
                                                 <Form.Control
                                                     required
                                                     type="password"
                                                     placeholder="Password"
                                                     className="uk-input uk-form-large"
+                                                    name="password"
+                                                    value={formData.password}
+                                                    onChange={handleChange}
                                                 />
                                             </Form.Group>
-                                            <div className="login-bottom uk-width-1-1">
-                                                <div className="checkbox-content">
-                                                    <label className="checkbox_field">
-                                                        <input name="rememberme" className="uk-checkbox" type="checkbox" value="forever" />
-                                                        <span>Remember Me</span>
-                                                    </label>
-                                                </div>
-                                                <Link className="lost-pass" to='/ResetPassword'> Lost password?</Link>
+                                            <div className="login-bottom uk-width-1-1  ">
+                                                <div className="checkbox-content login-btn-registrtation"></div>
+                                                <Link className="lost-pass login-btn-registrtation" to='/ResetPassword'> Lost password?</Link>
                                             </div>
-                                            <div className="uk-margin-medium-top uk-width-1-1 uk-text-center  login-btn-login">
+                                            <div className="uk-margin-medium-top uk-width-1-1  uk-text-center  login-btn-login">
                                                 <Button className="uk-button uk-button-danger uk-button-large" type="submit">Login </Button>
                                             </div>
                                             <div className="uk-margin-medium-top uk-width-1-1 uk-text-center login-btn-registrtation">
@@ -89,6 +131,7 @@ const Login = () => {
                 </div>
             </main >
         </>
+
     )
 }
 

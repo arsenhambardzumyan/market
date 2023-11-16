@@ -17,7 +17,8 @@ import UIkit from 'uikit';
 import { Route, Routes } from 'react-router-dom';
 import request from "./components/helpers/request";
 import defaultImg from '../src/assets/img/defaultImg.jpg';
-
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css'
 import './App.css';
 
 // const productHome = [
@@ -160,13 +161,16 @@ const productInner = [
 
 function App() {
 
-    let shoppingCart = document.getElementsByClassName('offConvassCart');    
+    let shoppingCart = document.getElementsByClassName('offConvassCart');
     const getTotalPrice = (items) => items.map((item) => item.price * item.count).reduce((acc, value) => acc + value, 0);
     const [productsInCart, setProducts] = useState(JSON.parse(localStorage.getItem("shopping-cart")) || []);
     const CartTotalPrice = getTotalPrice(productsInCart);
 
     const [productHome, setproductHome] = useState([]);
     const [categoryList, setcategoryList] = useState([]);
+
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     useEffect(() => {
         localStorage.setItem(
@@ -175,13 +179,13 @@ function App() {
         );
         request('https://api.dev.itfabers.com/api/website-setup')
             .then((homeData) => {
-                homeData.products.forEach((product , i )=>{
-                    if(product.thumb_image===null){
+                homeData.products.forEach((product, i) => {
+                    if (product.thumb_image === null) {
                         product.thumb_image = defaultImg;
                     }
                 })
-                homeData.productCategories.forEach((category , i )=>{
-                    if(category.image===null){
+                homeData.productCategories.forEach((category, i) => {
+                    if (category.image === null) {
                         category.image = defaultImg;
                     }
                 })
@@ -192,7 +196,22 @@ function App() {
                 console.log(error);
             })
 
-    }, [productsInCart]);
+        if (errorMessage) {
+            toast.error(errorMessage);
+        }
+        if (successMessage) {
+            toast.success(successMessage)
+        }
+
+    }, [productsInCart, errorMessage, successMessage]);
+
+    const SetSuccessMessage = (messageDone) => {
+        setSuccessMessage(messageDone)
+    }
+    const SetErrorMessage = (messageError) => {
+        setErrorMessage(null);
+        setErrorMessage(messageError)
+    }
 
     const addProductToCart = (product) => {
         const names = productsInCart.map(product => product.id)
@@ -241,25 +260,43 @@ function App() {
                 onProductRemove={onProductRemove}
                 CartTotalPrice={CartTotalPrice}
             />
+            <ToastContainer
+                position="bottom-left"
+                autoClose={3000}
+                limit={3}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
             <Routes>
                 <Route path="/" element={<HomePage
                     products={productHome}
                     addProductToCart={addProductToCart}
                     categoryList={categoryList}
                 />} />
-
                 <Route path="product-listing" element={<ProductListing
                     products={productListing}
                     addProductToCart={addProductToCart}
                 />} />
                 <Route path="Contacts" element={<Contacts />} />
-                <Route path="login" element={<Login />} />
+                <Route path="login" element={<Login
+                    SetSuccessMessage={SetSuccessMessage}
+                    SetErrorMessage={SetErrorMessage}
+                />} />
                 <Route path="ResetPassword" element={<ResetPassword />} />
                 <Route path="wish-list" element={<WishList
                     products={favoriteProducts}
                     addProductToCart={addProductToCart}
                 />} />
-                <Route path="registration" element={<Registration />} />
+                <Route path="registration" element={<Registration
+                    SetSuccessMessage={SetSuccessMessage}
+                    SetErrorMessage={SetErrorMessage}
+                />} />
                 <Route path="account" element={<Account />} />
                 <Route path="shopping-cart" element={<ShoppingCartPage
                     products={productsInCart}
@@ -271,13 +308,12 @@ function App() {
                     products={productsInCart}
                     CartTotalPrice={CartTotalPrice}
                 />} />
-                <Route path="product-inner/:id" 
-                    element={
-                        <ProductInner
+                <Route path="product-inner/:id" element={
+                    <ProductInner
                         products={productInner}
                         onQuantityChange={onQuantityChange}
                         addProductToCart={addProductToCart}
-                    />} 
+                    />}
                 />
             </Routes>
             <Footer />

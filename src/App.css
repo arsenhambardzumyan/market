@@ -1860,6 +1860,15 @@ blockquote span::before {
   transition: 0.5s;
 }
 
+.header-btn{
+  transition: 0.5s;
+}
+
+.header-btn:hover {
+  background: #e63619;
+}
+
+
 .search-btn svg {
   width: 25px;
   height: 25px;

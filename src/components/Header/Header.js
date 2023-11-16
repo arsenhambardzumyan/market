@@ -3,6 +3,7 @@ import navLogo from '../../assets/img/icons/menu.svg';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import { Link } from "react-router-dom";
+import { AiOutlineUser } from 'react-icons/ai';
 
 const Header = ({ products }) => {
 
@@ -50,34 +51,16 @@ const Header = ({ products }) => {
                 <div className="page-header__center">
                     <nav className="page-nav" data-uk-navbar>
                         <ul className="uk-navbar-nav">
-                            <li>
-                                <Link to="/">Home</Link>                               
-                            </li>                            
-                            <li><a href="/#">Product Page</a>
-                                <div className="uk-navbar-dropdown">
-                                    <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><Link to="product-listing">Product Listing</Link></li>
-                                        <li><Link to="product-inner">Product Inner</Link></li>
-                                        <li><Link to="wish-list">Wish List</Link></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="/#">Our News</a>
-                                <div className="uk-navbar-dropdown">
-                                    <ul className="uk-nav uk-navbar-dropdown-nav">
-                                        <li><Link to="login">Login</Link></li>
-                                        <li><Link to="registration">Registration</Link></li>
-                                        <li><Link to="account">Account</Link></li>
-                                    </ul>
-                                </div>
-                            </li>
+                            <li><Link to="/">Home</Link></li>        
+                            <li><Link to="product-listing">Products</Link></li>
                             <li><Link to="Contacts">Contact</Link></li>
                         </ul>
                     </nav>
                 </div>
                 <div className="page-header__right">
                     <a className="uk-navbar-toggle search-btn" href="#modal-search" data-uk-search-icon onClick={modalSearchShow}> </a>
-                    <a className="uk-navbar-toggle cart-btn" href="#/" onClick={offConvasCartShow}>
+                    <Link to="login" className="uk-navbar-toggle header-btn"> <AiOutlineUser size={30} /> </Link>
+                    <a className="uk-navbar-toggle header-btn cart-btn" href="#/" onClick={offConvasCartShow}>
                         <div className="cart-btn__icon uk-icon" data-uk-icon="cart">
                             {products.length > 0 && (<span className="product-count cart-btn__count">{ products.length}</span>)}
                         </div>

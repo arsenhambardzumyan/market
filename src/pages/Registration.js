@@ -3,17 +3,45 @@ import blacklogo from '../assets/img/logo-black.png';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import request from "../components/helpers/request";
 
 
-const Login = () => {
+const Login = ({SetSuccessMessage , SetErrorMessage}) => {
+
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+    });
+
     const [validated, setValidated] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
+        }else{
+            event.preventDefault();
+            request(`https://api.dev.itfabers.com/api/store-register/`, 'POST', formData)
+                .then(() => {
+                    SetSuccessMessage('success ✔');
+                    navigate('/login');
+                })
+                .catch(err => {
+                    console.log(err);
+                    SetErrorMessage(err)
+                })
         }
 
         setValidated(true);
@@ -49,36 +77,49 @@ const Login = () => {
                                 <div className="section-content">
                                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                         <div className="uk-grid uk-grid-small uk-child-width-1-3@s" data-uk-grid>
-                                            <Form.Group className="uk-width-1-1" controlId="validationCustom01">
+                                            <Form.Group className="uk-width-1-1 login-btn-registrtation" controlId="validationCustom01">
                                                 <Form.Control
                                                     required
                                                     type="text"
                                                     placeholder="first name"
                                                     className="uk-input uk-form-large"
+                                                    name="firstName"
+                                                    value={formData.firstName}
+                                                    onChange={handleChange}
                                                 />
+
                                             </Form.Group>
-                                            <Form.Group className="uk-width-1-1" controlId="validationCustom01">
+                                            <Form.Group className="uk-width-1-1 login-btn-registrtation" controlId="validationCustom02">
                                                 <Form.Control
                                                     required
                                                     type="text"
                                                     placeholder="Last name"
                                                     className="uk-input uk-form-large"
+                                                    name="lastName"
+                                                    value={formData.lastName}
+                                                    onChange={handleChange}
                                                 />
                                             </Form.Group>
-                                            <Form.Group className="uk-width-1-1" controlId="validationCustom01">
+                                            <Form.Group className="uk-width-1-1 login-btn-registrtation" controlId="validationCustom03">
                                                 <Form.Control
                                                     required
                                                     type="email"
                                                     placeholder="Your email"
                                                     className="uk-input uk-form-large"
+                                                    name="email"
+                                                    value={formData.email}
+                                                    onChange={handleChange}
                                                 />
                                             </Form.Group>
-                                            <Form.Group className="uk-width-1-1" controlId="validationCustom02">
+                                            <Form.Group className="uk-width-1-1 login-btn-registrtation" controlId="validationCustom04">
                                                 <Form.Control
                                                     required
                                                     type="password"
                                                     placeholder="Password"
                                                     className="uk-input uk-form-large"
+                                                    name="password"
+                                                    value={formData.password}
+                                                    onChange={handleChange}
                                                 />
                                             </Form.Group>
                                             <div className="uk-margin-medium-top uk-width-1-1 uk-text-center login-btn-login">

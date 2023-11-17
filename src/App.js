@@ -21,100 +21,6 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css'
 import './App.css';
 
-// const productHome = [
-//     {
-//         id: 1,
-//         name: "Product 1",
-//         description: "Vivamus vitae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-//         price: 199,
-//         image: require("./assets/img/product01.png"),
-//         slug: ''
-//     },
-
-//     {
-//         id: 2,
-//         name: "product 2",
-//         description: "Vivamus vitae neque accumsan, ultrices nisl nec maximus sem.",
-//         price: 320,
-//         image: require("./assets/img/product02.jpg"),
-//     },
-
-//     {
-//         id: 3,
-//         name: "product 3",
-//         description: "Vivamus vitae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-//         price: 500,
-//         image: require("./assets/img/product03.jpg"),
-//     }
-// ];
-
-// const productListing = [
-//     {
-//         id: 4,
-//         name: "Product 4",
-//         description: "Vivamus vi644444tae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-//         price: 199,
-//         image: require("./assets/img/milkprod2.jpg"),
-//     },
-
-//     {
-//         id: 5,
-//         name: "product 5",
-//         description: "Vivamus v555555itae neque accumsan, ultrices nisl nec maximus sem.",
-//         price: 320,
-//         image: require("./assets/img/milkprod4.jpg"),
-//     },
-
-//     {
-//         id: 6,
-//         name: "product 6",
-//         description: "Vivamus vita6666666666e neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-//         price: 500,
-//         image: require("./assets/img/product03.jpg"),
-//     },
-
-//     {
-//         id: 7,
-//         name: "product 7",
-//         description: "Vivamus v77777erra magna. Fusce nec maximus sem.",
-//         price: 500,
-//         image: require("./assets/img/milkprod5.jpg"),
-//     },
-
-
-//     {
-//         id: 22,
-//         name: "Product 4",
-//         description: "Vivamus vi644444tae neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-//         price: 199,
-//         image: require("./assets/img/milkprod2.jpg"),
-//     },
-
-//     {
-//         id: 55,
-//         name: "product 5",
-//         description: "Vivamus v555555itae neque accumsan, ultrices nisl nec maximus sem.",
-//         price: 320,
-//         image: require("./assets/img/milkprod4.jpg"),
-//     },
-
-//     {
-//         id: 66,
-//         name: "product 6",
-//         description: "Vivamus vita6666666666e neque accumsan, ultrices nisl et, viverra magna. Fusce nec maximus sem.",
-//         price: 500,
-//         image: require("./assets/img/product03.jpg"),
-//     },
-
-//     {
-//         id: 763,
-//         name: "product 7",
-//         description: "Vivamus v77777erra magna. Fusce nec maximus sem.",
-//         price: 500,
-//         image: require("./assets/img/milkprod5.jpg"),
-//     }
-// ];
-
 const favoriteProducts = [
     {
         id: 8,
@@ -316,7 +222,7 @@ function App() {
                     addProductToCart={addProductToCart}
                     categoryList={categoryList}
                 />} />
-                <Route path="product-listing" element={<ProductListing
+                <Route path="product-listing"  element={<ProductListing
                     products={productListing}
                     SetProductsListing ={SetProductsListing}
                     addProductToCart={addProductToCart}

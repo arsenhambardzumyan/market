@@ -57,7 +57,7 @@ const MainSlider = () => {
                     <div className="slideshow-nav__count">
                         <ul>
                         {sliders.map((slider, index) => (
-                          <li data-uk-slideshow-item={index}><span>{index+1} </span></li>
+                          <li key={index} data-uk-slideshow-item={index}><span>{index+1} </span></li>
                         ))}
                         </ul>
                         <span>/{sliders.length}</span>

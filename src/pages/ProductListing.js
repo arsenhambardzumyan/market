@@ -1,4 +1,4 @@
-import React, { useRef, useState , useCallback } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import brand1 from '../assets/img/brand-1.png';
 import Subscribe from '../components/Subscribe/Subscribe';
 import Slider from 'rc-slider';
@@ -13,22 +13,18 @@ import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import request from '../components/helpers/request';
+import { Card, Placeholder } from 'react-bootstrap';
+import defaultImg from '../../src/assets/img/defaultImg.jpg';
 
-
-const ProductListing = ({ addProductToCart, products , SetProductsListing }) => {
+const ProductListing = ({ addProductToCart, products, SetProductsListing }) => {
 
     let productListEl = useRef(null);
+    const [listLoader, setlistLoader] = useState(true);
     const [isToggled, setIsToggled] = useState(false);
     const [activeButton, setActiveButton] = useState('button2');
-
-    // const [PagesData, setPagesData] = useState({
-    //     firstPage : 1,
-    //     lastPage : 10,
-    //     nextPage : 2,
-    //     prevPage : 0,
-    // });
-
     const [page, setPage] = useState(1);
+    const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
+    const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
 
     const toggleClass = () => {
         setIsToggled(!isToggled);
@@ -38,9 +34,6 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
         setActiveButton(buttonId);
         toggleClass();
     };
-
-    const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
-    const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
 
     const handlePriceValuesChange = (newValues) => {
         setPriceValues(newValues);
@@ -64,12 +57,16 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
     }
 
     const SetCurrentProducts = useCallback((data) => {
-        SetProductsListing(data);
+        if (data) {
+            SetProductsListing(data);
+            setlistLoader(false);
+        }
     }, [SetProductsListing]);
+
 
     React.useEffect(() => {
         let localList;
-        if (localStorage.getItem("shopping-cart") != null) {
+        if (localStorage.getItem("shopping-cart") != null  && productListEl.current !==null) {
             localList = JSON.parse(localStorage.getItem("shopping-cart")).map(product => product.id);
             for (let i = 0; i < productListEl.current.childElementCount; i++) {
                 if (localList.includes(+productListEl.current.children[i].id)) {
@@ -80,22 +77,30 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
             }
         }
         request(`https://api.dev.itfabers.com/api/all-products?page=${page}`)
-        .then((response) => {
-           SetCurrentProducts(response.products.data);
-        })
-        .catch(err => {
-            console.log(err);
+            .then((response) => {
+                SetCurrentProducts(response.products.data);
+            })
+            .catch(err => {
+                console.log(err);
         })
     }, [page]);
 
-
-    const handlePageChange = (pageNumber) => {
+    const handlePageChange = (e, pageNumber) => {
+        e.preventDefault();
+        setlistLoader(true);
+        const element = document.getElementById('products_container');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
         if (
             pageNumber > 0 &&
-            pageNumber <=  10 &&
+            pageNumber <= 10 &&
             pageNumber !== page
-        )
-        setPage(pageNumber);
+        ){
+            setTimeout(() => {
+                setPage(pageNumber);
+            }, 700);
+        }
     };
 
     return (
@@ -119,7 +124,7 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
                             </div>
                         </div>
                     </div>
-                    <div className="page-content">
+                    <div className="page-content" id="products_container">
                         <div className="uk-section-large uk-container">
                             <div className="uk-grid" data-uk-grid>
                                 <div className="uk-width-1-3@m">
@@ -254,7 +259,107 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
                                         </div>
                                     </div>
                                     <div className="products-items uk-grid" data-uk-grid>
-                                        <div className={isToggled ? 'uk-grid uk-grid-medium uk-child-width-1-1@m uk-child-width-1-2@s product_listing' : 'uk-grid uk-grid-medium uk-child-width-1-2@m uk-child-width-1-2@s product_listing'}
+                                        {listLoader ?
+                                            <div className={isToggled ? 'uk-grid placeholder-line uk-grid-medium uk-child-width-1-1@m uk-child-width-1-2@s product_listing placeholder-list' : 'placeholder-list uk-grid uk-grid-medium uk-child-width-1-2@m uk-child-width-1-2@s product_listing'}>
+                                                <div className="product-container placeholder_container">
+                                                    <Card >
+                                                        <Card.Body>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                        </Card.Body>
+                                                        <Card.Img variant="top" src={defaultImg} />
+                                                        <Card.Body className='card-body-bottom'>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                            <Placeholder.Button variant="primary" xs={6} />
+                                                        </Card.Body>
+                                                    </Card>
+                                                </div>
+                                                <div className="product-container placeholder_container">
+                                                    <Card  >
+                                                        <Card.Body>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                        </Card.Body>
+                                                        <Card.Img variant="top" src={defaultImg} />
+                                                        <Card.Body className='card-body-bottom'>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                            <Placeholder.Button variant="primary" xs={6} />
+                                                        </Card.Body>
+                                                    </Card>
+                                                </div>
+                                                <div className="product-container placeholder_container">
+                                                    <Card  >
+                                                        <Card.Body>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                        </Card.Body>
+                                                        <Card.Img variant="top" src={defaultImg} />
+                                                        <Card.Body className='card-body-bottom'>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                            <Placeholder.Button variant="primary" xs={6} />
+                                                        </Card.Body>
+                                                    </Card>
+                                                </div>
+                                                <div className="product-container placeholder_container">
+                                                    <Card  >
+                                                        <Card.Body>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                        </Card.Body>
+                                                        <Card.Img variant="top" src={defaultImg} />
+                                                        <Card.Body className='card-body-bottom'>
+                                                            <Placeholder as={Card.Title} animation="glow">
+                                                                <Placeholder xs={6} />
+                                                            </Placeholder>
+                                                            <Placeholder as={Card.Text} animation="glow">
+                                                                <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
+                                                                <Placeholder xs={6} /> <Placeholder xs={8} />
+                                                            </Placeholder>
+                                                            <Placeholder.Button variant="primary" xs={6} />
+                                                        </Card.Body>
+                                                    </Card>
+                                                </div>
+                                            </div>
+                                            :
+                                            <div className={isToggled ? 'uk-grid uk-grid-medium uk-child-width-1-1@m uk-child-width-1-2@s product_listing' : 'uk-grid uk-grid-medium uk-child-width-1-2@m uk-child-width-1-2@s product_listing'}
                                             data-uk-grid ref={productListEl}>
                                             {products.map((product) => (
                                                 <div key={product.id} id={product.id} className="product-container" >
@@ -269,7 +374,7 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
                                                             </div>
                                                         </div>
                                                         <div className="product-item__media uk-inline-clip uk-inline">
-                                                            <img src={`https://api.dev.itfabers.com/${product.thumb_image}`} alt={product.thumb_image} title="product" />
+                                                            <img src={product.thumb_image !==null ? `https://api.dev.itfabers.com/${product.thumb_image}` : `${defaultImg}`} alt="productImage" title="product" />
                                                             <div className="uk-transition-fade" onClick={(e) => addProduct(e, product)}>
                                                                 <div className="uk-overlay-cover uk-overlay-primary"></div>
                                                                 <FiCheck className="checked_icon uk-position-center " size={60} />
@@ -338,7 +443,9 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
                                                         </div>
                                                     </Link>
                                                 </div>))}
-                                        </div>
+                                            </div>
+                                        }
+                                    
                                     </div>
                                     {products.length > 0 && (
                                         <div className="uk-margin-large-top uk-text-center">
@@ -346,19 +453,18 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
                                                 <li>
                                                     <a href="/#"
                                                         onClick={(e) => {
-                                                            e.preventDefault();
-                                                            handlePageChange(page - 1)
+                                                            handlePageChange(e , page - 1)
                                                         }}
                                                         className={`arrow ${page === 1 ? "pagination__disabled" : ""}`}
                                                     >
                                                         <span data-uk-pagination-previous></span>
                                                     </a>
                                                 </li>
-                                                
+
                                                 {[...Array(Math.floor(10))].map((_, i) => (
                                                     <li className={`page__number ${page === i + 1 ? "uk-active" : ""}`}
                                                         key={i + 1}
-                                                        onClick={() => handlePageChange(i + 1)}
+                                                        onClick={(e) => handlePageChange(e , i + 1)}
                                                     >
                                                         <span>{i + 1}</span>
                                                     </li>
@@ -367,13 +473,12 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
                                                 <li>
                                                     <a href="/#"
                                                         onClick={(e) => {
-                                                            e.preventDefault();
-                                                            handlePageChange(page + 1)
+                                                            handlePageChange(e , page + 1)
                                                         }}
                                                         className={`arrow ${page === Math.floor(10)
-                                                        ? "pagination__disabled"
-                                                        : ""
-                                                        }`}
+                                                            ? "pagination__disabled"
+                                                            : ""
+                                                            }`}
                                                     >
                                                         <span data-uk-pagination-next></span>
                                                     </a>
@@ -389,7 +494,6 @@ const ProductListing = ({ addProductToCart, products , SetProductsListing }) => 
             </main >
             <Subscribe />
         </>
-
     )
 }
 

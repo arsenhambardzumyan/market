@@ -122,7 +122,7 @@ const Header = ({ products }) => {
                 <div className="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" data-uk-height-viewport>
                     <button className="uk-modal-close-full" type="button" data-uk-close onClick={modalSearchClose}></button>
                     <form className="uk-search uk-search-large">
-                        <input className="uk-search-input uk-text-center" type="search" placeholder="Search..." autoFocus />
+                        <input className="uk-search-input uk-text-center" name="input-search" type="search" placeholder="Search..." autoFocus />
                     </form>
                 </div>
             </div>

@@ -18,9 +18,9 @@ const SubScribe = () => {
                         </div>
                         <div>
                             <div className="subscribe-box__form">
-                                <form  onSubmit={handleSubmit(onSubmit)} >
+                                <form  onSubmit={handleSubmit(onSubmit)}>
                                     <div className="uk-flex uk-flex-middle">
-                                        <input className="uk-input" {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} type="email" name="email" placeholder="Email Address ...." />
+                                        <input className="uk-input"    autoComplete="on"  {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} type="email" name="email" placeholder="Email Address ...." />
                                         <button className="uk-button uk-button-danger" type="submit">Subscribe</button>
                                     </div>
                                 </form>

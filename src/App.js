@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage';
+import BrandsPage from './pages/BrandsPage';
+import ProductsPage from './pages/ProductsPage';
+import CategoryPage from './pages/CategoryPage';
+import HotOfferPage from './pages/HotOfferPage';
+import NewArrivalPage from './pages/NewArrivalPage';
 import ProductListing from './pages/ProductListing';
 import Contacts from './pages/Contacts';
 import Login from './pages/Login';
@@ -14,12 +21,13 @@ import WishList from './pages/WishList';
 import ProductInner from './pages/ProductInner';
 import ShoppingCart from "./components/ShoppingCarts/ShoppingCart";
 import UIkit from 'uikit';
-import { Route, Routes } from 'react-router-dom';
-import request from "./components/helpers/request";
-import defaultImg from '../src/assets/img/defaultImg.jpg';
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.min.css'
+import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
+
+import { addToCart, updateQuantity, removeFromCart, addToFavorites, addToProductInner } from './redux/actions/cartActions';
+
+// const App = () => {
 
 const favoriteProducts = [
     {
@@ -99,99 +107,44 @@ const productInner = [
 
 
 function App() {
-
+    const dispatch = useDispatch();
+    const productsInCart = useSelector((state) => state.cart.productsInCart);
+    const errorMessage = useSelector((state) => state.cart.errorMessage);
+    const successMessage = useSelector((state) => state.cart.successMessage);
+    const apiUrl = process.env.REACT_APP_BASE_URL;
     let shoppingCart = document.getElementsByClassName('offConvassCart');
     const getTotalPrice = (items) => items.map((item) => item.price * item.count).reduce((acc, value) => acc + value, 0);
-    const [productsInCart, setProducts] = useState(JSON.parse(localStorage.getItem("shopping-cart")) || []);
     const CartTotalPrice = getTotalPrice(productsInCart);
 
-    const [productHome, setproductHome] = useState([]);
-    const [productListing, setproductListing] = useState([]);
-    const [categoryList, setcategoryList] = useState([]);
-
-    const [successMessage, setSuccessMessage] = useState(null);
-    const [errorMessage, setErrorMessage] = useState(null);
-
-    useEffect(() => {
-        localStorage.setItem(
-            "shopping-cart",
-            JSON.stringify(productsInCart),
-        );
-        request('https://api.dev.itfabers.com/api/website-setup')
-            .then((homeData) => {
-                homeData.products.forEach((product, i) => {
-                    if (product.thumb_image === null) {
-                        product.thumb_image = defaultImg;
-                    }
-                })
-                homeData.productCategories.forEach((category, i) => {
-                    if (category.image === null) {
-                        category.image = defaultImg;
-                    }
-                })
-                setproductHome(homeData.products);
-                setcategoryList(homeData.productCategories)
-            })
-            .catch(error => {
-                console.log(error);
-            })
-        if (errorMessage) {
-            toast.error(errorMessage);
-        }
-        if (successMessage) {
-            toast.success(successMessage)
-        }
-
-    }, [productsInCart, errorMessage, successMessage]);
-
-    const SetProductsListing=(products)=>{
-        setproductListing(products)
-    }
-
-    const SetSuccessMessage = (messageDone) => {
-        setSuccessMessage(messageDone)
-    }
-    const SetErrorMessage = (messageError) => {
-        setErrorMessage(null);
-        setErrorMessage(messageError)
-    }
 
     const addProductToCart = (product) => {
-        const names = productsInCart.map(product => product.id)
+        const names = productsInCart.map((product) => product.id);
         if (!names.includes(product.id)) {
-            const newProduct = { ...product, count: 1 };
-            setProducts([...productsInCart, newProduct]);
+            dispatch(addToCart(product));
         }
     };
 
     const onQuantityChange = (productId, count) => {
-        setProducts((oldState) => {
-            const productsIndex = oldState.findIndex((item) => item.id === productId);
-            if (productsIndex !== -1) {
-                oldState[productsIndex].count = count;
-            }
-            return [...oldState];
-        });
+        dispatch(updateQuantity(productId, count));
     };
 
     const onProductRemove = (product) => {
-        setProducts((oldState) => {
-            const productsIndex = oldState.findIndex((item) => item.id === product.id);
-            if (productsIndex !== -1) {
-                oldState.splice(productsIndex, 1);
-            }
-            return [...oldState];
-        });
-        console.log(product.id);
-        if (document.getElementById(product.id)) {
-            document.getElementById(product.id).classList.remove('product-added')
-        }
+        dispatch(removeFromCart(product.id));
+    };
+
+    const addFavoriteToCart = (product) => {
+        dispatch(addToFavorites(product));
+    };
+
+    const addProductInnerToCart = (product) => {
+        dispatch(addToProductInner(product));
     };
 
     const offConvasCartHide = (e) => {
         e.preventDefault();
         UIkit.offcanvas(shoppingCart).hide();
-    }
+    };
+
 
     return (
         <div className='page-wrapper'>
@@ -217,30 +170,17 @@ function App() {
                 theme="dark"
             />
             <Routes>
-                <Route path="/" element={<HomePage
-                    products={productHome}
-                    addProductToCart={addProductToCart}
-                    categoryList={categoryList}
-                />} />
-                <Route path="product-listing"  element={<ProductListing
-                    products={productListing}
-                    SetProductsListing ={SetProductsListing}
-                    addProductToCart={addProductToCart}
-                />} />
+                <Route path="/" element={<HomePage addProductToCart={addProductToCart} />} />
+                <Route path="brands" element={<BrandsPage />} />
+                <Route path="shop" element={<ProductsPage />} />
+                <Route path="hot-offer" element={<HotOfferPage addProductToCart={addProductToCart} />} />
+                <Route path="new-arrival" element={<NewArrivalPage addProductToCart={addProductToCart} />} />
+                <Route path="product-listing" element={<ProductListing addProductToCart={addProductToCart} />} />
                 <Route path="Contacts" element={<Contacts />} />
-                <Route path="login" element={<Login
-                    SetSuccessMessage={SetSuccessMessage}
-                    SetErrorMessage={SetErrorMessage}
-                />} />
+                <Route path="login" element={<Login />} />
                 <Route path="ResetPassword" element={<ResetPassword />} />
-                <Route path="wish-list" element={<WishList
-                    products={favoriteProducts}
-                    addProductToCart={addProductToCart}
-                />} />
-                <Route path="registration" element={<Registration
-                    SetSuccessMessage={SetSuccessMessage}
-                    SetErrorMessage={SetErrorMessage}
-                />} />
+                <Route path="wish-list" element={<WishList products={favoriteProducts} addProductToCart={addFavoriteToCart} />} />
+                <Route path="registration" element={<Registration />} />
                 <Route path="account" element={<Account />} />
                 <Route path="shopping-cart" element={<ShoppingCartPage
                     products={productsInCart}
@@ -248,17 +188,13 @@ function App() {
                     onProductRemove={onProductRemove}
                     CartTotalPrice={CartTotalPrice}
                 />} />
-                <Route path="checkout" element={<Checkout
-                    products={productsInCart}
-                    CartTotalPrice={CartTotalPrice}
+                <Route path="checkout" element={<Checkout products={productsInCart} CartTotalPrice={CartTotalPrice} />} />
+                <Route path="product/:slug" element={<ProductInner
+                    products={productInner}
+                    onQuantityChange={onQuantityChange}
+                    addProductToCart={addProductInnerToCart}
                 />} />
-                <Route path="product-inner/:id" element={
-                    <ProductInner
-                        products={productInner}
-                        onQuantityChange={onQuantityChange}
-                        addProductToCart={addProductToCart}
-                    />}
-                />
+                <Route path="category/:slug" element={<CategoryPage addProductToCart={addProductInnerToCart}/>} />
             </Routes>
             <Footer />
         </div>

@@ -51,12 +51,13 @@ const ProductsPage = () => {
 
                     {/* Main Content */}
                     <div className="uk-width-3-4">
-                        <div className="uk-child-width-1-3@s uk-grid-small uk-grid-match" data-uk-grid>
+                        <div className="uk-child-width-1-2@s uk-grid-small uk-grid-match" data-uk-grid>
                             <ProductsComponent
                                 title=""
                                 products={productsData || []}
                                 pagination={true}
                                 template="shop"
+                                col={2}
                                 addToCart={handleAddToCart}
                             />
                         </div>

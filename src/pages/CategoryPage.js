@@ -19,8 +19,6 @@ const CategoryPage = () => {
     if (!categoriesData) {
         return <p>Loading...</p>;
     }
-
-    // Replace '/path/to/your/banner.jpg' with the actual path to your banner image
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';
 
     return (
@@ -28,10 +26,8 @@ const CategoryPage = () => {
             <div style={{ textAlign: 'center' }}>
                 <img src={bannerImage} alt="Banner" style={{ width: '100%', height: '500px', objectFit: 'cover', margin: '0 auto' }} />
             </div>
-
             <div className="uk-container">
                 <div className="uk-grid-small" data-uk-grid>
-                    {/* Left Sidebar */}
                     <div className="uk-width-1-4">
                         <div className="uk-card uk-card-default uk-card-body">
                             <h3 className="uk-card-title">Categories</h3>
@@ -46,8 +42,6 @@ const CategoryPage = () => {
                             </ul>
                         </div>
                     </div>
-
-                    {/* Main Content */}
                     <div className="uk-width-3-4">
                         <div className="uk-child-width-1-3@s uk-grid-small uk-grid-match" data-uk-grid>
                             <ProductsComponent

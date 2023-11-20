@@ -7,6 +7,8 @@ import Subscribe from '../components/Subscribe/Subscribe';
 import Partners from "../components/Partners/Partners";
 import { fetchHomeData } from "../redux/actions/homeActions";
 import { addToCart } from "../redux/actions/cartActions";
+import SectionVideo from "../components/Homepage/SectionVideo";
+import SectionGallery from "../components/Homepage/SectionGallery";
 
 const HomePage = () => {
     const dispatch = useDispatch();
@@ -40,6 +42,7 @@ const HomePage = () => {
                         pagination={false}
                         template="featured"
                         addToCart={handleAddToCart}
+                        col={3}
                     />
                     <ProductsComponent
                         title="New Arrival"
@@ -47,13 +50,16 @@ const HomePage = () => {
                         pagination={false}
                         template="new"
                         addToCart={handleAddToCart}
+                        col={3}
                     />
+                    <SectionGallery />
                     <ProductsComponent
                         title="Top products"
                         products={homeData.topProducts || []}
                         pagination={false}
                         template="top"
                         addToCart={handleAddToCart}
+                        col={3}
                     />
                     <ProductsComponent
                         title="Hot Offer"
@@ -61,13 +67,16 @@ const HomePage = () => {
                         pagination={false}
                         template="hot"
                         addToCart={handleAddToCart}
+                        col={3}
                     />
+                    <SectionVideo />
                     <ProductsComponent
                         title="Best Products"
                         products={homeData.bestProducts || []}
                         pagination={false}
                         template="hot"
                         addToCart={handleAddToCart}
+                        col={3}
                     />
                     <Partners />
                     <Subscribe />

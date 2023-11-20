@@ -6,8 +6,8 @@ const CategoriesComponent = ({categories}) => {
             <div className="uk-container uk-container-large">
                 <div className="uk-position-relative" tabIndex="-1" data-uk-slider>
                     <ul className="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-child-width-1-5@xl">
-                        {categories.map((category) => (
-                            <li key={category.id}>
+                        {categories.map((category , i) => (
+                            <li key={i}>
                                 <div className="category-item">
                                     <Link className="category-item__link" to={`category/${category.slug}`}>
                                         <div className="category-item__title">{category.name}</div>

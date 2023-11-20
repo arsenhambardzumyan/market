@@ -907,6 +907,7 @@ a:hover {
 .placeholder-line .placeholder_container .card-body-bottom {
   display: none;
 }
+
 .slider-nav .uk-slidenav-previous {
   background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg' data-svg='triangle-left'%3E%3Cpolygon points='12 5 7 10 12 15' fill='%23fff'%3E%3C/polygon%3E%3C/svg%3E") #222222;
 }
@@ -2803,6 +2804,11 @@ body.page-home .section-hero__content {
   margin-left: -20px;
 }
 
+.category-line {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+
 .product-item__head {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -2815,6 +2821,19 @@ body.page-home .section-hero__content {
   justify-content: space-between;
   padding: 40px;
   padding-bottom: 20px;
+  height: 175px;
+}
+
+.listing_container .uk-margin-medium-bottom p {
+  display: none;
+}
+
+.listing_container .uk-section {
+  padding-top: 0;
+}
+
+.listing_container .sorting {
+  margin-bottom: 0;
 }
 
 .product-item__name span {

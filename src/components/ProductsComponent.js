@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FiCheck } from 'react-icons/fi';
@@ -6,7 +6,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { addToCart } from '../redux/actions/cartActions';
 // import defaultImg from '../../src/assets/img/defaultImg.jpg';
 
-const ProductsComponent = ({ title, products, pagination, template, col, addProductToCart }) => {
+const ProductsComponent = ({ title, products, pagination, template,   col, addProductToCart }) => {
 
     let productListEl = useRef(null);
 
@@ -29,12 +29,6 @@ const ProductsComponent = ({ title, products, pagination, template, col, addProd
             e.currentTarget.parentElement.parentElement.parentElement.classList.add('product-added');
         }
     };
-
-    useEffect(() => {
-        console.log(products)
-    }, [products])
-
-
     return (
         <>
             <div className="uk-section uk-container">

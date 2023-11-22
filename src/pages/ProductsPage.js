@@ -16,17 +16,22 @@ const ProductsPage = () => {
     const dispatch = useDispatch();
     const categoriesData = useSelector((state) => state.shop.data.categories);
     const productsData = useSelector((state) => state.shop.data.products);
+    const loaderData = useSelector((state) => state.shop.loading);
+
     const [isToggled, setIsToggled] = useState(false);
     const [listingLine, setlistingLine] = useState(2);
+
     // const [listLoader, setlistLoader] = useState(true);
+    
     const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
     const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
+
     const [activeButton, setActiveButton] = useState('button2');
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        dispatch(fetchProducts());
-    }, [dispatch]);
+        dispatch(fetchProducts(page));
+    }, [dispatch , page]);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product));
@@ -72,14 +77,9 @@ const ProductsPage = () => {
         }
     };
 
-
-
     if (!categoriesData) {
-        // Return null or a loading component while waiting for categoriesData
         return <p>Loading...</p>;
     }
-
-    // Replace '/path/to/your/banner.jpg' with the actual path to your banner image
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';
 
     return (
@@ -87,10 +87,8 @@ const ProductsPage = () => {
             <div style={{ textAlign: 'center' }}>
                 <img src={bannerImage} alt="Banner" style={{ width: '100%', height: '500px', objectFit: 'cover', margin: '0 auto' }} />
             </div>
-
             <div className="uk-container listing_container uk-section-large " id="products_container">
                 <div className="uk-grid" data-uk-grid>
-                    {/* Left Sidebar */}
                     <div className="uk-width-1-3@m">
                         <div className="js-filter-more filter-more">
                             <div className="filter-more__desc">
@@ -113,7 +111,7 @@ const ProductsPage = () => {
                                 ))}
                             </ul>
                         </div>
-                        <aside className="sidebar js-filter-content">
+                        {/* <aside className="sidebar js-filter-content">
                             <div className="widjet widjet--filters">
                                 <div className="widjet__content">
                                     <div className="uk-grid uk-grid-small uk-child-width-1-2" data-uk-grid>
@@ -209,9 +207,8 @@ const ProductsPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </aside>
+                        </aside> */}
                     </div>
-                    {/* Main Content */}
                     <div className="uk-width-2-3@m">
                         <div className="sorting">
                             <div className="sorting-left">
@@ -236,8 +233,8 @@ const ProductsPage = () => {
                             </div>
                         </div>
                         <div className="products-items">
-                            {!categoriesData ?
-                                <div className={isToggled ? 'placeholder-line  uk-child-width-1-1@m uk-child-width-1-2@s placeholder-list' : 'placeholder-list  uk-child-width-1-2@m uk-child-width-1-2@s'}>
+                            {loaderData ?
+                                <div className={isToggled ? ' uk-grid uk-child-width-1-1@m uk-child-width-1-2@s placeholder_list  ' : '  uk-grid uk-child-width-1-2@m uk-child-width-1-2@s placeholder_list'}>
                                     <div className="product-container placeholder_container">
                                         <Card >
                                             <Card.Body>
@@ -347,7 +344,6 @@ const ProductsPage = () => {
                                     />
                                 </div>
                             }
-
                         </div>
                         {productsData.length > 0 && (
                             <div className="uk-margin-large-top uk-text-center">
@@ -388,7 +384,6 @@ const ProductsPage = () => {
                                 </ul>
                             </div>
                         )}
-
                     </div>
                 </div>
             </div>

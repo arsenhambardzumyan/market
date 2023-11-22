@@ -171,8 +171,8 @@ function App() {
             />
             <Routes>
                 <Route path="/" element={<HomePage addProductToCart={addProductToCart} />} />
-                <Route path="brands" element={<BrandsPage />} />
-                <Route path="shop" element={<ProductsPage />} />
+                <Route path="brands" element={<BrandsPage addProductToCart={addProductToCart}/>} />
+                <Route path="shop" element={<ProductsPage addProductToCart={addProductToCart} />} />
                 <Route path="hot-offer" element={<HotOfferPage addProductToCart={addProductToCart} />} />
                 <Route path="new-arrival" element={<NewArrivalPage addProductToCart={addProductToCart} />} />
                 <Route path="product-listing" element={<ProductListing addProductToCart={addProductToCart} />} />

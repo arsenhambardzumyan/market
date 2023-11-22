@@ -4,15 +4,15 @@ import {
   FETCH_BRANDS_DATA_REQUEST,
   FETCH_BRANDS_DATA_SUCCESS,
   FETCH_BRANDS_DATA_FAILURE,
-} from '../actions/categoryActions';
+} from '../actions/brandsActions';
 
 const initialState = {
-  brandsData: null,
+  brandsData: [],
   loading: false,
   error: null,
 };
 
-const categoryReducer = (state = initialState, action) => {
+const brandsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_BRANDS_DATA_REQUEST:
       return { ...state, loading: true, error: null };
@@ -28,4 +28,4 @@ const categoryReducer = (state = initialState, action) => {
   }
 };
 
-export default categoryReducer;
+export default brandsReducer;

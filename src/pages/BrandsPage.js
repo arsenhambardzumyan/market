@@ -11,20 +11,23 @@ import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
+import ReactPaginate from 'react-paginate';
 
 const BrandsPage = () => {
     const dispatch = useDispatch();
-    const brnadData = useSelector((state) => state.brands.brandsData.data);
+    const brnadData = useSelector((state) => state.brands.brandsData.brands);
+    const paginationData = useSelector((state) => state.brands.brandsData.pagination);
+    const loaderData = useSelector((state) => state.brands.loading);
     const [isToggled, setIsToggled] = useState(false);
-    const [listingLine, setlistingLine] = useState(2);
-    const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
-    const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
+    const [listingLine, setlistingLine] = useState(3);
+    // const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
+    // const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
     const [activeButton, setActiveButton] = useState('button2');
     const [page, setPage] = useState(1);
 
     useEffect(() => {
         dispatch(fetchBrands(page));
-        console.log(brnadData);
+        console.log(paginationData);
     }, [dispatch, page]);
 
     const handleAddToCart = (product) => {
@@ -34,7 +37,7 @@ const BrandsPage = () => {
     const toggleClass = () => {
         setIsToggled(!isToggled);
         if (isToggled) {
-            setlistingLine(2)
+            setlistingLine(3)
         } else {
             setlistingLine(1)
         }
@@ -45,16 +48,17 @@ const BrandsPage = () => {
         toggleClass();
     };
 
-    const handlePriceValuesChange = (newValues) => {
-        setPriceValues(newValues);
-    };
+    // const handlePriceValuesChange = (newValues) => {
+    //     setPriceValues(newValues);
+    // };
 
-    const handleMileageValuesChange = (newValues) => {
-        setMileageValues(newValues);
-    };
+    // const handleMileageValuesChange = (newValues) => {
+    //     setMileageValues(newValues);
+    // };
 
-    const handlePageChange = (e, pageNumber) => {
-        e.preventDefault();
+    const handlePageChange = (eventNumber) => {
+        let  pageNumber = eventNumber.selected + 1;
+
         const element = document.getElementById('products_container');
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
@@ -70,7 +74,6 @@ const BrandsPage = () => {
         }
     };
 
-
     if (!brnadData) {
         return <p>Loading...</p>;
     }
@@ -85,7 +88,7 @@ const BrandsPage = () => {
 
             <div className="uk-container listing_container uk-section-large " id="products_container">
                 <div className="uk-grid" data-uk-grid>
-                    <div className="uk-width-1-3@m">
+                    {/* <div className="uk-width-1-3@m">
                         <div className="js-filter-more filter-more">
                             <div className="filter-more__desc">
                                 <div className="uk-h4">Search options</div>
@@ -107,7 +110,7 @@ const BrandsPage = () => {
                                 ))}
                             </ul>
                         </div>
-                        {/* <aside className="sidebar js-filter-content">
+                        <aside className="sidebar js-filter-content">
                             <div className="widjet widjet--filters">
                                 <div className="widjet__content">
                                     <div className="uk-grid uk-grid-small uk-child-width-1-2" data-uk-grid>
@@ -203,21 +206,21 @@ const BrandsPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </aside> */}
-                    </div>
-                    <div className="uk-width-2-3@m">
+                        </aside>
+                    </div> */}
+                    <div className="uk-width-3-3@m">
                         <div className="sorting">
-                            <div className="sorting-left">
+                            {/* <div className="sorting-left">
                                 <div className="result-count">Your search returned <span>35</span> results.</div>
-                            </div>
+                            </div> */}
                             <div className="sorting-right">
-                                <select className="uk-select" name="orderby">
+                                {/* <select className="uk-select" name="orderby">
                                     <option value="popularity">Sort by popularity</option>
                                     <option value="rating">Sort by average rating</option>
                                     <option value="date">Sort by newness</option>
                                     <option value="price">Sort by price: low to high</option>
                                     <option value="price-desc">Sort by price: high to low</option>
-                                </select>
+                                </select> */}
                                 <button className={activeButton === 'button1' ? 'sorting-btn active' : 'sorting-btn'}
                                     onClick={() => handleButtonClick('button1')} type="button">
                                     <TfiViewList size={20} />
@@ -229,8 +232,8 @@ const BrandsPage = () => {
                             </div>
                         </div>
                         <div className="products-items">
-                            {!brnadData ?
-                                <div className={isToggled ? 'placeholder-line  uk-child-width-1-1@m uk-child-width-1-2@s placeholder-list' : 'placeholder-list  uk-child-width-1-2@m uk-child-width-1-2@s'}>
+                            {loaderData ?
+                                <div className={isToggled ? 'placeholder-line  uk-grid  uk-child-width-1-1@m uk-child-width-1-2@s placeholder-list brand_placeholder ' : ' brand_placeholder placeholder-list  uk-grid uk-child-width-1-3@m uk-child-width-1-3@s'}>
                                     <div className="product-container placeholder_container">
                                         <Card >
                                             <Card.Body>
@@ -243,16 +246,6 @@ const BrandsPage = () => {
                                                 </Placeholder>
                                             </Card.Body>
                                             <Card.Img variant="top" src={defaultImg} />
-                                            <Card.Body className='card-body-bottom'>
-                                                <Placeholder as={Card.Title} animation="glow">
-                                                    <Placeholder xs={6} />
-                                                </Placeholder>
-                                                <Placeholder as={Card.Text} animation="glow">
-                                                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-                                                    <Placeholder xs={6} /> <Placeholder xs={8} />
-                                                </Placeholder>
-                                                <Placeholder.Button variant="primary" xs={6} />
-                                            </Card.Body>
                                         </Card>
                                     </div>
                                     <div className="product-container placeholder_container">
@@ -267,16 +260,6 @@ const BrandsPage = () => {
                                                 </Placeholder>
                                             </Card.Body>
                                             <Card.Img variant="top" src={defaultImg} />
-                                            <Card.Body className='card-body-bottom'>
-                                                <Placeholder as={Card.Title} animation="glow">
-                                                    <Placeholder xs={6} />
-                                                </Placeholder>
-                                                <Placeholder as={Card.Text} animation="glow">
-                                                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-                                                    <Placeholder xs={6} /> <Placeholder xs={8} />
-                                                </Placeholder>
-                                                <Placeholder.Button variant="primary" xs={6} />
-                                            </Card.Body>
                                         </Card>
                                     </div>
                                     <div className="product-container placeholder_container">
@@ -291,40 +274,6 @@ const BrandsPage = () => {
                                                 </Placeholder>
                                             </Card.Body>
                                             <Card.Img variant="top" src={defaultImg} />
-                                            <Card.Body className='card-body-bottom'>
-                                                <Placeholder as={Card.Title} animation="glow">
-                                                    <Placeholder xs={6} />
-                                                </Placeholder>
-                                                <Placeholder as={Card.Text} animation="glow">
-                                                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-                                                    <Placeholder xs={6} /> <Placeholder xs={8} />
-                                                </Placeholder>
-                                                <Placeholder.Button variant="primary" xs={6} />
-                                            </Card.Body>
-                                        </Card>
-                                    </div>
-                                    <div className="product-container placeholder_container">
-                                        <Card  >
-                                            <Card.Body>
-                                                <Placeholder as={Card.Title} animation="glow">
-                                                    <Placeholder xs={6} />
-                                                </Placeholder>
-                                                <Placeholder as={Card.Text} animation="glow">
-                                                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-                                                    <Placeholder xs={6} /> <Placeholder xs={8} />
-                                                </Placeholder>
-                                            </Card.Body>
-                                            <Card.Img variant="top" src={defaultImg} />
-                                            <Card.Body className='card-body-bottom'>
-                                                <Placeholder as={Card.Title} animation="glow">
-                                                    <Placeholder xs={6} />
-                                                </Placeholder>
-                                                <Placeholder as={Card.Text} animation="glow">
-                                                    <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{' '}
-                                                    <Placeholder xs={6} /> <Placeholder xs={8} />
-                                                </Placeholder>
-                                                <Placeholder.Button variant="primary" xs={6} />
-                                            </Card.Body>
                                         </Card>
                                     </div>
                                 </div>
@@ -341,7 +290,7 @@ const BrandsPage = () => {
                                 </div>
                             }
                         </div>
-                        {brnadData.length > 0 && (
+                        {/* {brnadData.length > 0 && (
                             <div className="uk-margin-large-top uk-text-center">
                                 <ul className="uk-pagination uk-flex-center">
                                     <li>
@@ -377,6 +326,22 @@ const BrandsPage = () => {
                                     </li>
                                 </ul>
                             </div>
+                        )} */}
+                            {brnadData.length > 0 && (
+                            <ReactPaginate
+                                breakLabel="..."
+                                nextLabel=">"
+                                activeClassName="uk-active"
+                                onPageChange={(count) => {handlePageChange(count)}}
+                                className="uk-pagination uk-flex-center"
+                                pageRangeDisplayed={paginationData.last_page}
+                                pageCount={paginationData.last_page}
+                                activeLinkClassName="uk-active"
+                                previousLabel="<"
+                                renderOnZeroPageCount={null}
+                                previousLinkClassName="arrow"
+                                nextLinkClassName="arrow"
+                            />
                         )}
                     </div>
                 </div>

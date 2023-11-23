@@ -175,7 +175,7 @@ function App() {
                 <Route path="shop" element={<ProductsPage addProductToCart={addProductToCart} />} />
                 <Route path="hot-offer" element={<HotOfferPage addProductToCart={addProductToCart} />} />
                 <Route path="new-arrival" element={<NewArrivalPage addProductToCart={addProductToCart} />} />
-                <Route path="product-listing" element={<ProductListing addProductToCart={addProductToCart} />} />
+                {/* <Route path="product-listing" element={<ProductListing addProductToCart={addProductToCart} />} /> */}
                 <Route path="Contacts" element={<Contacts />} />
                 <Route path="login" element={<Login />} />
                 <Route path="ResetPassword" element={<ResetPassword />} />

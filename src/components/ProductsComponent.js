@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FiCheck } from 'react-icons/fi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { addToCart } from '../redux/actions/cartActions';
-// import defaultImg from '../../src/assets/img/defaultImg.jpg';
+import defaultImg from '../../src/assets/img/defaultImg.jpg';
 
 const ProductsComponent = ({ title, products, pagination, template,   col, addProductToCart }) => {
 
@@ -54,7 +54,7 @@ const ProductsComponent = ({ title, products, pagination, template,   col, addPr
                                         </div>
                                     </div>
                                     <div className="product-item__media uk-inline-clip uk-inline">
-                                        <img src={product.image} alt="productImage" title="product" />
+                                        <img src={product.thumb_image !==null ? `https://api.dev.itfabers.com/${product.thumb_image}` : `${defaultImg}`} alt="productImage" title="product" />
                                         <div className="uk-transition-fade" onClick={(e) => addProduct(e, product)}>
                                             <div className="uk-overlay-cover uk-overlay-primary"></div>
                                             <FiCheck className="checked_icon uk-position-center " size={60} />

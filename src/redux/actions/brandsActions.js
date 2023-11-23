@@ -6,7 +6,6 @@ export const FETCH_BRANDS_DATA_SUCCESS = 'FETCH_BRANDS_DATA_SUCCESS';
 export const FETCH_BRANDS_DATA_FAILURE = 'FETCH_BRANDS_DATA_FAILURE';
 
 export const fetchBrands = (page) => async (dispatch) => {
-  // console.log(page);
     dispatch({ type: FETCH_BRANDS_DATA_REQUEST });
     try {
       const data = await request(`${process.env.REACT_APP_BASE_URL}/brands/${page}`);

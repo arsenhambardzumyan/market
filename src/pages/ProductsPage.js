@@ -6,32 +6,35 @@ import { Link } from 'react-router-dom';
 import ProductsComponent from '../components/ProductsComponent';
 import { Card, Placeholder } from 'react-bootstrap';
 import brand1 from '../assets/img/brand-1.png';
-import Slider from 'rc-slider';
+// import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
+import ReactPaginate from 'react-paginate';
+
 
 const ProductsPage = () => {
     const dispatch = useDispatch();
     const categoriesData = useSelector((state) => state.shop.data.categories);
     const productsData = useSelector((state) => state.shop.data.products);
+    const paginationData = useSelector((state) => state.shop.data.pagination);
     const loaderData = useSelector((state) => state.shop.loading);
 
     const [isToggled, setIsToggled] = useState(false);
     const [listingLine, setlistingLine] = useState(2);
 
     // const [listLoader, setlistLoader] = useState(true);
-    
-    const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
-    const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
+
+    // const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
+    // const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
 
     const [activeButton, setActiveButton] = useState('button2');
     const [page, setPage] = useState(1);
 
     useEffect(() => {
         dispatch(fetchProducts(page));
-    }, [dispatch , page]);
+    }, [dispatch, page]);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product));
@@ -51,17 +54,16 @@ const ProductsPage = () => {
         toggleClass();
     };
 
-    const handlePriceValuesChange = (newValues) => {
-        setPriceValues(newValues);
-    };
+    // const handlePriceValuesChange = (newValues) => {
+    //     setPriceValues(newValues);
+    // };
 
-    const handleMileageValuesChange = (newValues) => {
-        setMileageValues(newValues);
-    };
+    // const handleMileageValuesChange = (newValues) => {
+    //     setMileageValues(newValues);
+    // };
 
-    const handlePageChange = (e, pageNumber) => {
-        e.preventDefault();
-        // setlistLoader(true);
+    const handlePageChange = (eventNumber) => {
+        let  pageNumber = eventNumber.selected + 1;
         const element = document.getElementById('products_container');
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
@@ -212,7 +214,7 @@ const ProductsPage = () => {
                     <div className="uk-width-2-3@m">
                         <div className="sorting">
                             <div className="sorting-left">
-                                <div className="result-count">Your search returned <span>35</span> results.</div>
+                                {/* <div className="result-count">Your search returned <span>35</span> results.</div> */}
                             </div>
                             <div className="sorting-right">
                                 <select className="uk-select" name="orderby">
@@ -346,43 +348,20 @@ const ProductsPage = () => {
                             }
                         </div>
                         {productsData.length > 0 && (
-                            <div className="uk-margin-large-top uk-text-center">
-                                <ul className="uk-pagination uk-flex-center">
-                                    <li>
-                                        <a href="/#"
-                                            onClick={(e) => {
-                                                handlePageChange(e, page - 1)
-                                            }}
-                                            className={`arrow ${page === 1 ? "pagination__disabled" : ""}`}
-                                        >
-                                            <span data-uk-pagination-previous></span>
-                                        </a>
-                                    </li>
-
-                                    {[...Array(Math.floor(10))].map((_, i) => (
-                                        <li className={`page__number ${page === i + 1 ? "uk-active" : ""}`}
-                                            key={i}
-                                            onClick={(e) => handlePageChange(e, i + 1)}
-                                        >
-                                            <span>{i + 1}</span>
-                                        </li>
-                                    ))}
-
-                                    <li>
-                                        <a href="/#"
-                                            onClick={(e) => {
-                                                handlePageChange(e, page + 1)
-                                            }}
-                                            className={`arrow ${page === Math.floor(10)
-                                                ? "pagination__disabled"
-                                                : ""
-                                                }`}
-                                        >
-                                            <span data-uk-pagination-next></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <ReactPaginate
+                                breakLabel="..."
+                                nextLabel=">"
+                                activeClassName="uk-active"
+                                onPageChange={(count) => {handlePageChange(count)}}
+                                className="uk-pagination uk-flex-center"
+                                pageRangeDisplayed={paginationData.last_page}
+                                pageCount={paginationData.last_page}
+                                activeLinkClassName="uk-active"
+                                previousLabel="<"
+                                renderOnZeroPageCount={null}
+                                previousLinkClassName="arrow"
+                                nextLinkClassName="arrow"
+                            />
                         )}
                     </div>
                 </div>

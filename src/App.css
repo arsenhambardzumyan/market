@@ -2909,10 +2909,23 @@ body.page-home .section-hero__content {
   text-transform: uppercase;
 }
 
+.brand_placeholder{
+  margin-top: 30px;
+}
+
+
 .product-item__price {
   font: normal 500 30px/1.1 Oswald;
   color: #e63619;
   margin-top: -10px;
+}
+
+.sorting-right{
+  margin-left: auto;
+}
+
+.uk-pagination{
+  width: 100%;
 }
 
 .product-item__media {
@@ -2924,7 +2937,7 @@ body.page-home .section-hero__content {
 .product-item__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .product-item__label {

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBrands } from "../redux/actions/brandsActions";
 import { addToCart } from "../redux/actions/cartActions";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ProductsComponent from '../components/ProductsComponent';
 import { Card, Placeholder } from 'react-bootstrap';
-import brand1 from '../assets/img/brand-1.png';
-import Slider from 'rc-slider';
+// import brand1 from '../assets/img/brand-1.png';
+// import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import { FiGrid } from "react-icons/fi";
@@ -27,7 +27,6 @@ const BrandsPage = () => {
 
     useEffect(() => {
         dispatch(fetchBrands(page));
-        console.log(paginationData);
     }, [dispatch, page]);
 
     const handleAddToCart = (product) => {

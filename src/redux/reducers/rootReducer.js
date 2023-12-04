@@ -8,6 +8,20 @@ import brandsReducer from './brandsReducer';
 import categoryReducer from './categoryReducer';
 
 
+
+// const DedaultState = {
+//   tasks: [],
+//   loading: false,
+//   error: null,
+//   addTaskSuccess: false,
+//   editTaskSuccess: false,
+//   successMessage: null,
+//   removeTasksSuccess: false,
+//   currJwt : null,
+//   isLogined: false,
+// }
+
+
 const rootReducer = combineReducers({
   cart: cartReducer,
   home: homeReducer,
@@ -15,6 +29,7 @@ const rootReducer = combineReducers({
   hotOffer: hotOfferReducer,
   arrival: arrivalReducer,
   brands: brandsReducer,
-  category: categoryReducer
+  category: categoryReducer,
+  // successMesssage: ,
 });
 export default rootReducer;

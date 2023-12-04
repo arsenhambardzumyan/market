@@ -1,10 +1,20 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import request from '../helpers/request';
 
 const SubScribe = () => {
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = (data) => {
+        // console.log(data);
+        request(`${process.env.REACT_APP_BASE_URL}/subscribe-request` , data);
+    };
+
     // console.log(errors);
+    // useEffect(() => {
+    //     request(fetchProducts(page));
+    //     // console.log(productsData , categoriesData);
+    // }, [dispatch, page]);
 
     return (
         <div className="section-subscribe">
@@ -18,9 +28,12 @@ const SubScribe = () => {
                         </div>
                         <div>
                             <div className="subscribe-box__form">
-                                <form  onSubmit={handleSubmit(onSubmit)}>
-                                    <div className="uk-flex uk-flex-middle">
-                                        <input className="uk-input"    autoComplete="on"  {...register("Email", {required: true, pattern: /^\S+@\S+$/i})} type="email" name="email" placeholder="Email Address ...." />
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <div className={errors?.mail?.type === "required" || errors?.mail?.type === "pattern" ? "form_block has-error uk-flex uk-flex-middle" : "form_block uk-flex uk-flex-middle"}  >
+                                        <input className="uk-input" placeholder="Email" {...register("mail", { required: true, pattern: /^\S+@\S+$/i })} />
+                                        {errors?.mail?.type === "pattern" ? <p className="error-info email-info" >invalid Email</p> :
+                                            <p className="error-info" >This field is required</p>
+                                        }
                                         <button className="uk-button uk-button-danger" type="submit">Subscribe</button>
                                     </div>
                                 </form>

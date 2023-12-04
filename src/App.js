@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
@@ -9,7 +9,7 @@ import ProductsPage from './pages/ProductsPage';
 import CategoryPage from './pages/CategoryPage';
 import HotOfferPage from './pages/HotOfferPage';
 import NewArrivalPage from './pages/NewArrivalPage';
-import ProductListing from './pages/ProductListing';
+// import ProductListing from './pages/ProductListing';
 import Contacts from './pages/Contacts';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
@@ -21,13 +21,16 @@ import WishList from './pages/WishList';
 import ProductInner from './pages/ProductInner';
 import ShoppingCart from "./components/ShoppingCarts/ShoppingCart";
 import UIkit from 'uikit';
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
-
-import { addToCart, updateQuantity, removeFromCart, addToFavorites, addToProductInner } from './redux/actions/cartActions';
-
-// const App = () => {
+import { 
+    addToCart, 
+    updateQuantity, 
+    removeFromCart, 
+    addToFavorites, 
+    addToProductInner 
+}   from './redux/actions/cartActions';
 
 const favoriteProducts = [
     {
@@ -37,7 +40,6 @@ const favoriteProducts = [
         price: 899,
         image: require("./assets/img/milkprod4.jpg"),
     },
-
     {
         id: 9,
         name: "Favorite product 6",
@@ -45,7 +47,6 @@ const favoriteProducts = [
         price: 500,
         image: require("./assets/img/product01.png"),
     },
-
     {
         id: 10,
         name: "Favorite product 7",
@@ -53,7 +54,6 @@ const favoriteProducts = [
         price: 500,
         image: require("./assets/img/milkprod2.jpg"),
     },
-
     {
         id: 11,
         name: "Favorite product 8",
@@ -61,7 +61,6 @@ const favoriteProducts = [
         price: 899,
         image: require("./assets/img/milkprod4.jpg"),
     },
-
     {
         id: 12,
         name: "Favorite product 6",
@@ -69,7 +68,6 @@ const favoriteProducts = [
         price: 500,
         image: require("./assets/img/product01.png"),
     },
-
     {
         id: 13,
         name: "Favorite product 7",
@@ -87,7 +85,6 @@ const productInner = [
         price: 320,
         image: require("./assets/img/milkprod1.jpg"),
     },
-
     {
         id: 6,
         name: "product 6",
@@ -95,7 +92,6 @@ const productInner = [
         price: 500,
         image: require("./assets/img/product03.jpg"),
     },
-
     {
         id: 7,
         name: "product 7",
@@ -107,15 +103,15 @@ const productInner = [
 
 
 function App() {
+
     const dispatch = useDispatch();
     const productsInCart = useSelector((state) => state.cart.productsInCart);
-    const errorMessage = useSelector((state) => state.cart.errorMessage);
-    const successMessage = useSelector((state) => state.cart.successMessage);
-    const apiUrl = process.env.REACT_APP_BASE_URL;
+    // const errorMessage = useSelector((state) => state.cart.errorMessage);
+    // const successMessage = useSelector((state) => state.cart.successMessage);
+    // const apiUrl = process.env.REACT_APP_BASE_URL;
     let shoppingCart = document.getElementsByClassName('offConvassCart');
     const getTotalPrice = (items) => items.map((item) => item.price * item.count).reduce((acc, value) => acc + value, 0);
     const CartTotalPrice = getTotalPrice(productsInCart);
-
 
     const addProductToCart = (product) => {
         const names = productsInCart.map((product) => product.id);
@@ -144,7 +140,6 @@ function App() {
         e.preventDefault();
         UIkit.offcanvas(shoppingCart).hide();
     };
-
 
     return (
         <div className='page-wrapper'>
@@ -177,7 +172,14 @@ function App() {
                 <Route path="new-arrival" element={<NewArrivalPage addProductToCart={addProductToCart} />} />
                 {/* <Route path="product-listing" element={<ProductListing addProductToCart={addProductToCart} />} /> */}
                 <Route path="Contacts" element={<Contacts />} />
-                <Route path="login" element={<Login />} />
+                <Route path="login" element={<Login       
+
+                            // SetSuccessMessage={SetSuccessMessage}
+                            // SetErrorMessage={SetErrorMessage} 
+                            
+                />} 
+                            
+                />
                 <Route path="ResetPassword" element={<ResetPassword />} />
                 <Route path="wish-list" element={<WishList products={favoriteProducts} addProductToCart={addFavoriteToCart} />} />
                 <Route path="registration" element={<Registration />} />
@@ -200,6 +202,5 @@ function App() {
         </div>
     );
 }
-
 
 export default App;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/actions/hotOfferActions";
 import { addToCart } from "../redux/actions/cartActions";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ProductsComponent from '../components/ProductsComponent';
 import { Card, Placeholder } from 'react-bootstrap';
 import brand1 from '../assets/img/brand-1.png';
@@ -10,21 +10,21 @@ import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
-import ReactPaginate from 'react-paginate';
-
+// import ReactPaginate from 'react-paginate';
 
 const HotOfferPage = () => {
     const dispatch = useDispatch();
     // const categoriesData = useSelector((state) => state.hotOffer.data.categories);
     const productsData = useSelector((state) => state.hotOffer.data.data);
-    const paginationData = useSelector((state) => state.hotOffer.data.pagination);
+    // const paginationData = useSelector((state) => state.hotOffer.data.pagination);
     const loaderData = useSelector((state) => state.hotOffer.loading);
     const [isToggled, setIsToggled] = useState(false);
     const [listingLine, setlistingLine] = useState(2);
     const [activeButton, setActiveButton] = useState('button2');
     const [page, setPage] = useState(1);
-
+    
     useEffect(() => {
+        setPage(1);
         dispatch(fetchProducts(page));
         // console.log(productsData , categoriesData);
     }, [dispatch, page]);
@@ -47,22 +47,22 @@ const HotOfferPage = () => {
         toggleClass();
     };
 
-    const handlePageChange = (eventNumber) => {
-        let  pageNumber = eventNumber.selected + 1;
-        const element = document.getElementById('products_container');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-        if (
-            pageNumber > 0 &&
-            pageNumber <= 10 &&
-            pageNumber !== page
-        ) {
-            setTimeout(() => {
-                setPage(pageNumber);
-            }, 700);
-        }
-    };
+    // const handlePageChange = (eventNumber) => {
+    //     let  pageNumber = eventNumber.selected + 1;
+    //     const element = document.getElementById('products_container');
+    //     if (element) {
+    //         element.scrollIntoView({ behavior: 'smooth' });
+    //     }
+    //     if (
+    //         pageNumber > 0 &&
+    //         pageNumber <= 10 &&
+    //         pageNumber !== page
+    //     ) {
+    //         setTimeout(() => {
+    //             setPage(pageNumber);
+    //         }, 700);
+    //     }
+    // };
 
     if (!productsData) {
         return <p>Loading...</p>;

@@ -6,6 +6,7 @@ import product02 from '../../assets/img/product02.jpg';
 import product04 from '../../assets/img/product04.jpg';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
+import {Link} from "react-router-dom";
 
 const Footer = () => {
     UIkit.use(Icons);
@@ -53,15 +54,12 @@ const Footer = () => {
                         </div>
                         <div>
                             <div className="page-footer__column page-footer__menu">
-                                <div className="uk-h4">About KeyMoto</div>
+                                <div className="uk-h4">Main pages</div>
                                 <ul className="list-decor">
-                                    <li> <a href="/#">Our Company</a></li>
-                                    <li> <a href="/#">Renting Facility</a></li>
-                                    <li> <a href="/#">KeyMoto Inventory</a></li>
-                                    <li> <a href="/#">Our Services</a></li>
-                                    <li> <a href="/#">Clients Testimonials</a></li>
-                                    <li> <a href="/#">Mission & Vision</a></li>
-                                    <li> <a href="/#">Contact Us</a></li>
+                                    <li><Link to="brands">Brands</Link></li>
+                                    <li><Link to="new-arrival">New arrival</Link></li>
+                                    <li><Link to="hot-offer">Best sellers</Link></li>
+                                    <li><Link to="shop">Shop</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -98,23 +96,10 @@ const Footer = () => {
                         </div>
                         <div>
                             <div className="page-footer__column page-footer__info">
-                                <div className="uk-h4">Dealer Information</div>
+                                <div className="uk-h4">Working Hours</div>
                                 <ul className="info-list">
                                     <li>
                                         <div className="info-list-item">
-                                            <div className="info-list-item__title">Sales Hours</div>
-                                            <div className="info-list-item__value">Monday - Friday: <br /> 09:00 am to 06:00 pm</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="info-list-item">
-                                            <div className="info-list-item__title">Service Hours</div>
-                                            <div className="info-list-item__value">Monday - Friday: <br /> 09:00 am to 06:00 pm</div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="info-list-item">
-                                            <div className="info-list-item__title">Parts Shop Hours</div>
                                             <div className="info-list-item__value">Monday - Friday: <br /> 09:00 am to 06:00 pm</div>
                                         </div>
                                     </li>

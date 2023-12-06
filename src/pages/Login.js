@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import request from "../components/helpers/request";
 
 
-const Login = ({ SetSuccessMessage, SetErrorMessage }) => {
+const Login = () => {
 
     const navigate = useNavigate();
     const [validated, setValidated] = useState(false);
@@ -36,32 +36,33 @@ const Login = ({ SetSuccessMessage, SetErrorMessage }) => {
             event.stopPropagation();
         } else {
             event.preventDefault();
-            request(`https://api.dev.itfabers.com/api/store-login/`, 'POST', formData)
+            request(`https://api.dev.itfabers.com/api/auth/login/`, 'POST', formData)
                 .then((response) => {
+                    if(response.success) {
+                        navigate('/account');
+                    }
                     if (response.notification) {
-                        SetErrorMessage(null)
+                        // SetErrorMessage(null)
                         setTimeout(() => {
-                            SetErrorMessage(response.notification)
+                            // SetErrorMessage(response.notification)
                         });
                     } else if (response.message) {
-                        SetErrorMessage(null);
+                        // SetErrorMessage(null);
                         setTimeout(() => {
-                            SetErrorMessage(response.message);
+                            // SetErrorMessage(response.message);
                         });
-                    } else {
-                        navigate('/account');
                     }
                 })
                 .catch(err => {
                     console.log(err);
-                    SetErrorMessage(err)
+                    // SetErrorMessage(err)
                 })
         }
         setValidated(true);
     };
- 
 
-    
+
+
     return (
         <>
             <main className="page-main">

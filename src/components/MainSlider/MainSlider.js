@@ -40,7 +40,6 @@ const MainSlider = () => {
                                                     </div>
                                                     <div className="slideshow-item__btns" data-uk-slideshow-parallax="x: 300,-300">
                                                         <a className="uk-button uk-button-danger" href="#section-about">Learn more </a>
-                                                        <a className="uk-button uk-button-secondary" href="#section-category">Motorcycles </a>
                                                     </div>
                                                 </div>
                                             </div>

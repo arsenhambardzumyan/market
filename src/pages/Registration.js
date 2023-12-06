@@ -33,15 +33,15 @@ const Login = ({SetSuccessMessage , SetErrorMessage}) => {
             event.stopPropagation();
         }else{
             event.preventDefault();
-            request(`https://api.dev.itfabers.com/api/store-register/`, 'POST', formData)
+            request(`https://api.dev.itfabers.com/api/auth/register/`, 'POST', formData)
                 .then(() => {
-                    SetErrorMessage(null);
-                    SetSuccessMessage('success ✔');
+                    // SetErrorMessage(null);
+                    // SetSuccessMessage('success ✔');
                     navigate('/login');
                 })
                 .catch(err => {
                     console.log(err);
-                    SetErrorMessage(err)
+                    // SetErrorMessage(err)
                 })
         }
         setValidated(true);

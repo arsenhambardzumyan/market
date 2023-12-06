@@ -36,17 +36,9 @@ const HomePage = () => {
         <>
             {homeData ? (
                 <>
-                   
+
                     <MainSlider data={homeData.mainSliderData || []} isPlaying={isPlaying} handlePlayPause={handlePlayPause} />
                     <CategoriesComponent categories={homeData.categories || []} />
-                    <ProductsComponent
-                        title="Featured Products"
-                        products={homeData.hotOfferProducts}
-                        pagination={false}
-                        template="featured"
-                        addToCart={handleAddToCart}
-                        col={3}
-                    />
                     <ProductsComponent
                         title="New Arrival"
                         products={homeData.newArrivalProducts || []}

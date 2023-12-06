@@ -6,7 +6,7 @@ import hotOfferReducer from './hotOfferReducer';
 import arrivalReducer from './arrivalReducer';
 import brandsReducer from './brandsReducer';
 import categoryReducer from './categoryReducer';
-
+import productReducer from './productReducer';
 // const DedaultState = {
 //   tasks: [],
 //   loading: false,
@@ -27,6 +27,7 @@ const rootReducer = combineReducers({
   arrival: arrivalReducer,
   brands: brandsReducer,
   category: categoryReducer,
+  product: productReducer
 });
 
 export default rootReducer;

@@ -10,10 +10,12 @@ import milkprod1 from '../assets/img/milkprod1.jpg';
 import milkprod2 from '../assets/img/milkprod2.jpg';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 import request from "../components/helpers/request";
+import {fetchProduct} from "../redux/actions/productActions";
+import {useDispatch, useSelector} from "react-redux";
 
 const ProductInner = ({ addProductToCart, products }) => {
     const [productSlug, setProductSlug] = useState(null);
@@ -22,22 +24,14 @@ const ProductInner = ({ addProductToCart, products }) => {
     let productInnerListEl = useRef(null);
     let producNameRef = useRef(null);
     const [isToggled] = useState(false);
-
+    const dispatch = useDispatch();
+    const { slug } = useParams();
+    const productData = useSelector((state) => state.product.products.product);
+    const similarProductsData = useSelector((state) => state.product.products.similarProducts);
     useEffect(() => {
-        const path = window.location.href;
-        const parts = path.split("/");
-        const desiredPart = parts.slice(parts.indexOf("product-inner") + 1).join("/");
-        setProductSlug(desiredPart)
-        request(`https://api.dev.itfabers.com/api/product/${desiredPart}`)
-            .then((product) => {
-                setSingleProduct(product)
-                console.log(Singleproduct);
-            })
-            .catch(error => {
-                console.log(error);
-            })
-
-    }, [productSlug , Singleproduct])
+        dispatch(fetchProduct(slug));
+    }, [dispatch, slug]);
+    console.log(productData)
 
     const addProduct = (e, product) => {
         e.preventDefault();
@@ -100,13 +94,10 @@ const ProductInner = ({ addProductToCart, products }) => {
                         <div className="section-hero__bg">
                             <div className="uk-container">
                                 <div className="section-hero__content">
-                                    <div className="section-hero__title"> <span>Taking rides to a newer level</span>
-                                        <div className="uk-h1">Inventory</div>
-                                    </div>
                                     <div className="section-hero__breadcrumb">
                                         <ul className="uk-breadcrumb">
                                             <li><a href="/#">Home</a></li>
-                                            <li><span>Product</span></li>
+                                            <li><span>{productData && productData.name?productData.name:''}</span></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -119,19 +110,18 @@ const ProductInner = ({ addProductToCart, products }) => {
                                 <div className="uk-grid uk-flex-middle" data-uk-grid>
                                     <div className="uk-width-2-3@m">
                                         <div className="page-product__title">
-                                            <div className="uk-h1 productInnerName" ref={producNameRef} >{ProductInnerProto.name}</div>
-                                            <span className="productInnerDesc">{ProductInnerProto.description}</span>
+                                            <div className="uk-h1 productInnerName">{productData.name}</div>
+                                            <span className="productInnerDesc">{productData.description}</span>
                                         </div>
                                     </div>
                                     <div className="uk-width-1-3@m">
                                         <div className="page-product__price">
-                                            <div><span className="current">${ProductInnerProto.price} </span><span className="old productInnerPrice">MSRP: $7,800</span></div>
-                                            <div className="uk-margin-small-top"><span>Included Taxes & Checkup*</span></div>
+                                            <div><span className="current">${productData.price} </span></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="uk-grid" data-uk-grid>
-                                    <div className="uk-width-2-3@m" ref={productInnerListEl} id={ProductInnerProto.id}>
+                                    <div className="uk-width-2-3@m" id={productData.id}>
                                         <div className="page-product__btns">
                                             <button className="danger" type="button">
                                                 <i className="fas fa-star"></i>
@@ -148,13 +138,13 @@ const ProductInner = ({ addProductToCart, products }) => {
                                         <div className="page-product__gallery">
                                             <div data-uk-slideshow="min-height: 300; max-height: 430">
                                                 <ul className="uk-slideshow-items uk-child-width-1-1">
-                                                    <li><img className="uk-width-1-1 productInnerImage" src={ProductInnerProto.image} alt="img-gallery" data-uk-cover title="product" /></li>
-                                                    <li><img className="uk-width-1-1" src={product03} alt="img-gallery" data-uk-cover title="product" /></li>
+                                                    <li><img className="uk-width-1-1 productInnerImage" src={`https://api.dev.itfabers.com/${productData.thumb_image}`} alt="img-gallery" data-uk-cover title="product" /></li>
+                                                    {/*<li><img className="uk-width-1-1" src={product03} alt="img-gallery" data-uk-cover title="product" /></li>
                                                     <li><img className="uk-width-1-1" src={product04} alt="img-gallery" data-uk-cover title="product" /></li>
                                                     <li><img className="uk-width-1-1" src={milkprod1} alt="img-gallery" data-uk-cover title="product" /></li>
-                                                    <li><img className="uk-width-1-1" src={milkprod2} alt="img-gallery" data-uk-cover title="product" /></li>
+                                                    <li><img className="uk-width-1-1" src={milkprod2} alt="img-gallery" data-uk-cover title="product" /></li>*/}
                                                 </ul>
-                                                <div className="uk-margin-top" >
+                                                {/*<div className="uk-margin-top" >
                                                     <ul className="uk-thumbnav uk-slider-items uk-grid uk-grid-small uk-child-width-1-3 uk-child-width-1-4@m uk-child-width-1-5@l">
                                                         <li data-uk-slideshow-item="0"><a href="/#"><img className="uk-width-1-1" src={product02} alt="img-gallery" data-uk-cover title="product" /></a></li>
                                                         <li data-uk-slideshow-item="1"><a href="/#"><img className="uk-width-1-1" src={product03} alt="img-gallery" data-uk-cover title="product" /></a></li>
@@ -162,10 +152,10 @@ const ProductInner = ({ addProductToCart, products }) => {
                                                         <li data-uk-slideshow-item="3"><a href="/#"><img className="uk-width-1-1" src={milkprod1} alt="img-gallery" data-uk-cover title="product" /></a></li>
                                                         <li data-uk-slideshow-item="4"><a href="/#"><img className="uk-width-1-1" src={milkprod2} alt="img-gallery" data-uk-cover title="product" /></a></li>
                                                     </ul>
-                                                </div>
+                                                </div>*/}
                                             </div>
                                         </div>
-                                        <div className="page-product__list-info">
+                                        {/*<div className="page-product__list-info">
                                             <div className="product-list-info">
                                                 <div>
                                                     <div className="product-list-info-item"><img className="product-list-info-item__img" src={brand2} alt="icon-list-info" title="icon" />
@@ -198,11 +188,11 @@ const ProductInner = ({ addProductToCart, products }) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>*/}
                                         <hr className="uk-margin-medium" />
-                                        <h2>Motorcycle Overview</h2>
-                                        <p>Dolore magna aliqua quis nostrud exercitation ullamco laboris nisi ut aliquip ex consequat. Duis aute irure dolor in reprehenderit in voluptate velits esd se cilum dol sed ipsum nulla pariatur nostrul done elit magna. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolor magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                                        <p>Allamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderits voluptaty velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatate.</p>
+                                        <h2>Overview</h2>
+                                        <p>{/**/}</p>
+                                        <p>{productData.short_description}</p>
                                         <hr className="uk-margin-medium" />
                                         <h2>Technical Specifications</h2>
                                         <div className="page-product__specifications">

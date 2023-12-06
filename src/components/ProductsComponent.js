@@ -6,7 +6,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { addToCart } from '../redux/actions/cartActions';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 
-const ProductsComponent = ({ title, products, pagination, template,   col, addProductToCart }) => {
+const ProductsComponent = ({ title, description, products, pagination, template,   col, addProductToCart }) => {
 
     let productListEl = useRef(null);
 

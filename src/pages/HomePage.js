@@ -37,7 +37,7 @@ const HomePage = () => {
             {homeData ? (
                 <>
 
-                    <MainSlider data={homeData.mainSliderData || []} isPlaying={isPlaying} handlePlayPause={handlePlayPause} />
+                    <MainSlider slides={homeData.slides || []} isPlaying={isPlaying} handlePlayPause={handlePlayPause} />
                     <CategoriesComponent categories={homeData.categories || []} />
                     <ProductsComponent
                         title="New Arrival"

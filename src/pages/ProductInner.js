@@ -3,35 +3,38 @@ import brand2 from '../assets/img/brand-2.png';
 import Subscribe from '../components/Subscribe/Subscribe';
 import 'rc-slider/assets/index.css';
 import { FiCheck } from "react-icons/fi";
-import product04 from '../assets/img/product04.jpg';
 import product02 from '../assets/img/product02.jpg';
-import product03 from '../assets/img/product03.jpg';
-import milkprod1 from '../assets/img/milkprod1.jpg';
-import milkprod2 from '../assets/img/milkprod2.jpg';
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import { Link, useParams } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
-import request from "../components/helpers/request";
 import {fetchProduct} from "../redux/actions/productActions";
 import {useDispatch, useSelector} from "react-redux";
 
 const ProductInner = ({ addProductToCart, products }) => {
-    const [productSlug, setProductSlug] = useState(null);
-    const [Singleproduct, setSingleProduct] = useState(null);
+
+    const [exapleloading , setExampleLoading] = useState(false);
+
+
     let productListEl = useRef(null);
     let productInnerListEl = useRef(null);
-    let producNameRef = useRef(null);
     const [isToggled] = useState(false);
     const dispatch = useDispatch();
     const { slug } = useParams();
     const productData = useSelector((state) => state.product.products.product);
     const similarProductsData = useSelector((state) => state.product.products.similarProducts);
+    // console.log(productData)
     useEffect(() => {
         dispatch(fetchProduct(slug));
+        console.log(productData)
+        setTimeout(()=>{
+            setExampleLoading(true);
+            console.log(productData)
+
+        },[1000])
     }, [dispatch, slug]);
-    console.log(productData)
+    // console.log(productData)
 
     const addProduct = (e, product) => {
         e.preventDefault();
@@ -87,7 +90,7 @@ const ProductInner = ({ addProductToCart, products }) => {
     }
 
     return (
-        <>
+        <>  {exapleloading &&
             <main className="page-main">
                 <div className="product_inner_section">
                     <div className="section-hero">
@@ -111,7 +114,7 @@ const ProductInner = ({ addProductToCart, products }) => {
                                     <div className="uk-width-2-3@m">
                                         <div className="page-product__title">
                                             <div className="uk-h1 productInnerName">{productData.name}</div>
-                                            <span className="productInnerDesc">{productData.description}</span>
+                                            <span className="productInnerDesc">{productData.long_description}</span>
                                         </div>
                                     </div>
                                     <div className="uk-width-1-3@m">
@@ -342,8 +345,8 @@ const ProductInner = ({ addProductToCart, products }) => {
                                 <div className="uk-h2 uk-margin-medium-bottom">You May Also Like...</div>
                                 <div className="products-items uk-grid" data-uk-grid>
                                     <div className='uk-grid uk-grid-medium uk-child-width-1-3@m uk-child-width-1-3@s product_listing'
-                                        data-uk-grid ref={productListEl}>
-                                        {products.map((product) => (
+                                         data-uk-grid ref={productListEl}>
+                                        {similarProductsData ? similarProductsData.map((product) => (
                                             <div key={product.id} id={product.id} className="product-container" >
                                                 <Link to="/product-inner" className={isToggled ? 'product-item uk-transition-toggle product-item--list' : ' product-item uk-transition-toggle '}>
                                                     <div className="product-item__head">
@@ -364,59 +367,7 @@ const ProductInner = ({ addProductToCart, products }) => {
                                                         </div>
                                                         <button className="product-item__whish btn-whish"><i className="far fa-heart"><AiOutlineHeart /></i></button></div>
                                                     <div className="product-item__info">
-                                                        <ul className="list-info">
-                                                            <li className="list-info-item">
-                                                                <div className="list-info-item__title">Year</div>
-                                                                <div className="list-info-item__value">2021</div>
-                                                            </li>
-                                                            <li className="list-info-item">
-                                                                <div className="list-info-item__title">Type</div>
-                                                                <div className="list-info-item__value">Sports</div>
-                                                            </li>
-                                                            <li className="list-info-item">
-                                                                <div className="list-info-item__title">Make</div>
-                                                                <div className="list-info-item__value">BMW</div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div className="product-item__specifications">
-                                                        <ul className="specifications-list">
-                                                            <li className="specifications-list-item">
-                                                                <div className="specifications-list-item__icon">
-                                                                    <img src={product04} alt="Engine type" title="product" />
-                                                                </div>
-                                                                <div className="specifications-list-item__desc">
-                                                                    <div className="specifications-list-item__title">Engine type</div>
-                                                                    <div className="specifications-list-item__value">4-Stroke Cylinder</div>
-                                                                </div>
-                                                            </li>
-                                                            <li className="specifications-list-item">
-                                                                <div className="specifications-list-item__icon">
-                                                                    <img src={product03} alt="Engine Power" />
-                                                                </div>
-                                                                <div className="specifications-list-item__desc">
-                                                                    <div className="specifications-list-item__title">Engine Power</div>
-                                                                    <div className="specifications-list-item__value">205hp (151 kW)</div>
-                                                                </div>
-                                                            </li>
-                                                            <li className="specifications-list-item">
-                                                                <div className="specifications-list-item__icon">
-                                                                    <img src={product02} alt="Displacement" /></div>
-                                                                <div className="specifications-list-item__desc">
-                                                                    <div className="specifications-list-item__title">Displacement</div>
-                                                                    <div className="specifications-list-item__value">999 cc</div>
-                                                                </div>
-                                                            </li>
-                                                            <li className="specifications-list-item">
-                                                                <div className="specifications-list-item__icon">
-                                                                    <img src={product04} alt="Bore/Stroke" />
-                                                                </div>
-                                                                <div className="specifications-list-item__desc">
-                                                                    <div className="specifications-list-item__title">Bore/Stroke</div>
-                                                                    <div className="specifications-list-item__value">80mm / 49.7mm</div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
+                                                        <div className='product_description'>{product.seoDescription}</div>
                                                     </div>
                                                     <div className="add-favorite-block">
                                                         <div onClick={(e) => favoritemode(e)}>
@@ -425,7 +376,7 @@ const ProductInner = ({ addProductToCart, products }) => {
                                                     </div>
                                                 </Link>
                                             </div>
-                                        ))}
+                                        )): ''}
                                     </div>
                                 </div>
                             </div>
@@ -433,6 +384,7 @@ const ProductInner = ({ addProductToCart, products }) => {
                     </div>
                 </div>
             </main >
+        }
             <Subscribe />
         </>
 

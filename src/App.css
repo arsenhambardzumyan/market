@@ -6217,7 +6217,7 @@ input::-webkit-inner-spin-button {
   }
 
   .product-item__media img {
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .logo__icon {

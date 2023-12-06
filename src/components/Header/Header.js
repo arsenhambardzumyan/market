@@ -51,11 +51,10 @@ const Header = ({ products }) => {
                 <div className="page-header__center">
                     <nav className="page-nav" data-uk-navbar>
                         <ul className="uk-navbar-nav">
-                            <li><Link to="/">Home</Link></li>        
-                            <li><Link to="shop">Shop</Link></li>
                             <li><Link to="brands">Brands</Link></li>
-                            <li><Link to="hot-offer">Hot offer</Link></li>
                             <li><Link to="new-arrival">New arrival</Link></li>
+                            <li><Link to="hot-offer">Best sellers</Link></li>
+                            <li><Link to="shop">Shop</Link></li>
                         </ul>
                     </nav>
                 </div>

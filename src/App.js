@@ -21,7 +21,6 @@ import WishList from './pages/WishList';
 import ProductInner from './pages/ProductInner';
 import ShoppingCart from "./components/ShoppingCarts/ShoppingCart";
 import UIkit from 'uikit';
-import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
 import { 
@@ -151,19 +150,7 @@ function App() {
                 onProductRemove={onProductRemove}
                 CartTotalPrice={CartTotalPrice}
             />
-            <ToastContainer
-                position="bottom-left"
-                autoClose={3000}
-                limit={3}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-            />
+           
             <Routes>
                 <Route path="/" element={<HomePage addProductToCart={addProductToCart} />} />
                 <Route path="brands" element={<BrandsPage addProductToCart={addProductToCart}/>} />

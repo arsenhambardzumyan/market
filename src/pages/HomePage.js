@@ -10,6 +10,8 @@ import { addToCart } from "../redux/actions/cartActions";
 import SectionVideo from "../components/Homepage/SectionVideo";
 import SectionGallery from "../components/Homepage/SectionGallery";
 
+
+
 const HomePage = () => {
     const dispatch = useDispatch();
     const homeData = useSelector((state) => state.home.homeData);
@@ -24,18 +26,19 @@ const HomePage = () => {
     };
 
     const handleAddToCart = (product) => {
-        dispatch(addToCart(product));        
+        dispatch(addToCart(product));
     };
 
     if (!homeData) {
         return <p>Loading...</p>;
     }
     return (
-        <>            
+        <>
             {homeData ? (
                 <>
+                   
                     <MainSlider data={homeData.mainSliderData || []} isPlaying={isPlaying} handlePlayPause={handlePlayPause} />
-                    <CategoriesComponent categories={homeData.categories || []} />                
+                    <CategoriesComponent categories={homeData.categories || []} />
                     <ProductsComponent
                         title="Featured Products"
                         products={homeData.hotOfferProducts}
@@ -83,7 +86,7 @@ const HomePage = () => {
                 </>
             ) : (
                 <p>Loading...</p>
-            )}            
+            )}
         </>
     );
 }

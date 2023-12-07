@@ -333,7 +333,7 @@ const BrandsPage = () => {
                                 activeClassName="uk-active"
                                 onPageChange={(count) => {handlePageChange(count)}}
                                 className="uk-pagination uk-flex-center"
-                                pageRangeDisplayed={paginationData.last_page}
+                                // pageRangeDisplayed={paginationData.last_page}
                                 pageCount={paginationData.last_page}
                                 activeLinkClassName="uk-active"
                                 previousLabel="<"

@@ -7,6 +7,7 @@ import arrivalReducer from './arrivalReducer';
 import brandsReducer from './brandsReducer';
 import categoryReducer from './categoryReducer';
 import productReducer from './productReducer';
+
 // const DedaultState = {
 //   tasks: [],
 //   loading: false,

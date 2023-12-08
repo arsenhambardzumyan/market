@@ -31,12 +31,15 @@ const HomePage = () => {
 
     if (!homeData) {
         return <p>Loading...</p>;
+    } else {
+        homeData.hotOfferProducts = homeData.hotOfferProducts.slice(0, 3);
+        homeData.topProducts = homeData.topProducts.slice(0, 3);
+        homeData.bestProducts = homeData.bestProducts.slice(0, 3);
     }
     return (
         <>
             {homeData ? (
                 <>
-
                     <MainSlider slides={homeData.slides || []} isPlaying={isPlaying} handlePlayPause={handlePlayPause} />
                     <CategoriesComponent categories={homeData.categories || []} />
                     <ProductsComponent

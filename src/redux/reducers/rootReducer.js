@@ -8,18 +8,6 @@ import brandsReducer from './brandsReducer';
 import categoryReducer from './categoryReducer';
 import productReducer from './productReducer';
 
-// const DedaultState = {
-//   tasks: [],
-//   loading: false,
-//   error: null,
-//   addTaskSuccess: false,
-//   editTaskSuccess: false,
-//   successMessage: null,
-//   removeTasksSuccess: false,
-//   currJwt : null,
-//   isLogined: false,
-// }
-
 const rootReducer = combineReducers({
   cart: cartReducer,
   home: homeReducer,

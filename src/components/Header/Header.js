@@ -83,29 +83,10 @@ const Header = ({ products }) => {
                     </div>
                     <div className="uk-margin">
                         <ul className="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
-                            <li className="uk-parent">
-                                <Link to="/">Home</Link>
-                                <ul className="uk-nav-sub">
-                                    <li><Link to="/">Home 1</Link></li>
-                                    <li><Link to="/">Home 2</Link></li>
-                                </ul>
-                            </li>
-                            <li><a href="/#">About</a></li>
-                            <li className="uk-parent"><a href="/#">News</a>
-                                <ul className="uk-nav-sub">
-                                    <li><Link to="product-listing">Product Listing</Link></li>
-                                    <li><Link to="product-inner">Product Inner</Link></li>
-                                    <li><Link to="wish-list">Wish List</Link></li>
-                                </ul>
-                            </li>
-                            <li className="uk-parent"><a href="/#">Account Pages</a>
-                                <ul className="uk-nav-sub">
-                                    <li><Link to="login">Login</Link></li>
-                                    <li><Link to="registration">Registration</Link></li>
-                                    <li><Link to="account">Account</Link></li>
-                                </ul>
-                            </li>
-                            <li><Link to="Contacts">Contact</Link></li>
+                            <li><Link to="brands">Brands</Link></li>
+                            <li><Link to="new-arrival">New arrival</Link></li>
+                            <li><Link to="hot-offer">Best sellers</Link></li>
+                            <li><Link to="shop">Shop</Link></li>
                         </ul>
                     </div>
                     <div className="uk-margin-auto-top">

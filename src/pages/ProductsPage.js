@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import ProductsComponent from '../components/ProductsComponent';
 import { Card, Placeholder } from 'react-bootstrap';
 import brand1 from '../assets/img/brand-1.png';
-// import Slider from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import { FiGrid } from "react-icons/fi";
@@ -24,10 +24,8 @@ const ProductsPage = () => {
     const [isToggled, setIsToggled] = useState(false);
     const [listingLine, setlistingLine] = useState(2);
 
-    // const [listLoader, setlistLoader] = useState(true);
-
-    // const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
-    // const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
+    const [PriceRangevalues, setPriceValues] = useState([1250, 3800]);
+    const [MileageRangevalues, setMileageValues] = useState([700, 2800]);
 
     const [activeButton, setActiveButton] = useState('button2');
     const [page, setPage] = useState(1);
@@ -54,13 +52,13 @@ const ProductsPage = () => {
         toggleClass();
     };
 
-    // const handlePriceValuesChange = (newValues) => {
-    //     setPriceValues(newValues);
-    // };
+    const handlePriceValuesChange = (newValues) => {
+        setPriceValues(newValues);
+    };
 
-    // const handleMileageValuesChange = (newValues) => {
-    //     setMileageValues(newValues);
-    // };
+    const handleMileageValuesChange = (newValues) => {
+        setMileageValues(newValues);
+    };
 
     const handlePageChange = (eventNumber) => {
         let  pageNumber = eventNumber.selected + 1;
@@ -113,7 +111,7 @@ const ProductsPage = () => {
                                 ))}
                             </ul>
                         </div>
-                        {/* <aside className="sidebar js-filter-content">
+                        <aside className="sidebar js-filter-content">
                             <div className="widjet widjet--filters">
                                 <div className="widjet__content">
                                     <div className="uk-grid uk-grid-small uk-child-width-1-2" data-uk-grid>
@@ -209,7 +207,7 @@ const ProductsPage = () => {
                                     </div>
                                 </div>
                             </div>
-                        </aside> */}
+                        </aside>
                     </div>
                     <div className="uk-width-2-3@m">
                         <div className="sorting">

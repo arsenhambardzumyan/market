@@ -5017,6 +5017,13 @@ input::-webkit-inner-spin-button {
 
 .widjet__content .range-box__desc {
   margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.widjet__content .range-box__desc span {
+  display: block;
+  margin-right: 10px;
 }
 
 .widjet__content .rc-slider-step {
@@ -7282,7 +7289,7 @@ input::-webkit-inner-spin-button {
   .contact-form {
     margin-top: 25px;
     padding: 25px 15px;
-  } 
+  }
 }
 
 @media only screen and (max-width: 479px) {
@@ -7317,7 +7324,11 @@ input::-webkit-inner-spin-button {
 }
 
 
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
   color: var(--bs-btn-active-color) !important;
   background-color: #a32321 !important;
   border-color: #a32321 !important;

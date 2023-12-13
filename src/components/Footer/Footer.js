@@ -27,7 +27,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="uk-margin-medium">
-                                <p>Dolore magna aliq quis nostrud ulamco laboris nisi ut aliquip exa comads conseq asuis aute irure dolor reprehenderit.</p>
+                                <p>Lorem ipsum</p>
                             </div>
                             <div className="uk-margin-medium">
                                 <div className="support">
@@ -35,7 +35,7 @@ const Footer = () => {
                                         <div className="support__icon"><i className="fas fa-headset"></i></div>
                                         <div className="support__desc">
                                             <div className="support__label">Talk with our support</div>
-                                            <div className="support__phone">+1 (300) 490 5008</div>
+                                            <div className="support__phone">+374 00 000-000</div>
                                         </div>
                                     </a>
                                 </div>
@@ -69,25 +69,25 @@ const Footer = () => {
                                 <ul className="latest-news-list">
                                     <li>
                                         <div className="latest-news-item">
-                                            <div className="latest-news-item__thumb"><img src={product02} alt="news-thumb" /></div>
-                                            <div className="latest-news-item__info"><a className="latest-news-item__title" href="/#">We Allow Each Rider To Customize Their Rides.</a>
-                                                <div className="latest-news-item__date">August 25, 2021</div>
+                                            <div className="latest-news-item__thumb"><img src="https://api.dev.itfabers.com/uploads/custom-images/default.jpg" alt="news-thumb" /></div>
+                                            <div className="latest-news-item__info"><a className="latest-news-item__title" href="/#">News1</a>
+                                                <div className="latest-news-item__date">October 20, 2023</div>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="latest-news-item">
-                                            <div className="latest-news-item__thumb"><img src={product03} alt="news-thumb" /></div>
-                                            <div className="latest-news-item__info"><a className="latest-news-item__title" href="/#">Motorcycles Which Feels Just Right Like Ease.</a>
-                                                <div className="latest-news-item__date">August 25, 2021</div>
+                                            <div className="latest-news-item__thumb"><img src="https://api.dev.itfabers.com/uploads/custom-images/default.jpg" alt="news-thumb" /></div>
+                                            <div className="latest-news-item__info"><a className="latest-news-item__title" href="/#">News2</a>
+                                                <div className="latest-news-item__date">October 20, 2023</div>
                                             </div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="latest-news-item">
-                                            <div className="latest-news-item__thumb"><img src={product04} alt="news-thumb" /></div>
-                                            <div className="latest-news-item__info"><a className="latest-news-item__title" href="/#">Gaze Upon Unbelievably Exciting To Futuristic.</a>
-                                                <div className="latest-news-item__date">August 25, 2021</div>
+                                            <div className="latest-news-item__thumb"><img src="https://api.dev.itfabers.com/uploads/custom-images/default.jpg" alt="news-thumb" /></div>
+                                            <div className="latest-news-item__info"><a className="latest-news-item__title" href="/#">News3</a>
+                                                <div className="latest-news-item__date">October 20, 2023</div>
                                             </div>
                                         </div>
                                     </li>

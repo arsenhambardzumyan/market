@@ -85,7 +85,7 @@ const ProductsPage = () => {
     };
 
     if (!productsData) {
-        return <p>Loading...</p>;
+        return <Loader />;
     }
 
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';
@@ -106,13 +106,13 @@ const ProductsPage = () => {
                                 {/* <div className="result-count">Your search returned <span>35</span> results.</div> */}
                             </div>
                             <div className="sorting-right">
-                                <select className="uk-select" name="orderby">
+                                {/*<select className="uk-select" name="orderby">
                                     <option value="popularity">Sort by popularity</option>
                                     <option value="rating">Sort by average rating</option>
                                     <option value="date">Sort by newness</option>
                                     <option value="price">Sort by price: low to high</option>
                                     <option value="price-desc">Sort by price: high to low</option>
-                                </select>
+                                </select>*/}
                                 <button className={activeButton === 'button1' ? 'sorting-btn active' : 'sorting-btn'}
                                     onClick={() => handleButtonClick('button1')} type="button">
                                     <TfiViewList size={20} />

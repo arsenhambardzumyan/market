@@ -43,15 +43,14 @@ const Filter = ({postFilterData}) => {
         <>
             <div className="js-filter-more filter-more">
                 <div className="filter-more__desc">
-                    <div className="uk-h4">Search options</div>
-                    <span>Find your motorcycle</span>
+                    <div className="uk-h4">Categories</div>
+                    {/*<span>Find your motorcycle</span>*/}
                 </div>
-                <div className="filter-more__icon">
+                {/*<div className="filter-more__icon">
                     <img src={brand1} alt="logo" title="brand" />
-                </div>
+                </div>*/}
             </div>
             <div className="uk-card category-line uk-card-body">
-                <h3 className="uk-card-title">Categories</h3>
                 <ul className="uk-list">
                     {categoriesData.map((category, index) => (
                         <li key={index}>
@@ -61,6 +60,15 @@ const Filter = ({postFilterData}) => {
                         </li>
                     ))}
                 </ul>
+            </div>
+            <div className="js-filter-more mt-3 filter-more">
+                <div className="filter-more__desc">
+                    <div className="uk-h4">Search options</div>
+                    {/*<span>Find your motorcycle</span>*/}
+                </div>
+                {/*<div className="filter-more__icon">
+                    <img src={brand1} alt="logo" title="brand" />
+                </div>*/}
             </div>
             <aside className="sidebar js-filter-content">
                 <div className="widjet widjet--filters">

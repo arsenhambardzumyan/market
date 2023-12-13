@@ -113,7 +113,7 @@ const Filter = ({postFilterData}) => {
                         <div className="uk-text-center">
                             <button className="uk-button mg-centerAll uk-button-danger" type="button" onClick={handleApply}>Apply filter</button>
                             <br />
-                            <a className="uk-text-meta uk-margin-top" href="/#" onClick={(e) => clearFilters(e)}>Clear All Filters</a>
+                            {/*<a className="uk-text-meta uk-margin-top" href="/#" onClick={(e) => clearFilters(e)}>Clear All Filters</a>*/}
                         </div>
                     </div>
                 </div>

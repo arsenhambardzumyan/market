@@ -12,7 +12,7 @@ import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
 import ReactPaginate from 'react-paginate';
 import Filter from "../components/Filter/Filter";
-
+import { Circles } from  'react-loader-spinner'
 
 const ProductsPage = () => {
     const dispatch = useDispatch();
@@ -85,7 +85,15 @@ const ProductsPage = () => {
     };
 
     if (!productsData) {
-        return <Loader />;
+        return <div className="loader"><Circles
+              height="80"
+              width="80"
+              color="#ff0000"
+              ariaLabel="circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            /></div>;
     }
 
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';

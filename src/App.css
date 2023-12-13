@@ -7338,7 +7338,7 @@ input::-webkit-inner-spin-button {
   position: absolute;
   z-index: 999;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: #fff;
   top: 0;
   left: 0;

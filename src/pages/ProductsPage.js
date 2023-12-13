@@ -39,12 +39,9 @@ const ProductsPage = () => {
         const PostData = {
             min_price : filterData.priceRangeValue[0],
             max_price : filterData.priceRangeValue[1],
-            brand :  null,
-            child_category :  null,
-            sub_category : null,
+            brand :  null,            
             category : null
         }
-        console.log(PostData);
         dispatch(fetchFilter(PostData));
     }
 

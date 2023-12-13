@@ -21,7 +21,7 @@ const ProductsPage = () => {
 
     let paginationData = useSelector((state) => state.shop.data.pagination);
     const loaderData = useSelector((state) => state.shop.loading);
-    const filterStore = useSelector((state) => state.filter.data);
+    // const filterStore = useSelector((state) => state.filter.data);
 
     const [isToggled, setIsToggled] = useState(false);
     const [listingLine, setlistingLine] = useState(2);
@@ -29,9 +29,9 @@ const ProductsPage = () => {
     const [activeButton, setActiveButton] = useState('button2');
     const [page, setPage] = useState(1);
 
-    // useEffect(() => {
-    //     dispatch(fetchProducts(page));
-    // }, [dispatch, page]);
+    useEffect(() => {
+        dispatch(fetchProducts(page));
+    }, [dispatch, page]);
 
     const postFilterData = (filterData) =>{
         const PostData = {
@@ -41,12 +41,6 @@ const ProductsPage = () => {
             category : null
         }
         dispatch(fetchFilter(PostData));
-        console.log(productsData);
-
-        productsData =  filterStore.products;
-        paginationData = filterStore.pagination;
-
-        console.log(filterStore.products);
     }
 
     const handleAddToCart = (product) => {

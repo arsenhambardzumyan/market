@@ -61,17 +61,17 @@ const Filter = ({postFilterData}) => {
                     ))}
                 </ul>
             </div>
-            {/*<div className="js-filter-more mt-3 filter-more">
+            <div className="js-filter-more mt-3 filter-more">
                 <div className="filter-more__desc">
                     <div className="uk-h4">Search options</div>
-                    <span>Find your motorcycle</span>
+                    {/*<span>Find your motorcycle</span>*/}
                 </div>
-                <div className="filter-more__icon">
+                {/*<div className="filter-more__icon">
                     <img src={brand1} alt="logo" title="brand" />
-                </div>
+                </div>*/}
             </div>
             <aside className="sidebar js-filter-content">
-                <div className="widjet widjet--filters">
+                {/*<div className="widjet widjet--filters">
                     <div className="widjet__content">
                         <div className="uk-grid uk-grid-small uk-child-width-1-2" data-uk-grid>
                             <div className="uk-width-1-1">
@@ -84,7 +84,7 @@ const Filter = ({postFilterData}) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*/}
                 <div className="widjet widjet--price">
                     <div className="widjet__title">
                         <div className="uk-h4">Price range</div>
@@ -117,7 +117,7 @@ const Filter = ({postFilterData}) => {
                         </div>
                     </div>
                 </div>
-            </aside>*/}
+            </aside>
         </>
     )
 }

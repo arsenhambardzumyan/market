@@ -11,7 +11,7 @@ export const fetchHomeData = () => async (dispatch) => {
 
   try {
     const data = await request(`${process.env.REACT_APP_BASE_URL}/main`);
-    dispatch({ type: FETCH_HOME_DATA_SUCCESS, payload: data });
+    dispatch({ type: FETCH_HOME_DATA_SUCCESS, payload: data });    
   } catch (error) {
     dispatch({ type: FETCH_HOME_DATA_FAILURE, payload: error });
   }

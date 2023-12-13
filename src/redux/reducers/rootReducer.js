@@ -7,17 +7,7 @@ import arrivalReducer from './arrivalReducer';
 import brandsReducer from './brandsReducer';
 import categoryReducer from './categoryReducer';
 import productReducer from './productReducer';
-// const DedaultState = {
-//   tasks: [],
-//   loading: false,
-//   error: null,
-//   addTaskSuccess: false,
-//   editTaskSuccess: false,
-//   successMessage: null,
-//   removeTasksSuccess: false,
-//   currJwt : null,
-//   isLogined: false,
-// }
+import filterReducer from './filterReducer';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
@@ -27,7 +17,8 @@ const rootReducer = combineReducers({
   arrival: arrivalReducer,
   brands: brandsReducer,
   category: categoryReducer,
-  product: productReducer
+  product: productReducer,
+  filter: filterReducer
 });
 
 export default rootReducer;

@@ -16,7 +16,6 @@ const ProductsComponent = ({ title, description, products, pagination, template,
         setIsToggled(!isToggled);
     };
 
-
     const favoritemode = (e) => {
         e.preventDefault();
         e.currentTarget.classList.add('favorite-mode-on');

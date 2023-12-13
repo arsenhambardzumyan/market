@@ -9,11 +9,11 @@ import ProductsPage from './pages/ProductsPage';
 import CategoryPage from './pages/CategoryPage';
 import HotOfferPage from './pages/HotOfferPage';
 import NewArrivalPage from './pages/NewArrivalPage';
-// import ProductListing from './pages/ProductListing';
 import Contacts from './pages/Contacts';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import ResetPassword from './pages/ResetPassword';
+import NewPassword from './pages/NewPassword';
 import ShoppingCartPage from './pages/ShoppingCartPage';
 import Checkout from './pages/Checkout';
 import Account from './pages/Account';
@@ -74,7 +74,7 @@ const favoriteProducts = [
         price: 500,
         image: require("./assets/img/milkprod2.jpg"),
     }
-]
+];
 
 const productInner = [
     {
@@ -100,14 +100,10 @@ const productInner = [
     }
 ];
 
-
 function App() {
 
     const dispatch = useDispatch();
     const productsInCart = useSelector((state) => state.cart.productsInCart);
-    // const errorMessage = useSelector((state) => state.cart.errorMessage);
-    // const successMessage = useSelector((state) => state.cart.successMessage);
-    // const apiUrl = process.env.REACT_APP_BASE_URL;
     let shoppingCart = document.getElementsByClassName('offConvassCart');
     const getTotalPrice = (items) => items.map((item) => item.price * item.count).reduce((acc, value) => acc + value, 0);
     const CartTotalPrice = getTotalPrice(productsInCart);
@@ -150,25 +146,20 @@ function App() {
                 onProductRemove={onProductRemove}
                 CartTotalPrice={CartTotalPrice}
             />
-           
             <Routes>
                 <Route path="/" element={<HomePage addProductToCart={addProductToCart} />} />
                 <Route path="brands" element={<BrandsPage addProductToCart={addProductToCart}/>} />
                 <Route path="shop" element={<ProductsPage addProductToCart={addProductToCart} />} />
                 <Route path="hot-offer" element={<HotOfferPage addProductToCart={addProductToCart} />} />
                 <Route path="new-arrival" element={<NewArrivalPage addProductToCart={addProductToCart} />} />
-                {/* <Route path="product-listing" element={<ProductListing addProductToCart={addProductToCart} />} /> */}
                 <Route path="Contacts" element={<Contacts />} />
-                <Route path="login" element={<Login       
-
-                            // SetSuccessMessage={SetSuccessMessage}
-                            // SetErrorMessage={SetErrorMessage} 
-                            
-                />} 
-                            
-                />
+                <Route path="login" element={<Login />} />
                 <Route path="ResetPassword" element={<ResetPassword />} />
-                <Route path="wish-list" element={<WishList products={favoriteProducts} addProductToCart={addFavoriteToCart} />} />
+                <Route path="NewPassword" element={<NewPassword />} />
+                <Route path="wish-list" element={<WishList 
+                    products={favoriteProducts} 
+                    addProductToCart={addFavoriteToCart} 
+                />} />
                 <Route path="registration" element={<Registration />} />
                 <Route path="account" element={<Account />} />
                 <Route path="shopping-cart" element={<ShoppingCartPage
@@ -177,13 +168,16 @@ function App() {
                     onProductRemove={onProductRemove}
                     CartTotalPrice={CartTotalPrice}
                 />} />
-                <Route path="checkout" element={<Checkout products={productsInCart} CartTotalPrice={CartTotalPrice} />} />
+                <Route path="checkout" element={<Checkout 
+                    products={productsInCart} 
+                    CartTotalPrice={CartTotalPrice} />} />
                 <Route path="product/:slug" element={<ProductInner
                     products={productInner}
                     onQuantityChange={onQuantityChange}
                     addProductToCart={addProductInnerToCart}
                 />} />
-                <Route path="category/:slug" element={<CategoryPage addProductToCart={addProductInnerToCart}/>} />
+                <Route path="category/:slug" element={<CategoryPage 
+                    addProductToCart={addProductInnerToCart}/>} />
             </Routes>
             <Footer />
         </div>

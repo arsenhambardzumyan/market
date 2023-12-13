@@ -71,7 +71,7 @@ const Filter = ({postFilterData}) => {
                 </div>*/}
             </div>
             <aside className="sidebar js-filter-content">
-                <div className="widjet widjet--filters">
+                {/*<div className="widjet widjet--filters">
                     <div className="widjet__content">
                         <div className="uk-grid uk-grid-small uk-child-width-1-2" data-uk-grid>
                             <div className="uk-width-1-1">
@@ -84,7 +84,7 @@ const Filter = ({postFilterData}) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*/}
                 <div className="widjet widjet--price">
                     <div className="widjet__title">
                         <div className="uk-h4">Price range</div>

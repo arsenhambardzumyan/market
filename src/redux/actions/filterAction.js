@@ -15,7 +15,9 @@ export const fetchFilter = (filterData) => async (dispatch) => {
     try {
       const data = await request(`${process.env.REACT_APP_BASE_URL}/search-product` , 'POST' ,  filterData);
       dispatch({ type: FETCH_FILTER_SUCCESS, payload: data });
-      dispatch({ type: FETCH_CATEGORIES_SUCCESS, payload: data });
+      console.log(data);
+      // dispatch({ type: FETCH_CATEGORIES_SUCCESS, payload: data });
+      // console.log(data);
     } catch (error) {
       dispatch({ type: FETCH_FILTER_FAILURE, payload: error });
     }

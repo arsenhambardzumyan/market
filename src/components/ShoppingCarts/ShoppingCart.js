@@ -21,6 +21,7 @@ function ShoppingCart({ products, CartTotalPrice, onProductRemove, offConvasCart
 		}
 	};
 
+
 	const maxSize = 10;
 
 	return (
@@ -40,10 +41,10 @@ function ShoppingCart({ products, CartTotalPrice, onProductRemove, offConvasCart
 							</div>)}
 							{products.map((product) => (
 								<div className="cart-product" key={product.id}>
-									<img src={product.thumb_image} alt={product.name} />
+									<img src={product.image} alt={product.name} />
 									<div className="product-info">
 										<div className="cart_product_name">{product.name}</div>
-										<span className="product-price">{product.price * product.count}$</span>
+										<span className="product-price">{product.price * product.count} AMD</span>
 									</div>
 									<div className="count_block">
 										<button className="minusCount_btn" onClick={() => decrementCount(product.id)}><AiOutlineMinus size={13} /></button>
@@ -67,7 +68,7 @@ function ShoppingCart({ products, CartTotalPrice, onProductRemove, offConvasCart
 						<div className="bottom_block">
 							<div className="subtotal_block">
 								<div className="inner_title">Subtotal</div>
-								<div className="total_sum">{CartTotalPrice}<span>$</span></div>
+								<div className="total_sum">{CartTotalPrice}<span> AMD</span></div>
 							</div>
 							<Link to="shopping-cart" className="checkout_button" >Checkout</Link>
 						</div>

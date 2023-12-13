@@ -38,7 +38,7 @@ const ShoppingCartPage = ({ products, CartTotalPrice, onProductRemove, onQuantit
 
     const maxSize = 10;
 
-
+    
     return (
         <>
             <main className="page-main">

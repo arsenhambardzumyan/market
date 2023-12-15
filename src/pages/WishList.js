@@ -9,13 +9,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { BsFillHeartbreakFill } from "react-icons/bs";
 
-
 const WishList = ({ addProductToCart,  products }) => {
     
     let productListEl = useRef(null);
 
     const [isToggled] = useState(false);
-
     const addProduct = (e, product) => {
         e.preventDefault();
         addProductToCart(product);
@@ -37,6 +35,7 @@ const WishList = ({ addProductToCart,  products }) => {
             }
         }
     }, []);
+
 
     return (
         <>
@@ -159,7 +158,6 @@ const WishList = ({ addProductToCart,  products }) => {
             </main >
             <Subscribe />
         </>
-
     )
 }
 

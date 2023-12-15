@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import brand1 from '../../assets/img/brand-1.png';
+// import brand1 from '../../assets/img/brand-1.png';
 import Slider from 'rc-slider';
 import { useSelector } from "react-redux";
 

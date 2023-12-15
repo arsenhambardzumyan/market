@@ -4,6 +4,7 @@ import { fetchCategoryProducts } from "../redux/actions/categoryActions";
 import { addToCart } from "../redux/actions/cartActions";
 import { Link, useParams } from 'react-router-dom';
 import ProductsComponent from '../components/ProductsComponent';
+import { Circles } from 'react-loader-spinner';
 
 const CategoryPage = () => {
     const dispatch = useDispatch();
@@ -16,9 +17,23 @@ const CategoryPage = () => {
     const handleAddToCart = (product) => {
         dispatch(addToCart(product));
     };
+
     if (!categoriesData) {
-        return <p>Loading...</p>;
+        return (
+            <div className="loader">
+                <Circles
+                    height="80"
+                    width="80"
+                    color="#ff0000"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        )
     }
+
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';
 
     return (

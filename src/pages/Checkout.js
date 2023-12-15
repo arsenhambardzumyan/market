@@ -19,7 +19,6 @@ const Checkout = ({ products, CartTotalPrice }) => {
         setValidated(true);
     };
 
-
     return (
         <>
             <main className="page-main">

@@ -10,6 +10,7 @@ import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
+import { Circles } from 'react-loader-spinner'
 // import ReactPaginate from 'react-paginate';
 
 const HotOfferPage = () => {
@@ -65,8 +66,21 @@ const HotOfferPage = () => {
     // };
 
     if (!productsData) {
-        return <p>Loading...</p>;
+        return (
+            <div className="loader">
+                <Circles
+                    height="80"
+                    width="80"
+                    color="#ff0000"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        )
     }
+    
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';
 
     return (

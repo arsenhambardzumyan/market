@@ -12,7 +12,7 @@ import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
 import ReactPaginate from 'react-paginate';
 import Filter from "../components/Filter/Filter";
-import { Circles } from  'react-loader-spinner'
+import { Circles } from 'react-loader-spinner'
 
 const ProductsPage = () => {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const ProductsPage = () => {
 
     let paginationData = useSelector((state) => state.shop.data.pagination);
     const loaderData = useSelector((state) => state.shop.loading);
-    // const filterStore = useSelector((state) => state.filter.data);
+    const filterStore = useSelector((state) => state.filter.data);
 
     const [isToggled, setIsToggled] = useState(false);
     const [listingLine, setlistingLine] = useState(2);
@@ -33,14 +33,16 @@ const ProductsPage = () => {
         dispatch(fetchProducts(page));
     }, [dispatch, page]);
 
-    const postFilterData = (filterData) =>{
+    const postFilterData = (filterData) => {
         const PostData = {
-            min_price : filterData.priceRangeValue[0],
-            max_price : filterData.priceRangeValue[1],
-            brand :  null,            
-            category : null
+            min_price: filterData.priceRangeValue[0],
+            max_price: filterData.priceRangeValue[1],
+            brand: null,
+            category: null
         }
         dispatch(fetchFilter(PostData));
+        console.log(filterData);
+        console.log(filterStore);
     }
 
     const handleAddToCart = (product) => {
@@ -63,7 +65,7 @@ const ProductsPage = () => {
 
 
     const handlePageChange = (eventNumber) => {
-        let  pageNumber = eventNumber.selected + 1;
+        let pageNumber = eventNumber.selected + 1;
         const element = document.getElementById('products_container');
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
@@ -80,15 +82,19 @@ const ProductsPage = () => {
     };
 
     if (!productsData) {
-        return <div className="loader"><Circles
-              height="80"
-              width="80"
-              color="#ff0000"
-              ariaLabel="circles-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            /></div>;
+        return (
+            <div className="loader">
+                <Circles
+                    height="80"
+                    width="80"
+                    color="#ff0000"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        )
     }
 
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';
@@ -101,7 +107,7 @@ const ProductsPage = () => {
             <div className="uk-container listing_container uk-section-large " id="products_container">
                 <div className="uk-grid" data-uk-grid>
                     <div className="uk-width-1-3@m">
-                      <Filter postFilterData={postFilterData} />
+                        <Filter postFilterData={postFilterData} />
                     </div>
                     <div className="uk-width-2-3@m">
                         <div className="sorting">
@@ -109,13 +115,13 @@ const ProductsPage = () => {
                                 {/* <div className="result-count">Your search returned <span>35</span> results.</div> */}
                             </div>
                             <div className="sorting-right">
-                                {/*<select className="uk-select" name="orderby">
+                                {/* <select className="uk-select" name="orderby">
                                     <option value="popularity">Sort by popularity</option>
                                     <option value="rating">Sort by average rating</option>
                                     <option value="date">Sort by newness</option>
                                     <option value="price">Sort by price: low to high</option>
                                     <option value="price-desc">Sort by price: high to low</option>
-                                </select>*/}
+                                </select> */}
                                 <button className={activeButton === 'button1' ? 'sorting-btn active' : 'sorting-btn'}
                                     onClick={() => handleButtonClick('button1')} type="button">
                                     <TfiViewList size={20} />
@@ -244,7 +250,7 @@ const ProductsPage = () => {
                                 breakLabel="..."
                                 nextLabel=">"
                                 activeClassName="uk-active"
-                                onPageChange={(count) => {handlePageChange(count)}}
+                                onPageChange={(count) => { handlePageChange(count) }}
                                 className="uk-pagination uk-flex-center"
                                 pageRangeDisplayed={paginationData.last_page}
                                 pageCount={paginationData.last_page}

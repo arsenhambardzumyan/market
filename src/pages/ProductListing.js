@@ -83,7 +83,7 @@ const ProductListing = ({ addProductToCart, products, SetProductsListing }) => {
             .catch(err => {
                 console.log(err);
         })
-    }, [page]);
+    }, [page , SetCurrentProducts]);
 
     const handlePageChange = (e, pageNumber) => {
         e.preventDefault();

@@ -9,7 +9,7 @@ import { fetchHomeData } from "../redux/actions/homeActions";
 import { addToCart } from "../redux/actions/cartActions";
 import SectionVideo from "../components/Homepage/SectionVideo";
 import SectionGallery from "../components/Homepage/SectionGallery";
-
+import { Circles } from 'react-loader-spinner'
 
 
 const HomePage = () => {
@@ -30,12 +30,27 @@ const HomePage = () => {
     };
 
     if (!homeData) {
-        return <p>Loading...</p>;
-    } else {
+        return (
+            <div className="loader">
+                <Circles
+                    height="80"
+                    width="80"
+                    color="#ff0000"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        )
+    }else {
         homeData.hotOfferProducts = homeData.hotOfferProducts.slice(0, 3);
         homeData.topProducts = homeData.topProducts.slice(0, 3);
         homeData.bestProducts = homeData.bestProducts.slice(0, 3);
     }
+
+
+
     return (
         <>
             {homeData ? (

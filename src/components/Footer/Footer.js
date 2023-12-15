@@ -1,15 +1,37 @@
+import React, { useEffect } from 'react';
 import imglogo from '../../assets/img/logo.png';
 import "uikit/dist/css/uikit.min.css";
 import "uikit/dist/css/uikit-core.min.css";
-import product03 from '../../assets/img/product03.jpg';
-import product02 from '../../assets/img/product02.jpg';
-import product04 from '../../assets/img/product04.jpg';
-import UIkit from 'uikit';
-import Icons from 'uikit/dist/js/uikit-icons';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchfooter } from "../../redux/actions/footerActions";
+import { Circles } from 'react-loader-spinner'
 
 const Footer = () => {
-    UIkit.use(Icons);
+    const dispatch = useDispatch();
+    const filterStore = useSelector((state) => state.footer.footerData);
+
+    useEffect(() => {
+        dispatch(fetchfooter('data'));
+    }, [dispatch])
+
+    // console.log(filterStore);
+    
+    if (!filterStore.footer) {
+        return (
+            <div className="loader">
+                {/* <Circles
+                    height="80"
+                    width="80"
+                    color="#ff0000"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                /> */}
+            </div>
+        )
+    }
 
     return (
         <footer className="page-footer">
@@ -27,20 +49,20 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="uk-margin-medium">
-                                <p>Lorem ipsum</p>
+                                <p>{filterStore.footer.about_us}</p>
                             </div>
                             <div className="uk-margin-medium">
                                 <div className="support">
-                                    <a className="support__link" href="tel:13004905008">
+                                    <a className="support__link" href={`tel:${filterStore.footer.phone}`}>
                                         <div className="support__icon"><i className="fas fa-headset"></i></div>
                                         <div className="support__desc">
                                             <div className="support__label">Talk with our support</div>
-                                            <div className="support__phone">+374 00 000-000</div>
+                                            <div className="support__phone">{filterStore.footer.phone}</div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <div className="uk-margin-medium">
+                            {/* <div className="uk-margin-medium">
                                 <div className="social">
                                     <ul className="social-list">
                                         <li className="social-list__item"><a className="social-list__link" href="/#!"><i className="fab fa-twitter"></i></a></li>
@@ -50,7 +72,7 @@ const Footer = () => {
                                         <li className="social-list__item"><a className="social-list__link" href="/#!"><i className="fab fa-pinterest-p"></i></a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                         <div>
                             <div className="page-footer__column page-footer__menu">
@@ -112,11 +134,6 @@ const Footer = () => {
             <div className="page-footer__bottom">
                 <div className="uk-container">
                     <div className="uk-text-center">(c) 2023 Black Market -  All rights reserved.</div>
-                </div>
-            </div>
-            <div className="uk-modal-full uk-modal" id="modal-search" data-uk-modal>
-                <div className="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" data-uk-height-viewport><button className="uk-modal-close-full" type="button" data-uk-close></button>
-                    <form className="uk-search uk-search-large"><input className="uk-search-input uk-text-center" name='footer-input' type="search" placeholder="Search..." autoFocus /></form>
                 </div>
             </div>
         </footer>

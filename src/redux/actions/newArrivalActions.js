@@ -6,9 +6,17 @@ export const FETCH_ARRIVAL_SUCCESS = 'FETCH_ARRIVAL_SUCCESS';
 export const FETCH_ARRIVAL_FAILURE = 'FETCH_ARRIVAL_FAILURE';
 
 export const fetchProducts = (page) => async (dispatch) => {
+  const filterData = {
+    // type: 'new', 
+    min_price : null, 
+    max_price: null, 
+    // brands: '[]', 
+    // categories: '[]'
+  }
     dispatch({ type: FETCH_ARRIVAL_REQUEST });
     try {
-      const data = await request(`${process.env.REACT_APP_BASE_URL}/products/new/${page}`);
+      const data = await request(`${process.env.REACT_APP_BASE_URL}/search-product/1` , 'POST' , filterData);
+      console.log(data);
       dispatch({ type: FETCH_ARRIVAL_SUCCESS, payload: data });
     } catch (error) {
       dispatch({ type: FETCH_ARRIVAL_FAILURE, payload: error });

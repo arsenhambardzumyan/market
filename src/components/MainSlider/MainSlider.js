@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import request from "../helpers/request";
+import React from 'react';
 import {Link} from "react-router-dom";
-// import defaultImg from '../../assets/img/defaultImg.jpg';
-
 
 const MainSlider = (data) => {
     return (

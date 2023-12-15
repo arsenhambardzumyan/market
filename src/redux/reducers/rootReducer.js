@@ -8,6 +8,7 @@ import brandsReducer from './brandsReducer';
 import categoryReducer from './categoryReducer';
 import productReducer from './productReducer';
 import filterReducer from './filterReducer';
+import footerReducer from './footerReducer';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   brands: brandsReducer,
   category: categoryReducer,
   product: productReducer,
-  filter: filterReducer
+  filter: filterReducer,
+  footer: footerReducer,
 });
 
 export default rootReducer;

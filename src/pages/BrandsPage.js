@@ -7,6 +7,8 @@ import { Card, Placeholder } from 'react-bootstrap';
 import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import ReactPaginate from 'react-paginate';
+import { Circles } from 'react-loader-spinner'
+
 
 const BrandsPage = () => {
     const dispatch = useDispatch();
@@ -42,7 +44,19 @@ const BrandsPage = () => {
     };
 
     if (!brnadData) {
-        return <p>Loading...</p>;
+        return (
+            <div className="loader">
+                <Circles
+                    height="80"
+                    width="80"
+                    color="#ff0000"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        )
     }
 
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../redux/actions/shopActions";
+import { fetchProducts } from "../redux/actions/newArrivalActions";
 import { addToCart } from "../redux/actions/cartActions";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import ProductsComponent from '../components/ProductsComponent';
 import { Card, Placeholder } from 'react-bootstrap';
 import brand1 from '../assets/img/brand-1.png';
@@ -10,14 +10,14 @@ import 'rc-slider/assets/index.css';
 import defaultImg from '../../src/assets/img/defaultImg.jpg';
 import { FiGrid } from "react-icons/fi";
 import { TfiViewList } from "react-icons/tfi";
-import ReactPaginate from 'react-paginate';
-
+// import ReactPaginate from 'react-paginate';
+import { Circles } from 'react-loader-spinner';
 
 const NewArrivalPage = () => {
     const dispatch = useDispatch();
     // const categoriesData = useSelector((state) => state.shop.data.categories);
     const productsData = useSelector((state) => state.arrival.data);
-    const paginationData = useSelector((state) => state.arrival.data.pagination);
+    // const paginationData = useSelector((state) => state.arrival.data.pagination);
     const loaderData = useSelector((state) => state.arrival.loading);
     const [isToggled, setIsToggled] = useState(false);
     const [listingLine, setlistingLine] = useState(2);
@@ -26,6 +26,9 @@ const NewArrivalPage = () => {
 
     useEffect(() => {
         dispatch(fetchProducts(page));
+        // setPage(1);
+
+        console.log(productsData);
     }, [dispatch, page]);
 
     const handleAddToCart = (product) => {
@@ -46,26 +49,41 @@ const NewArrivalPage = () => {
         toggleClass();
     };
 
-    const handlePageChange = (eventNumber) => {
-        let  pageNumber = eventNumber.selected + 1;
-        const element = document.getElementById('products_container');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-        if (
-            pageNumber > 0 &&
-            pageNumber <= 10 &&
-            pageNumber !== page
-        ) {
-            setTimeout(() => {
-                setPage(pageNumber);
-            }, 700);
-        }
-    };
+    // const handlePageChange = (eventNumber) => {
+    //     let  pageNumber = eventNumber.selected + 1;
+    //     const element = document.getElementById('products_container');
+    //     if (element) {
+    //         element.scrollIntoView({ behavior: 'smooth' });
+    //     }
+    //     if (
+    //         pageNumber > 0 &&
+    //         pageNumber <= 10 &&
+    //         pageNumber !== page
+    //     ) {
+    //         setTimeout(() => {
+    //             setPage(pageNumber);
+    //         }, 700);
+    //     }
+    // };
 
     if (!productsData) {
-        return <p>Loading...</p>;
+        return (
+            <div className="loader">
+                <Circles
+                    height="80"
+                    width="80"
+                    color="#ff0000"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
+            </div>
+        )
     }
+
+
+
     const bannerImage = 'https://api.dev.itfabers.com/uploads/custom-images/default.jpg';
 
     return (
@@ -222,8 +240,8 @@ const NewArrivalPage = () => {
                                 :
                                 <div className='uk-child-width-1-1@m uk-child-width-1-2@s product_listing'>
                                     <ProductsComponent
-                                        title=""
-                                        products={productsData || []}
+                                        title = ""
+                                        products={productsData.products.data || []}
                                         pagination={true}
                                         template="shop"
                                         col={listingLine}

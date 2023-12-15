@@ -13,7 +13,6 @@ let shoppingCart = document.getElementsByClassName('offConvassCart');
 
 const ShoppingCartPage = ({ products, CartTotalPrice, onProductRemove, onQuantityChange, }) => {
 
-
     React.useEffect(() => {
         UIkit.offcanvas(shoppingCart).hide();
         const element = document.getElementById('cart_section');
@@ -38,7 +37,6 @@ const ShoppingCartPage = ({ products, CartTotalPrice, onProductRemove, onQuantit
 
     const maxSize = 10;
 
-    
     return (
         <>
             <main className="page-main">

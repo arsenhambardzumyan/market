@@ -10,7 +10,6 @@ import request from "../components/helpers/request";
 const Login = ({SetSuccessMessage , SetErrorMessage}) => {
 
     const navigate = useNavigate();
-
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
